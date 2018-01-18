@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "electron": "^1.7.10",
+    "electron-builder": "^19.53.7"
+  },
+  "build": {
+    "appId": "com.electron.s2microbit-ble",
+    "directories": {
+      "app": "app"
+    },
+    "artifactName": "${productName}_installer.${ext}",
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true
+    },
+    "npmRebuild" : false
+  }
+}

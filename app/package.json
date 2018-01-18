@@ -1,0 +1,28 @@
+{
+  "name": "s2microbit-ble",
+  "version": "1.0.0",
+  "description": "BBC micro:bit (bluetooth)",
+  "main": "s2microbit-ble.js",
+  "scripts": {
+    "start": "./node_modules/.bin/electron .",
+    "postinstall": "node noble-uwp-replace.js"
+  },
+  "author": "Hiroaki Kawashima",
+  "email": "memakura@gmail.com",
+  "license": "GPL-2.0",
+  "dependencies": {
+    "bbc-microbit": "^0.2.0",
+    "express": "^4.16.2",
+    "noble-uwp": "^0.5.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/memakura/s2microbit-ble.git"
+  },
+  "bugs": {
+    "url": "https://github.com/memakura/s2microbit-ble/issues"
+  },
+  "devDependencies": {
+    "electron": "^1.7.10"
+  }
+}

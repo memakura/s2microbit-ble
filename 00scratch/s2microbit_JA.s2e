@@ -1,0 +1,109 @@
+{
+    "extensionName": "s2microbit-ble",
+    "extensionPort": 50209,
+    "url": "https://github.com/memakura/s2microbit-ble",
+    "blockSpecs": [
+        [
+            " ",
+            "文字列を表示 %s",
+            "scroll",
+            "Hello!"
+        ],
+        [
+            "b",
+            "ボタンAが押されている",
+            "button_a_pressed"
+        ],
+        [
+            "b",
+            "ボタンBが押されている",
+            "button_b_pressed"
+        ],
+        [
+            "r",
+            "温度",
+            "temperature"
+        ],
+        [
+            "r",
+            "磁気センサ角度",
+            "magBearing"
+        ],
+        [
+            "r",
+            "磁気センサ X",
+            "mag_x"
+        ],
+        [
+            "r",
+            "磁気センサ Y",
+            "mag_y"
+        ],
+        [
+            "r",
+            "磁気センサ Z",
+            "mag_z"
+        ],
+        [
+            "r",
+            "加速度センサ X",
+            "acc_x"
+        ],
+        [
+            "r",
+            "加速度センサ Y",
+            "acc_y"
+        ],
+        [
+            "r",
+            "加速度センサ Z",
+            "acc_z"
+        ]
+    ],
+    "menus": {
+	"images": [
+            "HAPPY",
+            "SAD",
+            "ANGRY",
+            "SMILE",
+            "HEART",
+            "CONFUSED",
+            "ASLEEP",
+            "SURPRISED",
+            "SILLY",
+            "FABULOUS",
+            "MEH",
+            "YES",
+            "NO",
+            "TRIANGLE",
+            "DIAMOND",
+            "DIAMOND_SMALL",
+            "SQUARE",
+            "SQUARE_SMALL",
+            "TARGET",
+            "STICKFIGURE",
+            "RABBIT",
+            "COW",
+            "ROLLERSKATE",
+            "HOUSE",
+            "SNAKE",
+            "ARROW_N",
+            "ARROW_NE",
+            "ARROW_E",
+            "ARROW_SE",
+            "ARROW_S",
+            "ARROW_SW",
+            "ARROW_W",
+            "ARROW_NW"
+	    ],
+        "pins": [
+            "0",
+	        "1",
+	        "2"
+        ],
+        "val": [
+            "0",
+	        "1"
+        ] 
+    }
+}

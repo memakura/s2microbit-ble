@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>s2microbit-ble</title>
+  </head>
+  <body>
+    <h1>Scratch 2 Offline Extension for BBC Microbit</h1>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    We are using Node.js <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.
+
+    <script>
+      // You can also require other files to run in this process
+      //require('./renderer.js')
+      const { ipcRenderer } = require('electron');
+      ipcRenderer.on('mainmsg', function (event, msg) {
+        console.log("[main] : " + msg);
+      });
+    </script>
+  </body>
+</html>

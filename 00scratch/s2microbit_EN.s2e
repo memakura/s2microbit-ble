@@ -1,0 +1,109 @@
+{
+    "extensionName": "s2microbit-ble",
+    "extensionPort": 50209,
+    "url": "https://github.com/memakura/s2microbit-ble",
+    "blockSpecs": [
+        [
+            " ",
+            "Scroll %s",
+            "scroll",
+            "Replace With Your Text"
+        ],
+        [
+            "b",
+            "Button A pressed?",
+            "button_a_pressed"
+        ],
+        [
+            "b",
+            "Button B pressed?",
+            "button_b_pressed"
+        ],
+        [
+            "r",
+            "Temperature",
+            "temperature"
+        ],
+        [
+            "r",
+            "Magnetometer Bearing",
+            "magBearing"
+        ],
+        [
+            "r",
+            "Magnetometer X",
+            "mag_x"
+        ],
+        [
+            "r",
+            "Magnetometer Y",
+            "mag_y"
+        ],
+        [
+            "r",
+            "Magnetometer Z",
+            "mag_z"
+        ],
+        [
+            "r",
+            "Accelerometer X",
+            "acc_x"
+        ],
+        [
+            "r",
+            "Accelerometer Y",
+            "acc_y"
+        ],
+        [
+            "r",
+            "Accelerometer Z",
+            "acc_z"
+        ]
+    ],
+    "menus": {
+	"images": [
+            "HAPPY",
+            "SAD",
+            "ANGRY",
+            "SMILE",
+            "HEART",
+            "CONFUSED",
+            "ASLEEP",
+            "SURPRISED",
+            "SILLY",
+            "FABULOUS",
+            "MEH",
+            "YES",
+            "NO",
+            "TRIANGLE",
+            "DIAMOND",
+            "DIAMOND_SMALL",
+            "SQUARE",
+            "SQUARE_SMALL",
+            "TARGET",
+            "STICKFIGURE",
+            "RABBIT",
+            "COW",
+            "ROLLERSKATE",
+            "HOUSE",
+            "SNAKE",
+            "ARROW_N",
+            "ARROW_NE",
+            "ARROW_E",
+            "ARROW_SE",
+            "ARROW_S",
+            "ARROW_SW",
+            "ARROW_W",
+            "ARROW_NW"
+	    ],
+        "pins": [
+            "0",
+	        "1",
+	        "2"
+        ],
+        "val": [
+            "0",
+	        "1"
+        ] 
+    }
+}
