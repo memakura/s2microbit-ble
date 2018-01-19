@@ -8,7 +8,7 @@ Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 
 ## Installation
 1. Download and install the latest version from [Release](https://github.com/memakura/s2microbit-ble/releases).
-  - For Windows: s2microbit-ble_installer.exe
+    - For Windows: s2microbit-ble_installer.exe
 1. Download and open [a demo project (e.g., fly.sb2)](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly.sb2) from [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch).
 1. Download [a firmware hex file](https://github.com/jaafreitas/scratch-microbit-extension/raw/master/firmware/makecode-microbit-scratch-extension.hex) from [this page](https://github.com/jaafreitas/scratch-microbit-extension/tree/master/firmware) and write it to your microbit.
 
