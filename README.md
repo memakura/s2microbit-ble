@@ -2,6 +2,11 @@
 BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック  
 (English follows)
 
+<img alt="s2microbit-ble" src="https://github.com/memakura/s2microbit-ble/blob/master/images/s2microbit-ble.png" width=256>
+
+<img alt="blocks" src="https://github.com/memakura/s2microbit-ble/blob/master/images/blocks.png" width=800>
+
+
 ## 準備
 1. Bluetooth 4.0 以上に対応した PC（なければ USBのBluetoothアダプタなどが使えます。）
 1. Windows 10 build 10.0.15063 以上（OSビルド 15063以上）
