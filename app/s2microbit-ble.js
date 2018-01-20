@@ -78,7 +78,7 @@ var debug = false;
 var useButtons = true;
 var useTemperature = true;
 var useAccelerometer = true;
-var useMagnetometer = false;
+var useMagnetometer = true;
 
 //--- from scratch_microbit.js
 var buttonState = null;
@@ -153,7 +153,7 @@ exapp.get('/scroll/:text', function(req, res) {
     // text is a string that must be 20 characters or less
     var txt = req.params.text.substring(0, 20);
     device.writeLedText(txt, function(error) {
-      logBothConsole('microbit: display %s', txt);
+      logBothConsole('microbit: display ' + txt);
     });
   }
   res.send("OK");
@@ -195,7 +195,7 @@ exapp.get('/poll', function(req, res) {
 
 // Callback when discovered
 function microbitFound(microbit) {
-  logBothConsole('microbit: discovered %s', microbit); // microbit.id, microbit.address
+  logBothConsole('microbit: connecting to microbit: ' + microbit.id); // microbit.id, microbit.address
 
   // Events from microbit
   microbit.on('disconnect', function() {
@@ -216,41 +216,41 @@ function microbitFound(microbit) {
   });
 
   microbit.on('pinDataChange', function(pin, value) {
-    if (debug) { logBothConsole('microbit: > pin %d, value %d', pin, value); }
+    if (debug) { logBothConsole('microbit: > pin ' + pin + ', value ' + value); }
     pinValue[pin] = value;
   });
 
   microbit.on('temperatureChange', function(value) {
-    if (debug) { logBothConsole('microbit: temperature %d', value); }
+    if (debug) { logBothConsole('microbit: temperature ' + value); }
     temperature = value;
   });
 
   microbit.on('magnetometerBearingChange', function(value) {
-    logBothConsole('microbit: magnetometer bearing %d', value);
-    if (debug) { logBothConsole('microbit: magnetometer bearing %d', value); }
+    //logBothConsole('microbit: magnetometer bearing ' + value);
+    if (debug) { logBothConsole('microbit: magnetometer bearing ' + value); }
     magnetometerBearing = value;
   });
 
   microbit.on('magnetometerChange', function(x, y, z) {
-    // logBothConsole('microbit: orig magnetometer %d, %d, %d', x, y, z);
-    x = x.toFixed(1);
-    y = y.toFixed(1);
-    z = z.toFixed(1);
-    //if (debug) { logBothConsole('microbit: magnetometer %d, %d, %d', x, y, z); }
+    //logBothConsole('microbit: orig magnetometer ' + x + ', ' + y + ', ' + z);
+    x = x.toFixed(2);
+    y = y.toFixed(2);
+    z = z.toFixed(2);
+    if (debug) { logBothConsole('microbit: magnetometer ' + x + ', ' + y + ', ' + z); }
     magnetometer = { 'x': x, 'y': y, 'z': z };
   });
 
   microbit.on('accelerometerChange', function(x, y, z) {
-    // logBothConsole('microbit: orig accelerometer %d, %d, %d', x, y, z);    
-    x = x.toFixed(1);
-    y = y.toFixed(1);
-    z = z.toFixed(1);
-    //if (debug) { logBothConsole('microbit: accelerometer %d, %d, %d', x, y, z); }
+    //logBothConsole('microbit: orig accelerometer ' + x + ', ' + y + ', ' + z);
+    x = x.toFixed(2);
+    y = y.toFixed(2);
+    z = z.toFixed(2);
+    if (debug) { logBothConsole('microbit: accelerometer ' + x + ', ' + y + ', ' + z); }
     accelerometer = { 'x': x, 'y': y, 'z': z };
   });
 
   // When connected
-  logBothConsole('microbit: connecting...');
+  logBothConsole('microbit: (This may take a while) connecting.....');
   microbit.connectAndSetUp(function() {
     microbitConnected = true;
     device = microbit;
@@ -271,11 +271,11 @@ function microbitFound(microbit) {
     if (useMagnetometer) {
       microbit.writeMagnetometerPeriod(160, function() {
         // Use either of Bearing or XYZ 
-        /*
+
         microbit.subscribeMagnetometerBearing(function(error) {
           logBothConsole('microbit: subscribed to magnetometer bearing');
         });
-        */
+
         microbit.subscribeMagnetometer(function(error) {
           logBothConsole('microbit: subscribed to magnetometer');
         });

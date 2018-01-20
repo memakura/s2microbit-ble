@@ -16,7 +16,7 @@
       //require('./renderer.js')
       const { ipcRenderer } = require('electron');
       ipcRenderer.on('mainmsg', function (event, msg) {
-        console.log("[main] : " + msg);
+        console.log("[main] " + msg);
       });
     </script>
   </body>
