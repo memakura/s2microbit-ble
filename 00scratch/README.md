@@ -4,5 +4,5 @@
     - Cat can be moved using accelerometer.
 - fly.sb2
     - Fly in the infinit loop of squares. 
-    - Music: Thanks to [Maodamashi](https://maoudamashii.jokersounds.com/).
+    - Music: Thanks to [Maoudamashii](https://maoudamashii.jokersounds.com/).
 
