@@ -27,7 +27,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
     - 「The specified module could not be found」というエラーが出る場合は、準備のところで説明した再頒布可能パッケージが入っていない可能性があります。
 1. [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch) からScratch2のサンプルプロジェクトをダウンロードして開きます（例えば [fly.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly.sb2)など）。
 1. [このページ](https://github.com/jaafreitas/scratch-microbit-extension/tree/master/firmware)にある[HEXファイル](https://github.com/jaafreitas/scratch-microbit-extension/raw/master/firmware/makecode-microbit-scratch-extension.hex)をダウンロードしてMicrobitへ転送しておきます。
-    - s2microbit-ble が立ち上がっていると自動で接続されます。
+    - s2microbit-ble が立ち上がっていると自動で接続されます。"Console" というタブ（"Elements" の右）をクリックすると、メッセージや進行状況が表示されます。
     - 「その他」のブロックのところにある赤丸が緑丸になっていれば s2microbit-ble と Scratch 2 が接続できています。
 
 ## サンプルプログラム (fly.sb2)
