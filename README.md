@@ -107,6 +107,13 @@ Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 - Move your microbit like a plane.
 - Press A or B button for some change.
 
+## Difference from s2m
+
+Many blocks are compatible with [s2m by MrYsLab](https://github.com/MrYsLab/s2m). Some projects with s2m blocks may work to some extent. However, the following difference should be noted.
+
+- Intensity of the LEDs can only take binary values (ON or OFF).
+- The value range of analog I/O pin is NOT 0-1023 but 0-255. 
+
 ## References
 
 - [https://github.com/sandeepmistry/node-bbc-microbit](https://github.com/sandeepmistry/node-bbc-microbit)
