@@ -29,7 +29,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 1. インストールした s2microbit-ble を立ち上げておきます。
     - 「The specified module could not be found」というエラーが出る場合は、準備のところで説明した再頒布可能パッケージが入っていない可能性があります。
 1. [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch) からScratch2のサンプルプロジェクトをダウンロードして開きます（例えば [fly.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly.sb2)など）。
-1. [このページ](https://github.com/memakura/s2microbit-ble/tree/master/00microbit)にある[HEXファイル](https://raw.githubusercontent.com/memakura/s2microbit-ble/master/00microbit/microbit-scratch-extension2.hex)をダウンロードしてMicrobitへ転送しておきます。
+1. [このページ](https://github.com/memakura/s2microbit-ble/tree/master/00microbit)にある[HEXファイル](https://raw.githubusercontent.com/memakura/s2microbit-ble/raw/master/00microbit/microbit-scratch-extension2.hex)をダウンロードしてMicrobitへ転送しておきます。（HEXファイルのリンクで右クリックを押し「名前を付けてリンク先を保存」などを選ぶと保存できます。）
 1. 接続の確認
     - s2microbit-ble が立ち上がっていると自動で接続されます。"Console" というタブ（"Elements" の右）をクリックすると、メッセージや進行状況が表示されます。
     - micro:bit の LEDマトリクスが「ハート」を経て「チェックマーク」に変われば接続完了です。
@@ -71,7 +71,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 ## 改造方法
 
 - s2microbit-ble は Github のリポジトリを clone して改造できます。インストーラを生成する方法など、詳しくは[こちらの記事](https://qiita.com/memakura/items/dc5cf2ff39d24ceb53ff)が参考になります。
-- s2microbit-ble では Electron という仕組みを使っています。もう少しシンプルなバージョンは、[s2microbit-ble-console](https://github.com/memakura/s2microbit-ble-console) にあり、使用方法は[こちらの記事](https://qiita.com/memakura/items/11a0426f9060da1ded7e)が参考になります。
+- s2microbit-ble では Electron という仕組みを使っています。もう少しシンプルなバージョンは [s2microbit-ble-console](https://github.com/memakura/s2microbit-ble-console) にあり、使用方法は[こちらの記事](https://qiita.com/memakura/items/11a0426f9060da1ded7e)が参考になります。
 
 ---
 
@@ -90,8 +90,8 @@ Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 1. Download and install the latest version from [Release](https://github.com/memakura/s2microbit-ble/releases).
     - For Windows: s2microbit-ble_installer.exe
 1. Download and open a demo project (e.g., [fly.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly.sb2)) from [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch).
-    - For English blocks: Download and open [s2microbit_EN.s2e](https://github.com/memakura/s2microbit-ble/blob/master/00scratch/s2microbit_EN.s2e) from Scratch 2 Offline Editor to overwrite the original language (open "File" menu by pressing `Shift` key).
-1. Download [a firmware hex file](https://raw.githubusercontent.com/memakura/s2microbit-ble/master/00microbit/microbit-scratch-extension2.hex) from [this page](https://github.com/memakura/s2microbit-ble/tree/master/00microbit) and write it to your microbit.
+    - For English blocks: Download and open [s2microbit_EN.s2e](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/s2microbit_EN.s2e) from Scratch 2 Offline Editor to overwrite the original language (open "File" menu by pressing `Shift` key).
+1. Download [a firmware hex file](https://raw.githubusercontent.com/memakura/s2microbit-ble/raw/master/00microbit/microbit-scratch-extension2.hex) from [this page](https://github.com/memakura/s2microbit-ble/tree/master/00microbit) and write it to your microbit.
 
 ## Demo: fly.sb2
 
