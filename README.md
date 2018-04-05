@@ -1,7 +1,6 @@
 # s2microbit-ble
 
-BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック  
-(English follows)
+BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック (English follows)
 
 <img alt="s2microbit-ble" src="https://github.com/memakura/s2microbit-ble/raw/master/images/s2microbit-ble.png" width="256">
 
@@ -56,17 +55,25 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 ## s2m との違い
 
-いくつかありますが、特に以下の点は大きく異なります。
+多くのブロックは [MrYsLab の s2m](https://github.com/MrYsLab/s2m) と互換性があり、s2m 用のプロジェクトがそのまま動く部分もありますが、一方で、特に以下の点は大きく異なります。
 
 - LED の明るさは段階的に指定できない（点灯か消灯かのみ）。
 - アナログピンの値は 0-1023 ではなく、0-255 の範囲。
 
 また、文字列をスクロールしたあとは、スクロール前のLEDパターンに戻るようになっています（ここの仕様は変わるかもしれません）。
 
-## 参考URLやライセンス情報
+## 参考URL
 
-- このプログラムを作るうえでいくつかのコードを参考にしたり一部利用したりしています。
-- 参考にしたURLを下の英語版にリストします。
+このプログラムを作るうえで以下のコードやモジュールを参考にしたり、一部利用したりしています。
+
+- [https://github.com/sandeepmistry/node-bbc-microbit](https://github.com/sandeepmistry/node-bbc-microbit)
+- [https://github.com/jasongin/noble-uwp](https://github.com/jasongin/noble-uwp)
+- [https://github.com/jaafreitas/scratch-microbit-extension](https://github.com/jaafreitas/scratch-microbit-extension)
+- [https://github.com/MrYsLab/s2m](https://github.com/MrYsLab/s2m)
+
+## ライセンス情報
+
+- GPL
 
 ## 改造方法
 
@@ -78,6 +85,8 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 # s2microbit-ble
 
 Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
+
+<img alt="blocks" src="https://github.com/memakura/s2microbit-ble/raw/master/images/blocks_v2_EN.png" width="826">
 
 ## Requirements
 
@@ -100,10 +109,10 @@ Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 
 ## References
 
-- https://github.com/sandeepmistry/node-bbc-microbit
-- https://github.com/jasongin/noble-uwp
-- https://github.com/jaafreitas/scratch-microbit-extension
-- https://github.com/MrYsLab/s2m
+- [https://github.com/sandeepmistry/node-bbc-microbit](https://github.com/sandeepmistry/node-bbc-microbit)
+- [https://github.com/jasongin/noble-uwp](https://github.com/jasongin/noble-uwp)
+- [https://github.com/jaafreitas/scratch-microbit-extension](https://github.com/jaafreitas/scratch-microbit-extension)
+- [https://github.com/MrYsLab/s2m](https://github.com/MrYsLab/s2m)
 
 ## License
 
