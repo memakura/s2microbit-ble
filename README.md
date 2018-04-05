@@ -27,7 +27,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 1. インストールした s2microbit-ble を立ち上げておきます。
     - 「The specified module could not be found」というエラーが出る場合は、準備のところで説明した再頒布可能パッケージが入っていない可能性があります。
 1. [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch) からScratch2のサンプルプロジェクトをダウンロードして開きます（例えば [fly.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly.sb2)など）。
-1. [このページ](https://github.com/jaafreitas/scratch-microbit-extension/tree/master/firmware)にある[HEXファイル](https://github.com/jaafreitas/scratch-microbit-extension/raw/master/firmware/makecode-microbit-scratch-extension.hex)をダウンロードしてMicrobitへ転送しておきます。
+1. [このページ](https://github.com/memakura/s2microbit-ble/tree/master/00microbit)にある[HEXファイル](https://raw.githubusercontent.com/memakura/s2microbit-ble/master/00microbit/microbit-scratch-extension2.hex)をダウンロードしてMicrobitへ転送しておきます。
     - s2microbit-ble が立ち上がっていると自動で接続されます。"Console" というタブ（"Elements" の右）をクリックすると、メッセージや進行状況が表示されます。
     - 「その他」のブロックのところにある赤丸が緑丸になっていれば s2microbit-ble と Scratch 2 が接続できています。
 
@@ -72,7 +72,7 @@ Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
     - For Windows: s2microbit-ble_installer.exe
 1. Download and open a demo project (e.g., [fly.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly.sb2)) from [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch).
     - For English blocks: Download and open [s2microbit_EN.s2e](https://github.com/memakura/s2microbit-ble/blob/master/00scratch/s2microbit_EN.s2e) from Scratch 2 Offline Editor to overwrite the original language (open "File" menu by pressing `Shift` key).
-1. Download [a firmware hex file](https://github.com/jaafreitas/scratch-microbit-extension/raw/master/firmware/makecode-microbit-scratch-extension.hex) from [this page](https://github.com/jaafreitas/scratch-microbit-extension/tree/master/firmware) and write it to your microbit.
+1. Download [a firmware hex file](https://raw.githubusercontent.com/memakura/s2microbit-ble/master/00microbit/microbit-scratch-extension2.hex) from [this page](https://github.com/memakura/s2microbit-ble/tree/master/00microbit) and write it to your microbit.
 
 ## Demo: fly.sb2
 - Move your microbit like a plane.
