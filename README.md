@@ -30,6 +30,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 1. [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch) からScratch2のサンプルプロジェクトをダウンロードして開きます（例えば [fly.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly.sb2)など）。
 1. [このページ](https://github.com/memakura/s2microbit-ble/tree/master/00microbit)にある[HEXファイル](https://raw.githubusercontent.com/memakura/s2microbit-ble/raw/master/00microbit/microbit-scratch-extension2.hex)をダウンロードしてMicrobitへ転送しておきます。（HEXファイルのリンクで右クリックを押し「名前を付けてリンク先を保存」などを選ぶと保存できます。）
 1. 接続の確認
+    - micro:bit とPCがすでにペアリング済みの場合、ペアリングは解除しておきます（ペアリングなしで接続するため）。
     - s2microbit-ble が立ち上がっていると自動で接続されます。"Console" というタブ（"Elements" の右）をクリックすると、メッセージや進行状況が表示されます。
     - micro:bit の LEDマトリクスが「ハート」を経て「チェックマーク」に変われば接続完了です。
     - Scratch 2 エディタの「その他」ブロックの s2microbit-ble という文字の横にある赤丸が緑丸になっていれば s2microbit-ble と Scratch 2 が接続できています。
@@ -101,6 +102,7 @@ Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 1. Download and open a demo project (e.g., [fly_EN.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly_EN.sb2)) from [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch).
     - For English blocks: Download and open [s2microbit_EN.s2e](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/s2microbit_EN.s2e) from Scratch 2 Offline Editor to overwrite the original language (open "File" menu by pressing `Shift` key).
 1. Download [a firmware hex file](https://raw.githubusercontent.com/memakura/s2microbit-ble/raw/master/00microbit/microbit-scratch-extension2.hex) from [this page](https://github.com/memakura/s2microbit-ble/tree/master/00microbit) and write it to your microbit.
+1. If the micro:bit has already been paired with the PC, Remove the pairing information.
 
 ## Demo: fly_EN.sb2
 
