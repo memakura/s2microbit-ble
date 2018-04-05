@@ -12,7 +12,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 1. Bluetooth 4.0 以上に対応した PC（なければ USBのBluetoothアダプタなどが使えます。）
 1. Windows 10 build 10.0.15063 以上（OSビルド 15063以上）
-    - Windows の画面左下の「ここに入力して検索」に winver といれると確認できます。
+    - Windows の画面左下の「ここに入力して検索」に winver といれ、リターンを押すと確認できます。
     - バージョンが古い場合は Windows をアップデートしておきます。
 1. Microsoft Visual C++ 2015 再頒布可能パッケージをインストールしておきます。
     - [ここから](https://www.microsoft.com/ja-jp/download/details.aspx?id=52685)ダウンロードできます。
@@ -23,15 +23,18 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 ## インストール方法
 
-1. [Release](https://github.com/memakura/s2microbit-ble/releases) の最新バージョンをダウンロード、インストールします。
+1. [Github の Release](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
     - s2microbit-ble_installer-v(バージョン番号).exe という名前です。
     - 「Windows によって PC が保護されました」と出た場合は「詳細情報」をクリックしてから「実行」を選びます。
 1. インストールした s2microbit-ble を立ち上げておきます。
     - 「The specified module could not be found」というエラーが出る場合は、準備のところで説明した再頒布可能パッケージが入っていない可能性があります。
 1. [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch) からScratch2のサンプルプロジェクトをダウンロードして開きます（例えば [fly.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly.sb2)など）。
 1. [このページ](https://github.com/memakura/s2microbit-ble/tree/master/00microbit)にある[HEXファイル](https://raw.githubusercontent.com/memakura/s2microbit-ble/master/00microbit/microbit-scratch-extension2.hex)をダウンロードしてMicrobitへ転送しておきます。
+1. 接続の確認
     - s2microbit-ble が立ち上がっていると自動で接続されます。"Console" というタブ（"Elements" の右）をクリックすると、メッセージや進行状況が表示されます。
-    - 「その他」のブロックのところにある赤丸が緑丸になっていれば s2microbit-ble と Scratch 2 が接続できています。
+    - micro:bit の LEDマトリクスが「ハート」を経て「チェックマーク」に変われば接続完了です。
+    - Scratch 2 エディタの「その他」ブロックの s2microbit-ble という文字の横にある赤丸が緑丸になっていれば s2microbit-ble と Scratch 2 が接続できています。
+
 
 ## サンプルプログラム (fly.sb2)
 
@@ -41,8 +44,9 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 ## 新たに Scratch 2 プロジェクトを作る場合
 
 以下の二つのうちどちらかで行います。
+
 - サンプルプログラムを元にプログラム作っていき「名前をつけて保存」で別の名前にします。
-- 拡張ブロック用のファイル[s2microbit_JA.s2e](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/s2microbit_JA.s2e)を[00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch)からダウンロードしておきます。新たにプロジェクトを作成し、シフトを押しながら「ファイル」>「実験的なHTTP拡張を読み込み」でダウンロードしたファイルをを選ぶと拡張ブロックが追加されます。
+- 拡張ブロック用のファイル[s2microbit_JA.s2e](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/s2microbit_JA.s2e)を[00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch)からダウンロードしておきます。新たにプロジェクトを作成し、シフトを押しながら「ファイル」>「実験的なHTTP拡張を読み込み」でダウンロードしたファイルを選ぶと拡張ブロックが追加されます。
 
 ## 注意点
 
@@ -52,11 +56,12 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 ## s2m との違い
 
-いろいろありますが、特に以下の点は注意してください。
+いくつかありますが、特に以下の点は大きく異なります。
 
-- LED　の明るさは段階的に指定できない（点灯か消灯かのみ）
-- アナログピンの値は 0-1023 ではなく、0-255
-- 文字列をスクロールしたあとは、元の画像に戻す（ここの仕様は変わるかもしれません）
+- LED の明るさは段階的に指定できない（点灯か消灯かのみ）。
+- アナログピンの値は 0-1023 ではなく、0-255 の範囲。
+
+また、文字列をスクロールしたあとは、スクロール前のLEDパターンに戻るようになっています（ここの仕様は変わるかもしれません）。
 
 ## 参考URLやライセンス情報
 
@@ -65,7 +70,8 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 ## 改造方法
 
-- このリポジトリを clone してインストーラを生成する方法は、[こちらの記事](https://qiita.com/memakura/items/dc5cf2ff39d24ceb53ff)が参考になります。
+- s2microbit-ble は Github のリポジトリを clone して改造できます。インストーラを生成する方法など、詳しくは[こちらの記事](https://qiita.com/memakura/items/dc5cf2ff39d24ceb53ff)が参考になります。
+- s2microbit-ble では Electron という仕組みを使っています。もう少しシンプルなバージョンは、[s2microbit-ble-console](https://github.com/memakura/s2microbit-ble-console) にあり、使用方法は[こちらの記事](https://qiita.com/memakura/items/11a0426f9060da1ded7e)が参考になります。
 
 ---
 
