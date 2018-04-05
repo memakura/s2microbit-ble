@@ -1,8 +1,4 @@
 {
-  "devDependencies": {
-    "electron": "^1.7.10",
-    "electron-builder": "^19.53.7"
-  },
   "build": {
     "appId": "com.electron.s2microbit-ble",
     "directories": {
@@ -22,6 +18,10 @@
       "allowElevation": true,
       "allowToChangeInstallationDirectory": true
     },
-    "npmRebuild" : false
+    "npmRebuild": false
+  },
+  "devDependencies": {
+    "electron": "^1.8.4",
+    "electron-builder": "^20.8.1"
   }
 }

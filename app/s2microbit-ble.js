@@ -35,21 +35,21 @@ function createWindow () {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    mainWindow = null
+    mainWindow = null;
   });
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
 })
 
@@ -57,7 +57,7 @@ app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
-    createWindow()
+    createWindow();
   }
 });
 
@@ -67,47 +67,130 @@ app.on('activate', function () {
 
 // https://github.com/sandeepmistry/node-bbc-microbit/blob/master/API.md
 
-var BBCMicrobit = require('bbc-microbit');
-var device = null;
-var microbitConnected = false;
+let BBCMicrobit = require('bbc-microbit');
+let device = null;
+let microbitConnected = false;
 
-var BUTTON_VALUE_MAPPER = ['Not Pressed', 'Pressed', 'Long Press'];
+const BUTTON_VALUE_MAPPER = ['Not Pressed', 'Pressed', 'Long Press'];
 
-var debug = false;
+let debug = false;
 
-var useButtons = true;
-var useTemperature = true;
-var useAccelerometer = true;
-var useMagnetometer = true;
+// functionality
+let useButtons = true;
+let useTemperature = true;
+let useAccelerometer = true;
+let useMagnetometer = true; // switch to false if not stable
+let usePins = true;
 
-//--- from scratch_microbit.js
-var buttonState = null;
-var matrixState = null;
-var pinValue = null;
-var pinSetup = null;
-var temperature = null;
-var magnetometerBearing = null;
-var magnetometer = null;
-var accelerometer = null;
-var deviceName = null;
+// states and values
+let buttonState = null;
+let matrixState = null;
+let pinValue = null;
+let pinMode = null;
+let temperature = null;
+let magnetometerBearing = null;
+let magnetometer = null;
+let accelerometer = null;
+let prev_acc_z = null;
+let ledBuffer = null;
+let deviceName = null;
 
+const PIN_NOTSET = 0xFF;
+const PINMODE_OUTPUT_DIGITAL = 0x00;
+const PINMODE_INPUT = 0x01;
+const PINMODE_ANALOG = 0x02;
+const PINMODE_ANALOG_INPUT = 0x03;
+
+// LED matrix patterns (new Buffer has been deprecated: https://nodejs.org/api/buffer.html#buffer_buffer)
+const LED_PATTERNS = [
+  {name: 'HAPPY', value: Buffer.from([0b00000, 0b01010, 0b00000, 0b10001, 0b01110])},
+  {name: 'SAD',   value: Buffer.from([0b00000, 0b01010, 0b00000, 0b01110, 0b10001])},
+  {name: 'ANGRY', value: Buffer.from([0b10001, 0b01010, 0b00000, 0b11111, 0b10101])},
+  {name: 'SMILE', value: Buffer.from([0b00000, 0b00000, 0b00000, 0b10001, 0b01110])},
+  {name: 'HEART', value: Buffer.from([0b01010, 0b11111, 0b11111, 0b01110, 0b00100])},
+  {name: 'CONFUSED', value: Buffer.from([0b00000, 0b01010, 0b00000, 0b01010, 0b10101])},
+  {name: 'ASLEEP', value: Buffer.from([0b00000, 0b11011, 0b00000, 0b01110, 0b00000])},
+  {name: 'SURPRISED', value: Buffer.from([0b01010, 0b00000, 0b00100, 0b01010, 0b00100])},
+  {name: 'SILLY', value: Buffer.from([0b10001, 0b00000, 0b11111, 0b00011, 0b00011])},
+  {name: 'FABULOUS', value: Buffer.from([0b11111, 0b11011, 0b00000, 0b01010, 0b01110])},
+  {name: 'MEH', value: Buffer.from([0b01010, 0b00000, 0b00010, 0b00100, 0b01000])},
+  {name: 'YES', value: Buffer.from([0b00000, 0b00001, 0b00010, 0b10100, 0b01000])},
+  {name: 'NO', value: Buffer.from([0b10001, 0b01010, 0b00100, 0b01010, 0b10001])},
+  {name: 'TRIANGLE', value: Buffer.from([0b00000, 0b00100, 0b01010, 0b11111, 0b00000])},
+  {name: 'DIAMOND', value: Buffer.from([0b00100, 0b01010, 0b10001, 0b01010, 0b00100])},
+  {name: 'DIAMOND_SMALL', value: Buffer.from([0b00000, 0b00100, 0b01010, 0b00100, 0b00000])},
+  {name: 'SQUARE', value: Buffer.from([0b11111, 0b10001, 0b10001, 0b10001, 0b11111])},
+  {name: 'SQUARE_SMALL', value: Buffer.from([0b00000, 0b01110, 0b01010, 0b01110, 0b00000])},
+  {name: 'TARGET', value: Buffer.from([0b00100, 0b01110, 0b11011, 0b01110, 0b00100])},
+  {name: 'STICKFIGURE', value: Buffer.from([0b00100, 0b11111, 0b00100, 0b01010, 0b10001])},
+  {name: 'RABBIT', value: Buffer.from([0b10100, 0b10100, 0b11110, 0b11010, 0b11110])},
+  {name: 'COW', value: Buffer.from([0b10001, 0b10001, 0b11111, 0b01110, 0b00100])},
+  {name: 'ROLLERSKATE', value: Buffer.from([0b00011, 0b00011, 0b11111, 0b11111, 0b01010])},
+  {name: 'HOUSE', value: Buffer.from([0b00100, 0b01110, 0b11111, 0b01110, 0b01010])},
+  {name: 'SNAKE', value: Buffer.from([0b11000, 0b11011, 0b01010, 0b01110, 0b00000])},
+  {name: 'ARROW_N', value: Buffer.from([0b00100, 0b01110, 0b10101, 0b00100, 0b00100])},
+  {name: 'ARROW_NE', value: Buffer.from([0b00111, 0b00011, 0b00101, 0b01000, 0b10000])},
+  {name: 'ARROW_E', value: Buffer.from([0b00100, 0b00010, 0b11111, 0b00010, 0b00100])},
+  {name: 'ARROW_SE', value: Buffer.from([0b10000, 0b01000, 0b00101, 0b00011, 0b00111])},
+  {name: 'ARROW_S', value: Buffer.from([0b00100, 0b00100, 0b10101, 0b01110, 0b00100])},
+  {name: 'ARROW_SW', value: Buffer.from([0b00001, 0b00010, 0b10100, 0b11000, 0b11100])},
+  {name: 'ARROW_W', value: Buffer.from([0b00100, 0b01000, 0b11111, 0b01000, 0b00100])},
+  {name: 'ARROW_NW', value: Buffer.from([0b11100, 0b11000, 0b10100, 0b00010, 0b00001])},
+  {name: 'HEART_SMALL', value: Buffer.from([0b000000, 0b01010, 0b01110, 0b00100, 0b00000])},
+  {name: 'TRIANGLE_LEFT', value: Buffer.from([0b10000, 0b11000, 0b10100, 0b10010, 0b11111])},
+  {name: 'CHESSBOARD', value: Buffer.from([0b01010, 0b10101, 0b01010, 0b10101, 0b01010])},
+  {name: 'PITCHFORK', value: Buffer.from([0b10101, 0b10101, 0b11111, 0b00100, 0b00100])},
+  {name: 'XMAS', value: Buffer.from([0b00100, 0b01110, 0b00100, 0b01110, 0b11111])},
+  {name: 'TSHIRT', value: Buffer.from([0b11011, 0b11111, 0b01110, 0b01110, 0b01110])},
+  {name: 'SWORD', value: Buffer.from([0b00100, 0b00100, 0b00100, 0b01110, 0b00100])},
+  {name: 'UMBRELLA', value: Buffer.from([0b01110, 0b11111, 0b00100, 0b10100, 0b01100])},
+  {name: 'DUCK', value: Buffer.from([0b01100, 0b11100, 0b01111, 0b01110, 0b00000])},
+  {name: 'TORTOISE', value: Buffer.from([0b00000, 0b01110, 0b11111, 0b01010, 0b00000])},
+  {name: 'BUTTERFLY', value: Buffer.from([0b11011, 0b11111, 0b00100, 0b11111, 0b11011])},
+  {name: 'GIRAFFE', value: Buffer.from([0b11000, 0b01000, 0b01000, 0b01110, 0b01010])},
+  {name: 'SKULL', value: Buffer.from([0b01110, 0b10101, 0b11111, 0b01110, 0b01110])},
+  {name: 'MUSIC_CROTCHET', value: Buffer.from([0b00100, 0b00100, 0b00100, 0b11100, 0b11100])},
+  {name: 'MUSIC_QUAVER', value: Buffer.from([0b00100, 0b00110, 0b00101, 0b11100, 0b11100])},
+  {name: 'MUSIC_QUAVERS', value: Buffer.from([0b01111, 0b01001, 0b01001, 0b11011, 0b11011])},
+  {name: 'SCISSORS', value: Buffer.from([0b11001, 0b11010, 0b00100, 0b11010, 0b11001])},
+  {name: 'PACMAN', value: Buffer.from([0b01111, 0b11010, 0b11100, 0b11000, 0b01111])},
+  {name: 'GHOST', value: Buffer.from([0b01110, 0b10101, 0b11111, 0b11111, 0b10101])}
+];
+let LED_PATTERN_MAP = { }; // map : pattern name -> value
+function createLedPatternMap() {
+  for (var i=0; i < LED_PATTERNS.length; i++){
+    LED_PATTERN_MAP[LED_PATTERNS[i].name] = LED_PATTERNS[i].value; // value=reference
+  }
+}
+createLedPatternMap();
+
+// Initialization
 function initValues () {
   console.log("Initialize values...");
   buttonState = {A: 0, B: 0};
   matrixState = [0, 0, 0, 0, 0];
   // The array has space for P0 to P20 (including P17 and P18).
   pinValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  pinSetup = [
-    false, false, false, false, false, false, false, false, false, false, false,
-    false, false, false, false, false, false, false, false, false, false
-  ];
+  // 00(0):D-Out, 01(1):D-In, 10(2):A-Out, 11(3):A-In
+  pinMode = [PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, 
+      PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, 
+      PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, 
+      PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, PIN_NOTSET, PIN_NOTSET];
+
+  // Initialize LED matrix
+  ledBuffer = Buffer.alloc(5);
+  LED_PATTERN_MAP['YES'].copy(ledBuffer); // copy the value (do not pass by reference)
+
+  // Initialize sensor data
   temperature = 0;
   magnetometerBearing = 0;
   magnetometer = { 'x': 0, 'y': 0, 'z': 0 };
   accelerometer = { 'x': 0, 'y': 0, 'z': 0 };
+  prev_acc_z = 0;
 }
 
 initValues();
+
 
 console.log("=== BBC micro:bit Scratch 2.0 offline extension ===");
 // createWindow (mainWindow.webContents.on('did-finish-load') ) 
@@ -119,79 +202,90 @@ function logBothConsole (msg) {
   mainWindow.webContents.send('mainmsg', msg);
 }
 
-// Discover microbit
 //var id = 'dd628ee75dfe';
 var id = 'd5a250cd6035';
+
+// Discover microbit
 function microbitScanner() {
   logBothConsole("microbit: scanning...");
-  BBCMicrobit.discoverAll(onDiscover); // find all microbits
+
+  BBCMicrobit.discoverAll( function (microbit) {
+    logBothConsole("  found microbit : " + microbit);
+  }); // find all microbits
 
   //BBCMicrobit.discoverById(id, microbitFound);
   BBCMicrobit.discover(microbitFound);
 }
 
-function onDiscover(microbit) {
-  logBothConsole("  found microbit : " + microbit);
-}
-
-
-
-// ================= HTTP server =======================
-var express = require('express');
-var exapp = express();
-let exserver = null;
-
-function startHTTPServer(){
-  exserver = exapp.listen(50209, function(){
-    logBothConsole("Server started... listening port " + exserver.address().port);
+// Show pin settings
+function showPinSetting(microbit) {
+  microbit.readPinAdConfiguration(function(error, value) {
+    logBothConsole("pinsetting AD: " + value);
   });
+  microbit.readPinIoConfiguration(function(error, value) {
+    logBothConsole("pinsetting IO: " + value);
+  });  
 }
 
-//--- Responses to HTTP requrests from Scratch 2.0
-exapp.get('/scroll/:text', function(req, res) {
-  if (device) {
-    // text is a string that must be 20 characters or less
-    var txt = req.params.text.substring(0, 20);
-    device.writeLedText(txt, function(error) {
-      logBothConsole('microbit: display ' + txt);
-    });
+// Initialize 0-2 pin setting to Analog-Input
+function initializePinSetting(microbit) {
+  for (var pin=0; pin <= 2; pin++) {
+    setupPinMode({pin: pin, ADmode: 'analog', IOmode: 'input'});    
   }
-  res.send("OK");
-});
+}
 
-// 未完成
-/*
-exapp.get('/display_image/:value', function(req, res) {
+// Setting up pin mode (analog/digital and input/output)
+function setupPinMode(data) {
   if (device) {
-    matrix = new Buffer(value, 'hex');
-    device.writeLedMatrixState(matrix);
+    logBothConsole('setupPinMode: pin ' + data.pin + ' is originally configured as: ' + pinMode[data.pin]);
+    function log(data) {
+      logBothConsole('microbit: setup pin ' + data.pin + ' as ' + data.ADmode + ' ' + data.IOmode);
+    }
+    // SubscribeData
+    function subscribe(device, data) {
+      log(data);
+      device.readPin(data.pin, function(error, value) { // trigger a pinDataChange
+        showPinSetting(device);
+      });
+    }
+    // UnsubscribeData
+    function unsubscribe(device) {
+      log(data);
+      showPinSetting(device);
+    }
+
+    pinMode[data.pin] = PINMODE_OUTPUT_DIGITAL;
+    if (data.IOmode == 'input') {
+      pinMode[data.pin] += PINMODE_INPUT;
+      device.pinInput(data.pin, function(error) {
+        if (data.ADmode == 'analog') {
+          pinMode[data.pin] += PINMODE_ANALOG;
+          device.pinAnalog(data.pin, function(error) {
+            subscribe(device, data);
+          });
+        } else {
+          device.pinDigital(data.pin, function(error) {
+            subscribe(device, data);
+          });
+        };
+      });
+    } else {
+      device.pinOutput(data.pin, function(error) {
+        if (data.ADmode == 'analog') {
+          pinMode[data.pin] += PINMODE_ANALOG;
+          device.pinAnalog(data.pin, function(error) {
+            unsubscribe(device);
+          });
+        } else {
+          device.pinDigital(data.pin, function(error) {
+            unsubscribe(device);
+          });
+        }
+      });
+    }
   }
-});
-exapp.get('/...')
-  if (device) {
-    device.writePin(data.pin, Math.min(data.value, 255), function(error) {
-      // logBothConsole('microbit: < pin %d, value %d', data.pin, data.value);
-    });
-  };
-});
-*/
-//
-exapp.get('/poll', function(req, res) {
-  var reply = "";
-  reply += "button_a_pressed " + (buttonState['A']!=0) + "\n";
-  reply += "button_b_pressed " + (buttonState['B']!=0) + "\n";
-  reply += "temperature " + temperature + "\n";
-  reply += "magBearing " + magnetometerBearing + "\n";
-  reply += "mag_x " + magnetometer['x'] + "\n";
-  reply += "mag_y " + magnetometer['y'] + "\n";
-  reply += "mag_z " + magnetometer['z'] + "\n";
-  reply += "acc_x " + accelerometer['x'] + "\n";
-  reply += "acc_y " + accelerometer['y'] + "\n";
-  reply += "acc_z " + accelerometer['z'] + "\n";
-  res.send(reply);
-  if (debug) { logBothConsole(reply); }
-});
-// =============================================================
+}
+
 
 // Callback when discovered
 function microbitFound(microbit) {
@@ -216,7 +310,7 @@ function microbitFound(microbit) {
   });
 
   microbit.on('pinDataChange', function(pin, value) {
-    if (debug) { logBothConsole('microbit: > pin ' + pin + ', value ' + value); }
+    if (debug) { logBothConsole('microbit: Input pin ' + pin + ', value ' + value); }
     pinValue[pin] = value;
   });
 
@@ -288,64 +382,272 @@ function microbitFound(microbit) {
         });
       });
     }
-
+    if (usePins) {
+      microbit.subscribePinData(function(error) {
+        logBothConsole('microbit: subscribePinData');
+        initializePinSetting(microbit); // Initialize pin 0-2
+      });
+    }
+    // Read device name
     microbit.readDeviceName(function(error, deviceName) {
-      logBothConsole('microbit: ' + deviceName);
+      logBothConsole('microbit deviceName: ' + deviceName);
       deviceName = devicename;
     });
 
+    // Initial pattern
+    microbit.writeLedMatrixState(ledBuffer, function(error){
+        logBothConsole('microbit: [write ledmatrix] buf= ' + val.toString(2));
+    });
     if (exserver === null) {
       startHTTPServer();
     }
   });
 }
 
-/*
-//  socket.on('pinSetup', function(data) {
-  // logBothConsole('socket: pinSetup');
+
+
+// ================= HTTP server =======================
+var express = require('express');
+var exapp = express();
+let exserver = null;
+
+function startHTTPServer(){
+  exserver = exapp.listen(50209, function(){
+    logBothConsole("Server started... listening port " + exserver.address().port);
+  });
+}
+
+//--- Responses to HTTP requrests from Scratch 2.0
+exapp.get('/scroll/:text', function(req, res) {
   if (device) {
-    function log(data) {
-      logBothConsole('microbit: setup pin %d as %s %s',
-        data.pin, data.ADmode, data.IOmode);
+    // text is a string that must be 20 characters or less
+    var txt = req.params.text.substring(0, 20);
+    device.writeLedText(txt, function(error) {
+      logBothConsole('microbit: display ' + txt);
+    });
+  }
+  res.send("OK");
+});
+
+// Reset from scratch
+exapp.get('/reset_all', function(req, res){
+  logBothConsole('microbit: reset_all is called');
+  initValues();
+  initializePinSetting(device);  // Initialize pin 0-2
+  res.send("OK");
+});
+
+// LED matrix (image pattern)
+function writeLedBuffer(error) {
+  device.writeLedMatrixState(ledBuffer, function(error) {
+      logBothConsole("microbit: writeLedBuffer: buf= " + ledBuffer.toString('hex'));
+  });
+}
+// LED display preset image
+exapp.get('/display_image/:name', function(req, res) {
+  if (device) {
+    var name = req.params.name;
+    if (name.charAt(2) == '_') { // non-English
+      LED_PATTERNS[name.substr(0,2)-1].value.copy(ledBuffer);
+    } else { // English
+      LED_PATTERN_MAP[name].copy(ledBuffer);
     }
+    logBothConsole('microbit: [display_image] name= ' + name);
+    writeLedBuffer();
+  }
+  res.send("OK");
+});
 
-    function subscribe(device, data) {
-      device.subscribePinData(function(error) {
-        log(data);
-        // It will trigger a pinDataChange.
-        device.readPin(data.pin, function(error, value) {
-        });
-      });
-    };
+// LED dot
+exapp.get('/write_pixel/:x/:y/:value', function(req, res){
+  if (device){
+      var val = req.params.value;
+      if (val >= 1) {
+        val = 1;
+      }else{
+        val = 0;
+      }
+      var x = req.params.x;
+      if (x < 0){
+        x = 0;
+      }
+      if (x > 4){
+        x = 4;
+      }
+      var y = req.params.y;
+      if (y < 0){
+        y = 0;
+      }
+      if (y > 4){
+        y = 4;
+      }
+      ledBuffer[y] &= ~(0x01<<x); // clear the pixel (set 0)
+      ledBuffer[y] |=  val<<x; // set the pixel to 'val'
+      logBothConsole('microbit: [write_pixel] val=' + val + ' to ('+ x + ', ' + y + ')');
+      writeLedBuffer();
+  }
+  res.send("OK");  
+});
 
-    if (data.IOmode == 'input') {
-      device.pinInput(data.pin, function(error) {
-        if (data.ADmode == 'analog') {
-          device.pinAnalog(data.pin, function(error) {
-            subscribe(device, data);
-          });
-        } else {
-          device.pinDigital(data.pin, function(error) {
-            subscribe(device, data);
-          });
-        };
-      });
+// LED display custom pattern
+exapp.get('/display_pattern/:binstr', function(req, res) {
+  if (device) {    
+    logBothConsole('microbit: [display_pattern] str= ' + req.params.binstr);
+    var binstr = req.params.binstr;
+    // TODO: check
+    var linearray = binstr.split(' ');
+    if (linearray.length != 5) {
+      logBothConsole('microbit: [display_pattern] error: illegal array length= ' + linearray.length);
+      return;
+    }
+    for (var y=0; y < 5; y++) {
+      ledBuffer.writeUInt8(parseInt(linearray[y], 2), y);
+      //logBothConsole('microbit: buf[' + y + '] = ' + ledBuffer[y]);
+    }
+    writeLedBuffer();
+  }
+  res.send("OK");
+});
+
+// clear LED
+exapp.get('/display_clear', function(req, res){
+  if (device){
+    ledBuffer.fill(0);
+    logBothConsole('microbit: [display_clear]');
+    writeLedBuffer();
+  }
+  res.send("OK");
+});
+
+// PIN I/O
+// Should we use wait block?
+exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
+  if (device) {
+    var pin = req.params.pin;
+    if(pin < 0 || pin > 20 ){
+      logBothConsole('microbit: [setup_pin] error: pin number (' + pin + ') is out of range');
+      return;
+    }
+    //    pinMode[pin] = PIN_NOTSET; // once reset mode
+
+    var admode = req.params.admode;
+    if (admode.charAt(0) == 'D') {
+      admode = 'digital';
+    } else if(admode.charAt(0) == 'A') {
+      admode = 'analog';
     } else {
-      device.pinOutput(data.pin, function(error) {
-        if (data.ADmode == 'analog') {
-          device.pinAnalog(data.pin, function(error) {
-            log(data);
-          });
-        } else {
-          device.pinDigital(data.pin, function(error) {
-            log(data);
-          });
-        };
-      });
-    };
-  };
-//  });
+      logBothConsole('microbit: [setup_pin] error: no such ADmode: ' + admode);
+      return;
+    }
+    var iomode = req.params.iomode;
+    if (iomode.charAt(0) == 'I') {
+      iomode = 'input';
+    } else if (iomode.charAt(0) == 'O') {
+      iomode = 'output';
+    } else {
+      logBothConsole('[setup_pin] error: no such IOmode: ' + iomode);
+      return;
+    }
+    setupPinMode({pin: pin, ADmode: admode, IOmode: iomode});
+  }
+  res.send("OK");
+});
 
-//  socket.on('inWrite', function(data) {
-*/
+exapp.get('/digital_write/:pin/:value', function(req, res) {
+  if (device) {
+    var pin = req.params.pin;
+    if(pin < 0 || pin > 20 ){
+      logBothConsole('microbit: [digital_write] error: pin number (' + pin + ') is out of range');
+      return;
+    }
+    if ( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) == PINMODE_ANALOG ) {
+      logBothConsole('microbit: [digital_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
+      setupPinMode({pin: pin, ADmode: 'digital', IOmode: 'output'});
+    }else{
+      var val = req.params.value;
+      if(val >= 1) {
+        val = 1;
+      }else{
+        val = 0;
+      }
+      device.writePin(pin, val, function(error) {
+        logBothConsole('microbit: [digital_write] pin ' + pin + ', val ' + val);
+      });
+    }
+  }
+  res.send("OK");
+});
+
+exapp.get('/analog_write/:pin/:value', function(req, res) {
+  if (device) {
+    var pin = req.params.pin;
+    if(pin < 0 || pin > 20 ){
+      logBothConsole('microbit: [analog_write] error: pin number (' + pin + ') is out of range');
+      return;
+    }
+    if ( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) != PINMODE_ANALOG ) {
+      logBothConsole('microbit: [analog_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
+      setupPinMode({pin: pin, ADmode: 'analog', IOmode:' output'});
+    }else{
+      var val = req.params.value;
+      if(val > 255) {
+        val = 255;
+      }
+      if(val < 0) {
+        val = 0;
+      }
+      device.writePin(pin, val, function(error) {
+        logBothConsole('microbit: [analog_write] pin ' + pin + ', val ' + val);
+      });
+    }
+  }
+  res.send("OK");
+});
+
+// Response to polling
+exapp.get('/poll', function(req, res) {
+  var reply = "";
+  reply += "button_a_pressed " + (buttonState['A']!=0) + "\n";
+  reply += "button_b_pressed " + (buttonState['B']!=0) + "\n";
+  for (var pin=0; pin <= 20; pin++){
+    if ((pinMode[pin] != PIN_NOTSET) && (pinMode[pin] & PINMODE_INPUT)){
+      if (pinMode[pin] & PINMODE_ANALOG){
+        reply += "analog_read/" + pin + " " + pinValue[pin] + "\n";
+      }else{
+        reply += "digital_read/" + pin + " " + pinValue[pin] + "\n";
+      }
+    }
+  }
+  if (accelerometer['x'] > 0) {
+    reply += "tilted_right true\ntilted_left false\n";
+  } else {
+    reply += "tilted_right false\ntilted_left true\n";
+  }
+  if (accelerometer['y'] > 0) {
+    reply += "tilted_up true\ntilted_down false\n";
+  } else {
+    reply += "tilted_up false\ntilted_down true\n";
+  }
+  if ( Math.abs(accelerometer['z'] - prev_acc_z) > 0.7 ) {
+    reply += "shaken true\n";
+  } else {
+    reply += "shaken false\n";
+  }
+  prev_acc_z = accelerometer['z'];
+
+  // sensor values
+  reply += "temperature " + temperature + "\n";
+  reply += "magBearing " + magnetometerBearing + "\n";
+  reply += "mag_x " + magnetometer['x'] + "\n";
+  reply += "mag_y " + magnetometer['y'] + "\n";
+  reply += "mag_z " + magnetometer['z'] + "\n";
+  reply += "acc_x " + accelerometer['x'] + "\n";
+  reply += "acc_y " + accelerometer['y'] + "\n";
+  reply += "acc_z " + accelerometer['z'] + "\n";
+
+  res.send(reply);
+  if (debug) { logBothConsole(reply); }
+});
+// =============================================================
+
 

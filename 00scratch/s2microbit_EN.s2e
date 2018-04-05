@@ -5,9 +5,56 @@
     "blockSpecs": [
         [
             " ",
+            "Display %m.images",
+	        "display_image",
+	        "HAPPY"
+        ],
+        [
+            " ",
             "Scroll %s",
             "scroll",
-            "Replace With Your Text"
+            "Hello!"
+        ],
+        [
+            " ",
+            "Write Pixel X %n Y %n Intensity %m.val",
+            "write_pixel",
+            "0",
+            "0",
+            "1"
+        ],
+        [
+            " ",
+            "Display pattern %n",
+            "display_pattern",
+            "11001 01111 01110 11110 10011"
+        ],
+        [
+            " ",
+            "Clear Display",
+            "display_clear"
+        ],
+        [
+            " ",
+            "Setup Pin %m.pins as %m.admodes %m.iomodes",
+            "setup_pin",
+            "0",
+            "Digital",
+            "Output"
+        ],
+        [
+            " ",
+            "Digital Write Pin %m.pins Value %m.val",
+            "digital_write",
+            "0",
+            "0"
+        ],
+        [
+            " ",
+            "Analog Write Pin %m.pins Value %n",
+            "analog_write",
+            "0",
+            "0"
         ],
         [
             "b",
@@ -18,6 +65,43 @@
             "b",
             "Button B pressed?",
             "button_b_pressed"
+        ],
+        [
+            "b",
+            "Tilted right?",
+            "tilted_right"
+        ],
+        [
+            "b",
+            "Tilted left?",
+            "tilted_left"
+        ],
+        [
+            "b",
+            "Tilted up?",
+            "tilted_up"
+        ],
+        [
+            "b",
+            "Tilted down?",
+            "tilted_down"
+        ],
+        [
+            "b",
+            "Shaken?",
+            "shaken"
+        ],
+        [
+            "r",
+            "Digital Read Pin %m.pins",
+            "digital_read",
+            "0"
+        ],
+        [
+            "r",
+            "Analog Read Pin %m.pins",
+            "analog_read",
+            "0"
         ],
         [
             "r",
@@ -94,7 +178,26 @@
             "ARROW_S",
             "ARROW_SW",
             "ARROW_W",
-            "ARROW_NW"
+            "ARROW_NW",
+            "HEART_SMALL",
+            "TRIANGLE_LEFT",
+            "CHESSBOARD",
+            "PITCHFORK",
+            "XMAS",
+            "TSHIRT",
+            "SWORD",
+            "UMBRELLA",
+            "DUCK",
+            "TORTOISE",
+            "BUTTERFLY",
+            "GIRAFFE",
+            "SKULL",
+            "MUSIC_CROTCHET",
+            "MUSIC_QUAVER",
+            "MUSIC_QUAVERS",
+            "SCISSORS",
+            "PACMAN",
+            "GHOST"
 	    ],
         "pins": [
             "0",
@@ -104,6 +207,14 @@
         "val": [
             "0",
 	        "1"
-        ] 
+        ],
+        "iomodes": [
+            "Input",
+            "Output"
+        ],
+        "admodes": [
+            "Digital",
+            "Analog"
+        ]
     }
 }
