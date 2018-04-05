@@ -86,7 +86,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 
-<img alt="blocks" src="https://github.com/memakura/s2microbit-ble/raw/master/images/blocks_v2_EN.png" width="826">
+<img alt="blocks" src="https://github.com/memakura/s2microbit-ble/raw/master/images/blocks_v2_EN.png" width="815">
 
 ## Requirements
 
@@ -98,11 +98,11 @@ Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 
 1. Download and install the latest version from [Release](https://github.com/memakura/s2microbit-ble/releases).
     - For Windows: s2microbit-ble_installer.exe
-1. Download and open a demo project (e.g., [fly.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly.sb2)) from [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch).
+1. Download and open a demo project (e.g., [fly_EN.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly_EN.sb2)) from [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch).
     - For English blocks: Download and open [s2microbit_EN.s2e](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/s2microbit_EN.s2e) from Scratch 2 Offline Editor to overwrite the original language (open "File" menu by pressing `Shift` key).
 1. Download [a firmware hex file](https://raw.githubusercontent.com/memakura/s2microbit-ble/raw/master/00microbit/microbit-scratch-extension2.hex) from [this page](https://github.com/memakura/s2microbit-ble/tree/master/00microbit) and write it to your microbit.
 
-## Demo: fly.sb2
+## Demo: fly_EN.sb2
 
 - Move your microbit like a plane.
 - Press A or B button for some change.
