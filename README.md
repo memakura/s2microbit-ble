@@ -1,8 +1,8 @@
 # s2microbit-ble
 
-BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック (English follows)
+BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック [(English)](#English)
 
-<img alt="s2microbit-ble" src="https://github.com/memakura/s2microbit-ble/raw/master/images/s2microbit-ble.png" width="256">
+[<img alt="s2microbit-ble" src="https://github.com/memakura/s2microbit-ble/raw/master/images/s2microbit-ble.png" width="256">](https://github.com/memakura/s2microbit-ble/wiki/)
 
 <img alt="blocks" src="https://github.com/memakura/s2microbit-ble/raw/master/images/blocks_v2.png" width="870">
 
@@ -87,7 +87,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 - s2microbit-ble では Electron という仕組みを使っています。もう少しシンプルなバージョンは [s2microbit-ble-console](https://github.com/memakura/s2microbit-ble-console) にあり、使用方法は[こちらの記事](https://qiita.com/memakura/items/11a0426f9060da1ded7e)が参考になります。
 
 ---
-
+<a name="English">
 # s2microbit-ble
 
 Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
@@ -105,7 +105,7 @@ Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 1. Download and install the latest version from [Release](https://github.com/memakura/s2microbit-ble/releases).
     - For Windows: s2microbit-ble_installer.exe
 1. Download and open a demo project (e.g., [fly_EN.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly_EN.sb2)) from [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch).
-    - For English blocks: Download and open [s2microbit_EN.s2e](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/s2microbit_EN.s2e) from Scratch 2 Offline Editor to overwrite the original language (open "File" menu by pressing `Shift` key).
+    - For English blocks: Download and open [s2microbit_EN.s2e](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/s2microbit_EN.s2e) from Scratch 2 Offline Editor to overwrite the original language (open "File" menu with `Shift` key pressed).
 1. Download [a firmware hex file](https://raw.githubusercontent.com/memakura/s2microbit-ble/raw/master/00microbit/microbit-scratch-extension2.hex) from [this page](https://github.com/memakura/s2microbit-ble/tree/master/00microbit) and write it to your micro:bit.
 1. If the micro:bit has already been paired with the PC, Remove the pairing information.
 
