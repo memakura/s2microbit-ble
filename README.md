@@ -22,13 +22,15 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 ## インストール方法
 
-1. [Github の Release](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
+1. [この Release ページ](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
     - s2microbit-ble_installer-v(バージョン番号).exe という名前です。
     - 「Windows によって PC が保護されました」と出た場合は「詳細情報」をクリックしてから「実行」を選びます。
 1. インストールした s2microbit-ble を立ち上げておきます。
     - 「The specified module could not be found」というエラーが出る場合は、準備のところで説明した再頒布可能パッケージが入っていない可能性があります。
-1. [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch) からScratch2のサンプルプロジェクトをダウンロードして開きます（例えば [fly.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly.sb2)など）。
-1. [このページ](https://github.com/memakura/s2microbit-ble/tree/master/00microbit)にある[HEXファイル](https://raw.githubusercontent.com/memakura/s2microbit-ble/raw/master/00microbit/microbit-scratch-extension2.hex)をダウンロードしてMicrobitへ転送しておきます。（HEXファイルのリンクで右クリックを押し「名前を付けてリンク先を保存」などを選ぶと保存できます。）
+1. [このページ](https://github.com/memakura/s2microbit-ble/tree/master/00scratch) からScratch2のサンプルプロジェクトをダウンロードして開きます（例えば [fly.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly.sb2)など）。
+1. [このページ](https://github.com/memakura/s2microbit-ble/tree/master/00microbit)にある[HEXファイル](https://raw.githubusercontent.com/memakura/s2microbit-ble/raw/master/00microbit/microbit-scratch-extension2.hex)をダウンロードしてmicro:bitへ転送しておきます。
+    - HEXファイルのリンクで右クリックを押し「名前を付けてリンク先を保存」などを選ぶと保存できます。
+    - HEXファイルを micro:bit に転送すると、「DRAW A CIRCLE」とLED部分にスクロール表示されることがあります。その場合は micro:bit を傾けながら、LED のドットが端の方を一周するように（ドットが円を描くように）動かします。
 1. 接続の確認
     - micro:bit とPCがすでにペアリング済みの場合、ペアリングは解除しておきます（ペアリングなしで接続するため）。
     - s2microbit-ble が立ち上がっていると自動で接続されます。"Console" というタブ（"Elements" の右）をクリックすると、メッセージや進行状況が表示されます。
@@ -39,7 +41,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 ## サンプルプログラム (fly.sb2)
 
 - 飛行機のような感じで動かしてください。
-- AやBボタンを押すと何か起こります。（押し続けてもいいです。）
+- AやBボタンを押している間、何か起こります。（A: Air, B: Bダッシュ）
 
 ## 新たに Scratch 2 プロジェクトを作る場合
 
@@ -50,9 +52,12 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 ## 注意点
 
-- 最初に見つかった microbit と接続します。
-- 近くに複数の電源の入った microbit があるとうまく接続できないかもしれません。
-- 途中で止まる可能性もあります。s2microbit-ble を立ち上げる、microbit のリセットボタンを押す、一度電池を外して入れなおす、などを試してください。
+- ペアリングは不要です。逆にペアリングされているとうまく接続できないかもしれません。その場合はペアリングを削除してみてください。
+- 最初に見つかった micro:bit と接続します。ほかに電源の入った micro:bit が近くにあると、うまく接続できないかもしれません。
+- Scanning... などの途中で止まる可能性もあります。以下を試してみてください。
+    - s2microbit-ble を一度落として立ち上げ直す。
+    - micro:bit のリセットボタンを押す。
+    - micro:bit の一度電池を外して入れなおす。
 
 ## s2m との違い
 
@@ -74,7 +79,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 ## ライセンス情報
 
-- GPL
+- GPL 3.0
 
 ## 改造方法
 
@@ -101,12 +106,12 @@ Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
     - For Windows: s2microbit-ble_installer.exe
 1. Download and open a demo project (e.g., [fly_EN.sb2](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/fly_EN.sb2)) from [00scratch](https://github.com/memakura/s2microbit-ble/tree/master/00scratch).
     - For English blocks: Download and open [s2microbit_EN.s2e](https://github.com/memakura/s2microbit-ble/raw/master/00scratch/s2microbit_EN.s2e) from Scratch 2 Offline Editor to overwrite the original language (open "File" menu by pressing `Shift` key).
-1. Download [a firmware hex file](https://raw.githubusercontent.com/memakura/s2microbit-ble/raw/master/00microbit/microbit-scratch-extension2.hex) from [this page](https://github.com/memakura/s2microbit-ble/tree/master/00microbit) and write it to your microbit.
+1. Download [a firmware hex file](https://raw.githubusercontent.com/memakura/s2microbit-ble/raw/master/00microbit/microbit-scratch-extension2.hex) from [this page](https://github.com/memakura/s2microbit-ble/tree/master/00microbit) and write it to your micro:bit.
 1. If the micro:bit has already been paired with the PC, Remove the pairing information.
 
 ## Demo: fly_EN.sb2
 
-- Move your microbit like a plane.
+- Move your micro:bit like a plane.
 - Press A or B button for some change.
 
 ## Difference from s2m
@@ -125,4 +130,4 @@ Many blocks are compatible with [s2m by MrYsLab](https://github.com/MrYsLab/s2m)
 
 ## License
 
-- GPL
+- GPL 3.0
