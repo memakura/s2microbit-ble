@@ -1,4 +1,4 @@
- # s2microbit-ble
+# s2microbit-ble
 
 BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック [(English)](#English)
 
