@@ -481,8 +481,8 @@ exapp.get('/write_pixel/:x/:y/:value', function(req, res){
       if (y > 4){
         y = 4;
       }
-      ledBuffer[y] &= ~(0x01<<x); // clear the pixel (set 0)
-      ledBuffer[y] |=  val<<x; // set the pixel to 'val'
+      ledBuffer[y] &= ~(0x01<<(4-x)); // clear the pixel (set 0)
+      ledBuffer[y] |=  val<<(4-x); // set the pixel to 'val'
       logBothConsole('microbit: [write_pixel] val=' + val + ' to ('+ x + ', ' + y + ')');
       writeLedBuffer();
   }
