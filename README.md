@@ -87,7 +87,9 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 - s2microbit-ble では Electron という仕組みを使っています。もう少しシンプルなバージョンは [s2microbit-ble-console](https://github.com/memakura/s2microbit-ble-console) にあり、使用方法は[こちらの記事](https://qiita.com/memakura/items/11a0426f9060da1ded7e)が参考になります。
 
 ---
+
 <a name="English">
+
 # s2microbit-ble
 
 Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
