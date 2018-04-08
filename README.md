@@ -5,7 +5,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 - **ブロックの使い方**: 下のアイコンをクリックしてください。
 - **準備やインストール方法**：このページをみてください。
 
-[<img alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="256">](./wiki)
+[<img alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="256">](https://github.com/memakura/s2microbit-ble/wiki)
 
 <img alt="blocks" src="./images/blocks_v2.png" width="870">
 
@@ -33,6 +33,8 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
     ![release_exe](./images/release_exe.png)
     - 「Windows によって PC が保護されました」と出た場合は「詳細情報」をクリックしてから「実行」を選びます。
 1. インストールした s2microbit-ble を立ち上げておきます。
+    - インストール完了時にはデフォルトではそのまま立ち上がります。
+    - 二回目以降は、デスクトップのアイコンから立ち上げるか、Windows のタスクバー右下の「ここに入力して検索」に s2mi.. あたりまで入れると選べます。
     - 「The specified module could not be found」というエラーが出る場合は、準備のところで説明した再頒布可能パッケージが入っていない可能性があります。
 1. [このページ](./00scratch) からScratch2のサンプルプロジェクトをダウンロードして開きます（例えば [fly.sb2](./00scratch/fly.sb2)など）。
 1. [このページ](./00microbit)にある[HEXファイル](./microbit-scratch-extension2.hex)をダウンロードしてmicro:bitへ転送しておきます。
@@ -43,6 +45,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
     - s2microbit-ble が立ち上がっていると自動で接続されます。"Console" というタブ（"Elements" の右）をクリックすると、メッセージや進行状況が表示されます。
     - micro:bit の LEDマトリクスが「ハート」を経て「チェックマーク」に変われば接続完了です。
     - Scratch 2 エディタの「その他」ブロックの s2microbit-ble という文字の横にある赤丸が緑丸になっていれば s2microbit-ble と Scratch 2 が接続できています。
+    - [こちらのWiki](https://github.com/memakura/s2microbit-ble/wiki)も確認してみてください。
 
 
 ## サンプルプログラム (fly.sb2)
