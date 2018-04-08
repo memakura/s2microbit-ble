@@ -20,6 +20,8 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 1. Windows のファイル拡張子を表示するようにしておくと便利です。
     - ファイルエクスプローラーで「表示」>「ファイル名拡張子」にチェックしておきます。
 
+<a name="Installation_JA">
+
 ## インストール方法
 
 1. [この Release ページ](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
@@ -42,6 +44,8 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 - 飛行機のような感じで動かしてください。
 - AやBボタンを押している間、何か起こります。（A: Air, B: Bダッシュ）
+
+<a name="StartProject_JA">
 
 ## 新たに Scratch 2 プロジェクトを作る場合
 
