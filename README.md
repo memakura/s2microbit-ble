@@ -98,7 +98,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 
-<img alt="blocks" src="https://github.com/memakura/s2microbit-ble/raw/master/images/blocks_v2_EN.png" width="815">
+<img alt="blocks" src="./images/blocks_v2_EN.png" width="815">
 
 ## Requirements
 
