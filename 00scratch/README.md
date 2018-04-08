@@ -1,3 +1,5 @@
+[(English)](#English)
+
 # デモプロジェクト (.sb2) とブロック拡張ファイル (.s2e)
 
 ## Scratch 2 (Offline) プロジェクトファイル (.sb2)
@@ -12,13 +14,16 @@
 
 ## Scratch 2 拡張ファイル (.s2e)
 
-上記のデモプロジェクトではなく、自分で作成したプロジェクトにs2microbit-bleのブロックを追加します。
+上記のデモプロジェクトではなく、新たに作成したプロジェクトや、以前に作成したプロジェクトにs2microbit-bleのブロックを追加するときは、以下の Scratch 2 拡張ファイルを使います。
+
 - [s2microbit_JA.s2e](s2microbit_JA.s2e)
     - Scratch 2 オフラインエディタで、シフトを押しながらメニューから**ファイル**を選び、「実験的なHTTP拡張を読み込み」を選んで、ダウンロードした s2e ファイルを読み込みます。
 
 ![open-extension](../images/open-extension_JA.png)
 
 ---
+
+<a name="English">
 
 # Demo projects (.sb2) and block extension files (.s2e)
 
