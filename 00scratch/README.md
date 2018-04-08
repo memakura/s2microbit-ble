@@ -7,16 +7,17 @@
 - [cat.sb2](cat.sb2)
     - 加速度センサでスクラッチキャットを動かします。
 - [fly.sb2](fly.sb2)
-    - 四角の中を飛びます。
+    - 四角の中を飛びます。micro:bit を、USB端子側を奥にして水平に持ち、飛行機のようにゆっくりと動かしてください。
     - 音楽: [魔王魂](https://maoudamashii.jokersounds.com/)より
 - [test_s2microbit_JA.sb2](test_s2microbit_JA.sb2)
     - いろいろなテストです。
 
 ## Scratch 2 拡張ファイル (.s2e)
 
-上記のデモプロジェクトではなく、新たに作成したプロジェクトや、以前に作成したプロジェクトにs2microbit-bleのブロックを追加するときは、以下の Scratch 2 拡張ファイルを使います。
+上記のデモプロジェクトではなく、新たに作成したプロジェクトや、以前に作成していたプロジェクトにs2microbit-bleのブロックを追加するときは、以下の Scratch 2 拡張ファイルを使います。
 
 - [s2microbit_JA.s2e](s2microbit_JA.s2e)
+    - 右クリックを押して「名前を付けてリンク先を保存」などを選び、自分のPCにダウンロードしてください。
     - Scratch 2 オフラインエディタで、シフトを押しながらメニューから**ファイル**を選び、「実験的なHTTP拡張を読み込み」を選んで、ダウンロードした s2e ファイルを読み込みます。
 
 ![open-extension](../images/open-extension_JA.png)
