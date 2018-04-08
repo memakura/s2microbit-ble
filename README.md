@@ -3,7 +3,7 @@
 BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック [(English)](#English)
 
 - **ブロックの使い方**: 下のアイコンをクリックしてください。
-- **準備やインストール方法**：このページをみてください。
+- **準備やインストール方法**：このページの[下の方](#Preparation_JA)をみてください。
 
 [<img alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="256">](https://github.com/memakura/s2microbit-ble/wiki)
 
