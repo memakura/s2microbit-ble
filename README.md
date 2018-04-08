@@ -9,6 +9,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 <img alt="blocks" src="./images/blocks_v2.png" width="870">
 
+<a name="Preparation_JA">
 
 ## 準備
 
