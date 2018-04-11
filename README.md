@@ -10,7 +10,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 - **準備やインストール方法**：このページの[下の方](#Preparation_JA)をみてください。
 
 [<img alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="256">](https://github.com/memakura/s2microbit-ble/wiki)
-<iframe width="560" height="315" align="right" src="https://www.youtube.com/embed/dTPiU2RnBIc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="281" align="right" src="https://www.youtube.com/embed/dTPiU2RnBIc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 <img alt="blocks" src="./images/blocks_v2.png" width="870">
 
@@ -34,9 +34,9 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 ## インストール方法
 
 1. [この Release ページ](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
-    - s2microbit-ble_installer-v(バージョン番号).exe という名前です。
+    - s2microbit-ble_installer-v(バージョン番号).exe という名前です。<br>
     <img width="400" alt="release_exe" src="./images/release_exe.png">
-    - 「Windows によって PC が保護されました」と出た場合は「詳細情報」をクリックしてから「実行」を選びます。
+    - 「Windows によって PC が保護されました」と出た場合は「詳細情報」をクリックしてから「実行」を選びます。<br>
     <img width="500" alt="win10_warning" src="./images/win10_warning.png">
 1. インストールした s2microbit-ble を立ち上げておきます。
     - インストール完了時にはデフォルトではそのまま立ち上がります。
