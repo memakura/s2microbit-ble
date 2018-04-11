@@ -1,11 +1,17 @@
+<div style="text-align: right">
+[(English)](#English)
+</div>
+
 # s2microbit-ble
 
-BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック [(English)](#English)
+BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック
 
 - **ブロックの使い方**: 下のアイコンをクリックしてください。
 - **準備やインストール方法**：このページの[下の方](#Preparation_JA)をみてください。
 
 [<img alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="256">](https://github.com/memakura/s2microbit-ble/wiki)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dTPiU2RnBIc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 <img alt="blocks" src="./images/blocks_v2.png" width="870">
 
@@ -30,8 +36,9 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 1. [この Release ページ](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
     - s2microbit-ble_installer-v(バージョン番号).exe という名前です。
-    ![release_exe](./images/release_exe.png)
+    <img width="532" alt="release_exe" src="./images/release_exe.png">
     - 「Windows によって PC が保護されました」と出た場合は「詳細情報」をクリックしてから「実行」を選びます。
+    <img width="500" alt="win10_warning" src="./images/win10_warning.png">
 1. インストールした s2microbit-ble を立ち上げておきます。
     - インストール完了時にはデフォルトではそのまま立ち上がります。
     - 二回目以降は、デスクトップのアイコンから立ち上げるか、Windows のタスクバー右下の「ここに入力して検索」に s2mi.. あたりまで入れると選べます。
@@ -52,6 +59,9 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 - 飛行機のような感じで動かしてください。
 - AやBボタンを押している間、何か起こります。（A: Air, B: Bダッシュ）
+- 動作デモは[この記事](https://qiita.com/memakura/items/1acab55a37651e9081b4)や[動画](https://www.youtube.com/embed/dTPiU2RnBIc)で確認できます。
+- その他のサンプルプログラムは[こちらのページ](./00scratch)にあります。
+
 
 <a name="StartProject_JA">
 
@@ -65,7 +75,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 ## 注意点
 
 - ペアリングは不要です。逆にペアリングされているとうまく接続できないかもしれません。その場合はペアリングを削除してみてください。
-- 最初に見つかった micro:bit と接続します。ほかに電源の入った micro:bit が近くにあると、うまく接続できないかもしれません。
+- 最初に見つかった micro:bit と接続します。電源の入った他の micro:bit が近くにあると、うまく接続できないかもしれません。
 - Scanning... などの途中で止まる可能性もあります。以下を試してみてください。
     - s2microbit-ble を一度落として立ち上げ直す。
     - micro:bit のリセットボタンを押す。
@@ -80,6 +90,13 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 また、文字列をスクロールしたあとは、スクロール前のLEDパターンに戻るようになっています（ここの仕様は変わるかもしれません）。
 
+## 改造方法
+
+- s2microbit-ble は [Github のリポジトリ](https://github.com/memakura/s2microbit-ble)を clone して改造できます。
+- 全体のシステム構成は[こちらの記事](https://qiita.com/memakura/items/1acab55a37651e9081b4)で解説しています。
+- s2microbit-ble では Electron という仕組みを使っています。インストーラを生成する方法など、詳しくは[こちらの記事](https://qiita.com/memakura/items/dc5cf2ff39d24ceb53ff)が参考になります。
+- もう少しシンプルなバージョンは [s2microbit-ble-console](https://github.com/memakura/s2microbit-ble-console) にあり、使用方法は[こちらの記事](https://qiita.com/memakura/items/11a0426f9060da1ded7e)が参考になります。
+
 ## 参考URL
 
 このプログラムを作るうえで以下のコードやモジュールを参考にしたり、一部利用したりしています。
@@ -93,10 +110,6 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 - GPL 3.0
 
-## 改造方法
-
-- s2microbit-ble は Github のリポジトリを clone して改造できます。インストーラを生成する方法など、詳しくは[こちらの記事](https://qiita.com/memakura/items/dc5cf2ff39d24ceb53ff)が参考になります。
-- s2microbit-ble では Electron という仕組みを使っています。もう少しシンプルなバージョンは [s2microbit-ble-console](https://github.com/memakura/s2microbit-ble-console) にあり、使用方法は[こちらの記事](https://qiita.com/memakura/items/11a0426f9060da1ded7e)が参考になります。
 
 ---
 

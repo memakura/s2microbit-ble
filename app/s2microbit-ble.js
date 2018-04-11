@@ -67,7 +67,7 @@ app.on('activate', function () {
 
 // https://github.com/sandeepmistry/node-bbc-microbit/blob/master/API.md
 
-let BBCMicrobit = require('bbc-microbit');
+const BBCMicrobit = require('bbc-microbit');
 let device = null;
 let microbitConnected = false;
 
@@ -407,8 +407,8 @@ function microbitFound(microbit) {
 
 
 // ================= HTTP server =======================
-var express = require('express');
-var exapp = express();
+const express = require('express');
+let exapp = express();
 let exserver = null;
 
 function startHTTPServer(){
@@ -426,7 +426,7 @@ exapp.get('/scroll/:text', function(req, res) {
       logBothConsole('microbit: display ' + txt);
     });
   }
-  res.send("OK");
+  res.send('OK');
 });
 
 // Reset from scratch
@@ -434,7 +434,7 @@ exapp.get('/reset_all', function(req, res){
   logBothConsole('microbit: reset_all is called');
   initValues();
   initializePinSetting(device);  // Initialize pin 0-2
-  res.send("OK");
+  res.send('OK');
 });
 
 // LED matrix (image pattern)
@@ -455,7 +455,7 @@ exapp.get('/display_image/:name', function(req, res) {
     logBothConsole('microbit: [display_image] name= ' + name);
     writeLedBuffer();
   }
-  res.send("OK");
+  res.send('OK');
 });
 
 // LED dot
@@ -486,7 +486,7 @@ exapp.get('/write_pixel/:x/:y/:value', function(req, res){
       logBothConsole('microbit: [write_pixel] val=' + val + ' to ('+ x + ', ' + y + ')');
       writeLedBuffer();
   }
-  res.send("OK");  
+  res.send('OK');  
 });
 
 // LED display custom pattern
@@ -506,7 +506,7 @@ exapp.get('/display_pattern/:binstr', function(req, res) {
     }
     writeLedBuffer();
   }
-  res.send("OK");
+  res.send('OK');
 });
 
 // clear LED
@@ -516,7 +516,7 @@ exapp.get('/display_clear', function(req, res){
     logBothConsole('microbit: [display_clear]');
     writeLedBuffer();
   }
-  res.send("OK");
+  res.send('OK');
 });
 
 // PIN I/O
@@ -550,7 +550,7 @@ exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
     }
     setupPinMode({pin: pin, ADmode: admode, IOmode: iomode});
   }
-  res.send("OK");
+  res.send('OK');
 });
 
 exapp.get('/digital_write/:pin/:value', function(req, res) {
@@ -575,7 +575,7 @@ exapp.get('/digital_write/:pin/:value', function(req, res) {
       });
     }
   }
-  res.send("OK");
+  res.send('OK');
 });
 
 exapp.get('/analog_write/:pin/:value', function(req, res) {
@@ -601,49 +601,49 @@ exapp.get('/analog_write/:pin/:value', function(req, res) {
       });
     }
   }
-  res.send("OK");
+  res.send('OK');
 });
 
 // Response to polling
 exapp.get('/poll', function(req, res) {
-  var reply = "";
-  reply += "button_a_pressed " + (buttonState['A']!=0) + "\n";
-  reply += "button_b_pressed " + (buttonState['B']!=0) + "\n";
+  var reply = '';
+  reply += 'button_a_pressed ' + (buttonState['A']!=0) + '\n';
+  reply += 'button_b_pressed ' + (buttonState['B']!=0) + '\n';
   for (var pin=0; pin <= 20; pin++){
     if ((pinMode[pin] != PIN_NOTSET) && (pinMode[pin] & PINMODE_INPUT)){
       if (pinMode[pin] & PINMODE_ANALOG){
-        reply += "analog_read/" + pin + " " + pinValue[pin] + "\n";
+        reply += 'analog_read/' + pin + ' ' + pinValue[pin] + '\n';
       }else{
-        reply += "digital_read/" + pin + " " + pinValue[pin] + "\n";
+        reply += 'digital_read/' + pin + ' ' + pinValue[pin] + '\n';
       }
     }
   }
   if (accelerometer['x'] > 0) {
-    reply += "tilted_right true\ntilted_left false\n";
+    reply += 'tilted_right true\ntilted_left false\n';
   } else {
-    reply += "tilted_right false\ntilted_left true\n";
+    reply += 'tilted_right false\ntilted_left true\n';
   }
   if (accelerometer['y'] > 0) {
-    reply += "tilted_up true\ntilted_down false\n";
+    reply += 'tilted_up true\ntilted_down false\n';
   } else {
-    reply += "tilted_up false\ntilted_down true\n";
+    reply += 'tilted_up false\ntilted_down true\n';
   }
   if ( Math.abs(accelerometer['z'] - prev_acc_z) > 0.7 ) {
-    reply += "shaken true\n";
+    reply += 'shaken true\n';
   } else {
-    reply += "shaken false\n";
+    reply += 'shaken false\n';
   }
   prev_acc_z = accelerometer['z'];
 
   // sensor values
-  reply += "temperature " + temperature + "\n";
-  reply += "magBearing " + magnetometerBearing + "\n";
-  reply += "mag_x " + magnetometer['x'] + "\n";
-  reply += "mag_y " + magnetometer['y'] + "\n";
-  reply += "mag_z " + magnetometer['z'] + "\n";
-  reply += "acc_x " + accelerometer['x'] + "\n";
-  reply += "acc_y " + accelerometer['y'] + "\n";
-  reply += "acc_z " + accelerometer['z'] + "\n";
+  reply += 'temperature ' + temperature + '\n';
+  reply += 'magBearing ' + magnetometerBearing + '\n';
+  reply += 'mag_x ' + magnetometer['x'] + '\n';
+  reply += 'mag_y ' + magnetometer['y'] + '\n';
+  reply += 'mag_z ' + magnetometer['z'] + '\n';
+  reply += 'acc_x ' + accelerometer['x'] + '\n';
+  reply += 'acc_y ' + accelerometer['y'] + '\n';
+  reply += 'acc_z ' + accelerometer['z'] + '\n';
 
   res.send(reply);
   if (debug) { logBothConsole(reply); }
