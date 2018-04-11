@@ -10,8 +10,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 - **準備やインストール方法**：このページの[下の方](#Preparation_JA)をみてください。
 
 [<img alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="256">](https://github.com/memakura/s2microbit-ble/wiki)
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dTPiU2RnBIc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="560" height="315" align="right" src="https://www.youtube.com/embed/dTPiU2RnBIc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 <img alt="blocks" src="./images/blocks_v2.png" width="870">
 
@@ -93,7 +92,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 ## 改造方法
 
 - s2microbit-ble は [Github のリポジトリ](https://github.com/memakura/s2microbit-ble)を clone して改造できます。
-- 全体のシステム構成は[こちらの記事](https://qiita.com/memakura/items/1acab55a37651e9081b4)で解説しています。
+- 全体のシステム構成は、図で書くと[こんな感じ](./images/system-configuration.png)で、詳しくは[こちらの記事](https://qiita.com/memakura/items/1acab55a37651e9081b4)で解説しています。
 - s2microbit-ble では Electron という仕組みを使っています。インストーラを生成する方法など、詳しくは[こちらの記事](https://qiita.com/memakura/items/dc5cf2ff39d24ceb53ff)が参考になります。
 - もう少しシンプルなバージョンは [s2microbit-ble-console](https://github.com/memakura/s2microbit-ble-console) にあり、使用方法は[こちらの記事](https://qiita.com/memakura/items/11a0426f9060da1ded7e)が参考になります。
 
