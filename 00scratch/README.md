@@ -1,6 +1,4 @@
-<div style="text-align: right">
 [(English)](#English)
-</div>
 
 # デモプロジェクト (.sb2) とブロック拡張ファイル (.s2e)
 

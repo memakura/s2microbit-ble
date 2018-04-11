@@ -1,6 +1,4 @@
-<div style="text-align: right">
 [(English)](#English)
-</div>
  
 # HEX ファイルのインストール
  
