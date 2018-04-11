@@ -10,7 +10,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 - **準備やインストール方法**：このページの[下の方](#Preparation_JA)をみてください。
 
 [<img align="left" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="256">](https://github.com/memakura/s2microbit-ble/wiki)
-<iframe width="500" height="281" marginheight="5px" align="right" src="https://www.youtube.com/embed/dTPiU2RnBIc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="500" height="281" marginheight="4px" align="right" src="https://www.youtube.com/embed/dTPiU2RnBIc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 <img alt="blocks" src="./images/blocks_v2.png" width="870">
 
