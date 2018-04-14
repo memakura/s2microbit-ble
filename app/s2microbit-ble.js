@@ -295,7 +295,7 @@ function microbitFound(microbit) {
   microbit.on('disconnect', function() {
     microbitConnected = false;
     device = null;
-    logBothConsole('microbit: disconnected ' + microbitConnected);
+    logBothConsole('microbit: disconnected. microbitConnected= ' + microbitConnected);
     microbitScanner();
   });
 
@@ -364,12 +364,9 @@ function microbitFound(microbit) {
     }
     if (useMagnetometer) {
       microbit.writeMagnetometerPeriod(160, function() {
-        // Use either of Bearing or XYZ 
-
         microbit.subscribeMagnetometerBearing(function(error) {
           logBothConsole('microbit: subscribed to magnetometer bearing');
         });
-
         microbit.subscribeMagnetometer(function(error) {
           logBothConsole('microbit: subscribed to magnetometer');
         });
@@ -493,13 +490,20 @@ exapp.get('/write_pixel/:x/:y/:value', function(req, res){
 exapp.get('/display_pattern/:binstr', function(req, res) {
   if (device) {    
     logBothConsole('microbit: [display_pattern] str= ' + req.params.binstr);
-    var binstr = req.params.binstr;
-    // TODO: check
-    var linearray = binstr.split(' ');
-    if (linearray.length != 5) {
-      logBothConsole('microbit: [display_pattern] error: illegal array length= ' + linearray.length);
+    // check
+    if ( ! /^[01]{5} [01]{5} [01]{5} [01]{5} [01]{5}$/.test(req.params.binstr) ) {
+      logBothConsole('error: illegal pattern');
+      res.send('ERROR');
       return;
     }
+    var linearray = req.params.binstr.split(' ');
+    /*
+    if (linearray.length != 5) {
+      logBothConsole('microbit: [display_pattern] error: illegal array length= ' + linearray.length);
+      res.send('ERROR');
+      return;
+    }
+    */
     for (var y=0; y < 5; y++) {
       ledBuffer.writeUInt8(parseInt(linearray[y], 2), y);
       //logBothConsole('microbit: buf[' + y + '] = ' + ledBuffer[y]);
@@ -526,6 +530,7 @@ exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
     var pin = req.params.pin;
     if(pin < 0 || pin > 20 ){
       logBothConsole('microbit: [setup_pin] error: pin number (' + pin + ') is out of range');
+      res.send('ERROR');
       return;
     }
     //    pinMode[pin] = PIN_NOTSET; // once reset mode
@@ -537,6 +542,7 @@ exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
       admode = 'analog';
     } else {
       logBothConsole('microbit: [setup_pin] error: no such ADmode: ' + admode);
+      res.send('ERROR');
       return;
     }
     var iomode = req.params.iomode;
@@ -546,6 +552,7 @@ exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
       iomode = 'output';
     } else {
       logBothConsole('[setup_pin] error: no such IOmode: ' + iomode);
+      res.send('ERROR');
       return;
     }
     setupPinMode({pin: pin, ADmode: admode, IOmode: iomode});
@@ -558,6 +565,7 @@ exapp.get('/digital_write/:pin/:value', function(req, res) {
     var pin = req.params.pin;
     if(pin < 0 || pin > 20 ){
       logBothConsole('microbit: [digital_write] error: pin number (' + pin + ') is out of range');
+      res.send('ERROR');
       return;
     }
     if ( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) == PINMODE_ANALOG ) {
@@ -583,6 +591,7 @@ exapp.get('/analog_write/:pin/:value', function(req, res) {
     var pin = req.params.pin;
     if(pin < 0 || pin > 20 ){
       logBothConsole('microbit: [analog_write] error: pin number (' + pin + ') is out of range');
+      res.send('ERROR');
       return;
     }
     if ( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) != PINMODE_ANALOG ) {
