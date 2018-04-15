@@ -4,6 +4,24 @@
     "directories": {
       "app": "app"
     },
+    "files": [
+      "**/*",
+      {
+        "from": "../00scratch",
+        "to": "00scratch",
+        "filter": ["*.sb2", "*.s2e"]
+      },
+      {
+        "from": "../00microbit",
+        "to": "00microbit",
+        "filter": ["*.hex"]
+      },
+      {
+        "from": "../images",
+        "to": "images",
+        "filter": "s2microbit-ble.png"
+      }
+    ],
     "artifactName": "${productName}_installer.${ext}",
     "mac": {
       "category": "public.app-category.developer-tools",

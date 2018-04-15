@@ -4,13 +4,16 @@
 
 ## Scratch 2 (Offline) プロジェクトファイル (.sb2)
 
-- [cat.sb2](cat.sb2)
+- [豆猫 (cat.sb2)](cat.sb2)
     - 加速度センサでスクラッチキャットを動かします。
-- [fly.sb2](fly.sb2)
+    - X, Y方向の値で位置、z方向が大きさに対応しているので、micro:bitをひっくり返すと猫が大きくなります。
+- [飛ぶ (fly.sb2)](fly.sb2)
     - 四角の中を飛びます。micro:bit を、USB端子側を奥にして水平に持ち、飛行機のようにゆっくりと動かしてください。
+    - あえて激しく動かすと、波紋っぽくなります。（その場合、四角を丸に変えるのもありかもしれません。）
     - 音楽: [魔王魂](https://maoudamashii.jokersounds.com/)より
-- [test_s2microbit_JA.sb2](test_s2microbit_JA.sb2)
+- [いろいろ (small-tests.sb2)](small-tests.sb2)
     - いろいろなテストです。
+    - [ブロックの使い方の解説](https://github.com/memakura/s2microbit-ble/wiki)で使っているプログラムが含まれています。
 
 ## Scratch 2 拡張ファイル (.s2e)
 
@@ -20,7 +23,7 @@
     - 右クリックを押して「名前を付けてリンク先を保存」などを選び、自分のPCにダウンロードしてください。
     - Scratch 2 オフラインエディタで、シフトを押しながらメニューから**ファイル**を選び、「実験的なHTTP拡張を読み込み」を選んで、ダウンロードした s2e ファイルを読み込みます。
 
-![open-extension](../images/open-extension_JA.png)
+<img width="500" alt="open-extension" src="../images/open-extension_JA.png">
 
 ---
 
@@ -30,12 +33,12 @@
 
 ## Scratch 2 (Offline) Project files (.sb2)
 
-- [cat.sb2](cat.sb2)
+- [cat_EN.sb2](cat_EN.sb2)
     - Cat can be moved using accelerometer.
 - [fly_EN.sb2](fly_EN.sb2)
     - Fly in the infinit loop of squares. 
     - Music: Thanks to [Maoudamashii](https://maoudamashii.jokersounds.com/).
-- [test_s2microbit_EN.sb2](test_s2microbit_EN.sb2)
+- [small-tests_EN.sb2](small-tests_EN.sb2)
     - A set of simple test codes.
 
 ## Scratch 2 extension files (.s2e)
