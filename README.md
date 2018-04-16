@@ -106,9 +106,14 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 ## ライセンス情報
 
 - GPL 3.0
-- 拡張ブロックの名前は MrYsLab の s2m を参考にしています。
+
+### Copyright
+
+- 拡張ブロックの一部は MrYsLab s2m 互換です。
+    - s2m互換ブロックの日本語は[石原さんの翻訳](http://blog.champierre.com/1112)を参考にしています。
+    - 英語ブロック名は s2m (Alan Yorinks) のものを利用させてもらっています。
 - デモプロジェクトの音楽は"魔王魂"からです。
-- いらすとやの画像もwikiで使わせてもらっています。
+- Wikiでは一部"いらすとや"の画像を使わせてもらっています。
 
 ---
 
@@ -135,10 +140,11 @@ Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 1. Download [a firmware hex file](./00microbit/microbit-scratch-extension2.hex) from [this page](./00microbit) and write it to your micro:bit.
 1. If the micro:bit has already been paired with the PC, Remove the pairing information.
 
-## Demo: fly_EN.sb2
+## Demo project: fly_EN.sb2
 
 - Move your micro:bit like a plane.
 - Press A or B button for some change.
+- More demo projects can be found in [this page](./00scratch).
 
 ## Difference from s2m
 
@@ -149,6 +155,8 @@ Many blocks are compatible with [s2m by MrYsLab](https://github.com/MrYsLab/s2m)
 
 ## References
 
+Some part of the following modules and codes are used or referred in this project.
+
 - [https://github.com/sandeepmistry/node-bbc-microbit](https://github.com/sandeepmistry/node-bbc-microbit)
 - [https://github.com/jasongin/noble-uwp](https://github.com/jasongin/noble-uwp)
 - [https://github.com/jaafreitas/scratch-microbit-extension](https://github.com/jaafreitas/scratch-microbit-extension)
@@ -157,3 +165,7 @@ Many blocks are compatible with [s2m by MrYsLab](https://github.com/MrYsLab/s2m)
 ## License
 
 - GPL 3.0
+
+## Copyright
+
+- English names of s2m-compatible blocks are the same as those in s2m by MrYsLab (Alan Yorinks).
