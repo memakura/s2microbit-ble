@@ -3,103 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>s2microbit-ble</title>
-    <style type="text/css">
-      .basefont-ja {
-        font-size: 16px;
-        color: #666;
-      }
-      .basefont-en {
-        font-size: 18px;
-        color: #666;
-      }
-
-      .title-box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .title-text {
-        position: relative;
-        color: #158b2b;
-        font-size: 28px;
-        font-weight: bold;
-        padding: 10px 0;
-        text-align: center;
-        margin: 1.5em 0.5em;
-      }
-      .title-text:before {
-        content: "";
-        position: absolute;
-        top: -8px;
-        left: 50%;
-        width: 140px;
-        height: 68px;
-        border-radius: 50%;
-        border: 5px solid #a6ddb0;
-        border-left-color: transparent;
-        border-right-color: transparent;
-        -moz-transform: translateX(-50%);
-        -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        transform: translateX(-50%);
-      }
-      .title-icon {
-        margin: 0 0 0 0;
-      }
-      .abstract {
-        text-align: center;
-        margin: 0 0 24px 0;
-      }
-
-      .projects p {
-        margin: 30px 0px 10px 0px;
-        background: linear-gradient(transparent 70%, #ffe798 70%);
-        width: 90%;
-      }
-
-      .square_btn{
-          position: relative;
-          display: inline-block;
-          font-weight: bold;
-          padding: 0.25em 0.5em;
-          text-decoration: none;
-          color: #00bcd4;
-          background: #ECECEC;
-          transition: .4s;
-        }
-
-      .square_btn:hover {
-          background: #00bcd4; /* #008a9c; */ /* #668ad8; */
-          color: white;
-      }
-
-      .btn {
-        display: inline-block;
-        text-decoration: none;
-        background: #00bcd4; /* #87befd; #668ad8; */
-        font-size: 16px;
-        color: #FFF;
-        width: 70px;
-        height: 70px;
-        line-height: 70px;
-        text-align: center;
-        vertical-align: bottom;
-        overflow: hidden;        
-        transition: .4s;
-        margin: 4px;
-      }
-      .btn:hover {
-          background: #008a9c;
-          /* background: #668ad8; */
-      }
-      .btn-circle {
-        border-radius: 50%;
-      }
-      .btn-rect {
-        border-radius: 20%;        
-      }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="renderer.css" media="all">
   </head>
   <body>
     <div class="title-box">
@@ -138,16 +42,15 @@
       <p class="basefont-ja">micro:bitへ転送しておくHEXファイル</p>
       <a class="btn btn-rect" href="00microbit/microbit-scratch-extension2.hex" download="microbit-scratch-extension2.hex">hex</a>
     </div>
-
-
   </p>
-    <script>
-      // You can also require other files to run in this process
-      //require('./renderer.js')
-      const { ipcRenderer } = require('electron');
-      ipcRenderer.on('mainmsg', function (event, msg) {
+
+  <script>
+    require('./renderer.js');
+    const { ipcRenderer } = require('electron');
+    ipcRenderer.on('mainmsg', function (event, msg) {
         console.log("[main] " + msg);
-      });
-    </script>
+    });
+  </script>
+
   </body>
 </html>

@@ -1,6 +1,6 @@
 {
   "name": "s2microbit-ble",
-  "version": "2.2.0",
+  "version": "2.2.2",
   "description": "BBC micro:bit (bluetooth)",
   "main": "s2microbit-ble.js",
   "scripts": {
@@ -20,6 +20,7 @@
   "dependencies": {
     "bbc-microbit": "^0.2.0",
     "express": "^4.16.3",
+    "jquery": "^3.3.1",
     "noble-uwp": "^0.6.1",
     "node-pre-gyp": "0.6.39"
   }
