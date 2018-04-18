@@ -5,7 +5,7 @@
 BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック
 
 - **ブロックの使い方**: 下のアイコンをクリックしてください。
-- **準備やインストール方法**：このページの[下の方](#Preparation_JA)をみてください。
+- **準備やインストール方法**：[このページの下の方](#Preparation_JA)をみてください。
 
 [<img align="left" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="256">](https://github.com/memakura/s2microbit-ble/wiki)
 <iframe width="480" height="270" marginheight="4" align="right" src="https://www.youtube.com/embed/dTPiU2RnBIc?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -20,8 +20,8 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 1. Windows 10 build 10.0.15063 以上（OSビルド 15063以上）
     - Windows の画面左下の「ここに入力して検索」に winver といれ、リターンを押すと確認できます。
     - バージョンが古い場合は Windows をアップデートしておきます。
-1. Microsoft Visual C++ 2015 再頒布可能パッケージをインストールしておきます。
-    - [ここから](https://www.microsoft.com/ja-jp/download/details.aspx?id=52685)ダウンロードできます。
+1. [Microsoft Visual C++ 2015 再頒布可能パッケージ](https://www.microsoft.com/ja-jp/download/details.aspx?id=52685)をインストールしておきます。
+    - 上のリンクからダウンロードできます。
     - 多くの場合 Windows 10 (64bit) なので、その場合は vc_redist.x64.exe を選びます。
     - すでに入っている場合は不要です。よくわからない場合は先に進んで、もしエラーが起きたらこれを入れてください。
 1. Windows のファイル拡張子を表示するようにしておくと便利です。
@@ -46,7 +46,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
     - HEXファイルを micro:bit に転送すると、「DRAW A CIRCLE」とLED部分にスクロール表示されることがあります。その場合は micro:bit を傾けながら、LED のドットが端の方を一周するように（ドットが円を描くように）動かします。
 1. 接続の確認
     - micro:bit とPCがすでにペアリング済みの場合、ペアリングは解除しておきます（ペアリングなしで接続するため）。
-    - s2microbit-ble が立ち上がっていると自動で接続されます。"Console" というタブ（"Elements" の右）をクリックすると、メッセージや進行状況が表示されます。
+    - s2microbit-ble が立ち上がっていると自動で接続されます。画面右側にメッセージや進行状況が表示されます。
     - micro:bit の LEDマトリクスが「ハート」を経て「チェックマーク」に変われば接続完了です。
     - Scratch 2 エディタの「その他」ブロックの s2microbit-ble という文字の横にある赤丸が緑丸になっていれば s2microbit-ble と Scratch 2 が接続できています。
     - [こちらのWiki](https://github.com/memakura/s2microbit-ble/wiki)も確認してみてください。
