@@ -1,6 +1,6 @@
 {
   "name": "s2microbit-ble",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "BBC micro:bit (bluetooth)",
   "main": "s2microbit-ble.js",
   "scripts": {

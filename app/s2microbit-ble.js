@@ -7,16 +7,21 @@ const { app, ipcMain, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
 
+const BBCMicrobit = require('bbc-microbit');
+let device = null;
+let microbitConnected = false;
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 960, 
-    height: 600
+    width: 820, 
+    height: 730
   });
 
   // and load the index.html of the app.
@@ -27,10 +32,12 @@ function createWindow () {
   }));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
   mainWindow.webContents.on('did-finish-load', function() {
     // Find microbits
-    microbitScanner();
+    if (device === null) {
+      microbitScanner();
+    }
   });
 
   // Emitted when the window is closed.
@@ -69,10 +76,6 @@ app.on('activate', function () {
 
 
 // https://github.com/sandeepmistry/node-bbc-microbit/blob/master/API.md
-
-const BBCMicrobit = require('bbc-microbit');
-let device = null;
-let microbitConnected = false;
 
 const BUTTON_VALUE_MAPPER = ['Not Pressed', 'Pressed', 'Long Press'];
 
@@ -194,10 +197,10 @@ function initValues () {
 
 initValues();
 
-
 console.log("=== BBC micro:bit Scratch 2.0 offline extension ===");
 // createWindow (mainWindow.webContents.on('did-finish-load') ) 
 //   -> microbitScanner -> microbitFound -> connectAndSetup -> startHTTPServer
+
 
 // Output log to both terminal and renderer's console (in the developer tool)
 function logBothConsole (msg) {
@@ -208,14 +211,20 @@ function logBothConsole (msg) {
 //var id = 'dd628ee75dfe';
 var id = 'd5a250cd6035';
 
+//let scanning_all = false;
+
 // Discover microbit
 function microbitScanner() {
   logBothConsole("microbit: scanning...");
-
-  BBCMicrobit.discoverAll( function (microbit) {
-    logBothConsole("  found microbit : " + microbit);
-  }); // find all microbits
-
+  /*
+  if (!scanning_all) {
+    BBCMicrobit.discoverAll( function (microbit) { // keep scanning until stop is called
+      //logBothConsole("  found microbit : " + microbit);
+      logBothConsole("  found microbit : " + microbit.id);
+      scanning_all = true;
+    }); // find all microbits
+  }
+  */
   //BBCMicrobit.discoverById(id, microbitFound);
   BBCMicrobit.discover(microbitFound);
 }
@@ -240,7 +249,7 @@ function initializePinSetting(microbit) {
 // Setting up pin mode (analog/digital and input/output)
 function setupPinMode(data) {
   if (device) {
-    logBothConsole('setupPinMode: pin ' + data.pin + ' is originally configured as: ' + pinMode[data.pin]);
+    if (debug) { logBothConsole('setupPinMode: pin ' + data.pin + ' is originally configured as: ' + pinMode[data.pin]); }
     function log(data) {
       logBothConsole('microbit: setup pin ' + data.pin + ' as ' + data.ADmode + ' ' + data.IOmode);
     }
@@ -248,13 +257,13 @@ function setupPinMode(data) {
     function subscribe(device, data) {
       log(data);
       device.readPin(data.pin, function(error, value) { // trigger a pinDataChange
-        showPinSetting(device);
+        if (debug) { showPinSetting(device); }
       });
     }
     // UnsubscribeData
     function unsubscribe(device) {
       log(data);
-      showPinSetting(device);
+      if (debug) { showPinSetting(device); }
     }
 
     pinMode[data.pin] = PINMODE_OUTPUT_DIGITAL;
@@ -299,6 +308,7 @@ function microbitFound(microbit) {
     microbitConnected = false;
     device = null;
     logBothConsole('microbit: disconnected. microbitConnected= ' + microbitConnected);
+    initValues();
     microbitScanner();
   });
 
@@ -440,7 +450,7 @@ exapp.get('/reset_all', function(req, res){
 // LED matrix (image pattern)
 function writeLedBuffer(error) {
   device.writeLedMatrixState(ledBuffer, function(error) {
-      logBothConsole("microbit: writeLedBuffer: buf= " + ledBuffer.toString('hex'));
+      if (debug) { logBothConsole("microbit: writeLedBuffer: buf= " + ledBuffer.toString('hex')); }
   });
 }
 // LED display preset image
