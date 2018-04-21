@@ -5,3 +5,5 @@ tmp/
 old/
 aifiles/
 *.pdf
+.DS_Store
+yarn-error.log
