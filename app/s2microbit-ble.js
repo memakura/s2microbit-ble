@@ -172,7 +172,7 @@ createLedPatternMap();
 
 // Initialization
 function initValues () {
-  console.log("Initialize values...");
+  console.log('Initialize values...');
   buttonState = {A: 0, B: 0};
   matrixState = [0, 0, 0, 0, 0];
   // The array has space for P0 to P20 (including P17 and P18).
@@ -197,7 +197,7 @@ function initValues () {
 
 initValues();
 
-console.log("=== BBC micro:bit Scratch 2.0 offline extension ===");
+console.log('=== BBC micro:bit Scratch 2.0 offline extension ===');
 // createWindow (mainWindow.webContents.on('did-finish-load') ) 
 //   -> microbitScanner -> microbitFound -> connectAndSetup -> startHTTPServer
 
@@ -208,102 +208,98 @@ function logBothConsole (msg) {
   mainWindow.webContents.send('mainmsg', msg);
 }
 
+// ------------- discover microbit (begin) ----------------
 //var id = 'dd628ee75dfe';
-var id = 'd5a250cd6035';
+//var id = 'd5a250cd6035';
 
-//let scanning_all = false;
+let scanning_all = false; // check if discverAll is active
+let microbit_list = []; // the list of found microbit
+let timeoutfunc_id = null; // setTimeout timer id
+let intervalfunc_id = null; // setInterval timer id
+let scan_round = 0; // to ignore old select-btn
 
 // Discover microbit
 function microbitScanner() {
-  logBothConsole("microbit: scanning...");
-  /*
+  logBothConsole('microbit: scanning...');
   if (!scanning_all) {
-    BBCMicrobit.discoverAll( function (microbit) { // keep scanning until stop is called
-      //logBothConsole("  found microbit : " + microbit);
-      logBothConsole("  found microbit : " + microbit.id);
-      scanning_all = true;
-    }); // find all microbits
+    scan_round++;
+    microbit_list = [];
+    BBCMicrobit.discoverAll( onDiscover ); // keep scanning until stop is called
+    scanning_all = true;
   }
-  */
   //BBCMicrobit.discoverById(id, microbitFound);
-  BBCMicrobit.discover(microbitFound);
+  //BBCMicrobit.discover(microbitFound);
 }
 
-// Show pin settings
-function showPinSetting(microbit) {
-  microbit.readPinAdConfiguration(function(error, value) {
-    logBothConsole("pinsetting AD: " + value);
-  });
-  microbit.readPinIoConfiguration(function(error, value) {
-    logBothConsole("pinsetting IO: " + value);
-  });  
-}
-
-// Initialize 0-2 pin setting to Analog-Input
-function initializePinSetting(microbit) {
-  for (var pin=0; pin <= 2; pin++) {
-    setupPinMode({pin: pin, ADmode: 'analog', IOmode: 'input'});    
+// Called each time a new microbit is discovered
+function onDiscover(microbit) {
+  logBothConsole('  found microbit : <button class="select-btn" type="button" value="'
+   + scan_round + '-' + microbit_list.length + '">' + microbit.id + '</button>');
+  microbit_list.push(microbit); // the above line needs to come before this line (0-index)
+  if (microbit_list.length == 1) { // if this is the first microbit
+    // set timer to wait for other microbits
+    timeoutfunc_id = setTimeout(checkFoundNum, 7000);
+    var cnt_sec = 0; // counting seconds
+    intervalfunc_id = setInterval( function() {
+      cnt_sec += 1;
+      logBothConsole('.'); // visualize the progress while scanning
+      if(cnt_sec == 6) {
+        clearInterval(intervalfunc_id);
+      }
+    }, 1000);
   }
 }
 
-// Setting up pin mode (analog/digital and input/output)
-function setupPinMode(data) {
-  if (device) {
-    if (debug) { logBothConsole('setupPinMode: pin ' + data.pin + ' is originally configured as: ' + pinMode[data.pin]); }
-    function log(data) {
-      logBothConsole('microbit: setup pin ' + data.pin + ' as ' + data.ADmode + ' ' + data.IOmode);
-    }
-    // SubscribeData
-    function subscribe(device, data) {
-      log(data);
-      device.readPin(data.pin, function(error, value) { // trigger a pinDataChange
-        if (debug) { showPinSetting(device); }
-      });
-    }
-    // UnsubscribeData
-    function unsubscribe(device) {
-      log(data);
-      if (debug) { showPinSetting(device); }
-    }
-
-    pinMode[data.pin] = PINMODE_OUTPUT_DIGITAL;
-    if (data.IOmode == 'input') {
-      pinMode[data.pin] += PINMODE_INPUT;
-      device.pinInput(data.pin, function(error) {
-        if (data.ADmode == 'analog') {
-          pinMode[data.pin] += PINMODE_ANALOG;
-          device.pinAnalog(data.pin, function(error) {
-            subscribe(device, data);
-          });
-        } else {
-          device.pinDigital(data.pin, function(error) {
-            subscribe(device, data);
-          });
-        };
-      });
-    } else {
-      device.pinOutput(data.pin, function(error) {
-        if (data.ADmode == 'analog') {
-          pinMode[data.pin] += PINMODE_ANALOG;
-          device.pinAnalog(data.pin, function(error) {
-            unsubscribe(device);
-          });
-        } else {
-          device.pinDigital(data.pin, function(error) {
-            unsubscribe(device);
-          });
-        }
-      });
-    }
+// Called (with delay) after the first microbit is found (For auto connection)
+function checkFoundNum() {
+  if (scanning_all && microbit_list.length == 1) { // if there is only  one microbit
+    logBothConsole('  auto connection...')
+    microbitFound(microbit_list[0]); // connect to the microbit
+  } else if (microbit_list.length >= 2) { // if more microbits are found
+    logBothConsole(' ひとつクリックしてください / Select and click one.');
   }
 }
 
+// Called when a select-btn is clicked
+ipcMain.on('selected', function (event, arg) {
+  var ss = arg.split('-');
+  if (ss[0]==scan_round) { // check if the button is from the latest scan-round
+    logBothConsole('  selected: ' + ss[1]);
+    if (timeoutfunc_id !== null) {
+      clearTimeout(timeoutfunc_id); // stop auto connection
+      timeoutfunc_id = null;
+    } 
+    if (intervalfunc_id !== null) {
+      clearInterval(intervalfunc_id); // stop progress display
+      intervalfunc_id = null;
+    }
+    //event.sender.send('selected-reply', 'ok'); // reply to asynchronous send from renderer
+    microbitFound(microbit_list[ss[1]]);
+  }
+});
 
-// Callback when discovered
+// Scan button is pressed
+ipcMain.on('startscan', function (event, arg) {
+  //logBothConsole('microbit: scan button pressed!');
+  if (device !== null && microbitConnected) {
+    logBothConsole('  disconnect before scanning');
+    device.disconnect( function() {  // 'disconnect' event is also emitted
+    });
+  } else {
+    microbitScanner();
+  }
+});
+
+// Start connection (called when discovered)
 function microbitFound(microbit) {
   logBothConsole('microbit: connecting to microbit: ' + microbit.id); // microbit.id, microbit.address
+  if (scanning_all) { // if still scanning
+     logBothConsole('  stop scanning all...');
+     BBCMicrobit.stopDiscoverAll( onDiscover );
+     scanning_all = false;
+  }
 
-  // Events from microbit
+  // Events from the connected microbit device or s2microbit (scan button)
   microbit.on('disconnect', function() {
     microbitConnected = false;
     device = null;
@@ -356,12 +352,14 @@ function microbitFound(microbit) {
     accelerometer = { 'x': x, 'y': y, 'z': z };
   });
 
-  // When connected
+  // settings after connection
   logBothConsole('microbit: (This may take a while) connecting.....');
+  // Connect
   microbit.connectAndSetUp(function() {
     microbitConnected = true;
     device = microbit;
     logBothConsole('microbit: connected ' + microbitConnected);
+    mainWindow.webContents.send('enablescan', microbit.id); // enable rescan
 
     if (useButtons) {
       microbit.subscribeButtons(function(error) {
@@ -413,23 +411,96 @@ function microbitFound(microbit) {
     }
   });
 }
+// ------------- discover microbit (end) ----------------
+
+
+// ------------- pin settings (begin) ----------------
+// Show pin settings
+function showPinSetting(microbit) {
+  microbit.readPinAdConfiguration(function(error, value) {
+    logBothConsole('pinsetting AD: ' + value);
+  });
+  microbit.readPinIoConfiguration(function(error, value) {
+    logBothConsole('pinsetting IO: ' + value);
+  });  
+}
+
+// Initialize 0-2 pin setting to Analog-Input
+function initializePinSetting(microbit) {
+  for (var pin=0; pin <= 2; pin++) {
+    setupPinMode({pin: pin, ADmode: 'analog', IOmode: 'input'});    
+  }
+}
+
+// Setting up pin mode (analog/digital and input/output)
+function setupPinMode(data) {
+  if (device !== null) {
+    if (debug) { logBothConsole('setupPinMode: pin ' + data.pin + ' is originally configured as: ' + pinMode[data.pin]); }
+    function log(data) {
+      logBothConsole('microbit: setup pin ' + data.pin + ' as ' + data.ADmode + ' ' + data.IOmode);
+    }
+    // SubscribeData
+    function subscribe(device, data) {
+      log(data);
+      device.readPin(data.pin, function(error, value) { // trigger a pinDataChange
+        if (debug) { showPinSetting(device); }
+      });
+    }
+    // UnsubscribeData
+    function unsubscribe(device) {
+      log(data);
+      if (debug) { showPinSetting(device); }
+    }
+
+    pinMode[data.pin] = PINMODE_OUTPUT_DIGITAL;
+    if (data.IOmode == 'input') {
+      pinMode[data.pin] += PINMODE_INPUT;
+      device.pinInput(data.pin, function(error) {
+        if (data.ADmode == 'analog') {
+          pinMode[data.pin] += PINMODE_ANALOG;
+          device.pinAnalog(data.pin, function(error) {
+            subscribe(device, data);
+          });
+        } else {
+          device.pinDigital(data.pin, function(error) {
+            subscribe(device, data);
+          });
+        };
+      });
+    } else {
+      device.pinOutput(data.pin, function(error) {
+        if (data.ADmode == 'analog') {
+          pinMode[data.pin] += PINMODE_ANALOG;
+          device.pinAnalog(data.pin, function(error) {
+            unsubscribe(device);
+          });
+        } else {
+          device.pinDigital(data.pin, function(error) {
+            unsubscribe(device);
+          });
+        }
+      });
+    }
+  }
+}
+// ------------- pin settings (end) ----------------
 
 
 
-// ================= HTTP server =======================
+// ================= HTTP server and routing =======================
 const express = require('express');
 let exapp = express();
 let exserver = null;
 
 function startHTTPServer(){
   exserver = exapp.listen(50209, function(){
-    logBothConsole("Server started... listening port " + exserver.address().port);
+    logBothConsole('Server started... listening port ' + exserver.address().port);
   });
 }
 
 //--- Responses to HTTP requrests from Scratch 2.0
 exapp.get('/scroll/:text', function(req, res) {
-  if (device) {
+  if (device !== null) {
     // text is a string that must be 20 characters or less
     var txt = req.params.text.substring(0, 20);
     device.writeLedText(txt, function(error) {
@@ -450,12 +521,12 @@ exapp.get('/reset_all', function(req, res){
 // LED matrix (image pattern)
 function writeLedBuffer(error) {
   device.writeLedMatrixState(ledBuffer, function(error) {
-      if (debug) { logBothConsole("microbit: writeLedBuffer: buf= " + ledBuffer.toString('hex')); }
+      if (debug) { logBothConsole('microbit: writeLedBuffer: buf= ' + ledBuffer.toString('hex')); }
   });
 }
 // LED display preset image
 exapp.get('/display_image/:name', function(req, res) {
-  if (device) {
+  if (device !== null) {
     var name = req.params.name;
     if (name.charAt(2) == '_') { // non-English
       LED_PATTERNS[name.substr(0,2)-1].value.copy(ledBuffer);
@@ -470,7 +541,7 @@ exapp.get('/display_image/:name', function(req, res) {
 
 // LED dot
 exapp.get('/write_pixel/:x/:y/:value', function(req, res){
-  if (device){
+  if (device !== null) {
       var val = req.params.value;
       if (val >= 1) {
         val = 1;
@@ -501,7 +572,7 @@ exapp.get('/write_pixel/:x/:y/:value', function(req, res){
 
 // LED display custom pattern
 exapp.get('/display_pattern/:binstr', function(req, res) {
-  if (device) {    
+  if (device !== null) {
     logBothConsole('microbit: [display_pattern] str= ' + req.params.binstr);
     // check
     if ( ! /^[01]{5} [01]{5} [01]{5} [01]{5} [01]{5}$/.test(req.params.binstr) ) {
@@ -528,7 +599,7 @@ exapp.get('/display_pattern/:binstr', function(req, res) {
 
 // clear LED
 exapp.get('/display_clear', function(req, res){
-  if (device){
+  if (device !== null) {
     ledBuffer.fill(0);
     logBothConsole('microbit: [display_clear]');
     writeLedBuffer();
@@ -539,7 +610,7 @@ exapp.get('/display_clear', function(req, res){
 // PIN I/O
 // Should we use wait block?
 exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
-  if (device) {
+  if (device !== null) {
     var pin = req.params.pin;
     if(pin < 0 || pin > 20 ){
       logBothConsole('microbit: [setup_pin] error: pin number (' + pin + ') is out of range');
@@ -574,7 +645,7 @@ exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
 });
 
 exapp.get('/digital_write/:pin/:value', function(req, res) {
-  if (device) {
+  if (device !== null) {
     var pin = req.params.pin;
     if(pin < 0 || pin > 20 ){
       logBothConsole('microbit: [digital_write] error: pin number (' + pin + ') is out of range');
@@ -600,7 +671,7 @@ exapp.get('/digital_write/:pin/:value', function(req, res) {
 });
 
 exapp.get('/analog_write/:pin/:value', function(req, res) {
-  if (device) {
+  if (device !== null) {
     var pin = req.params.pin;
     if(pin < 0 || pin > 20 ){
       logBothConsole('microbit: [analog_write] error: pin number (' + pin + ') is out of range');

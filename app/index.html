@@ -7,7 +7,7 @@
   </head>
   <body>
     <div id="container">
-      <div id="main_pane">
+      <div id="main-pane">
         <div class="title-box">
           <div class="title-icon">   
             <a href="http://memakura.github.io/s2microbit-ble" target="_blank">
@@ -20,9 +20,9 @@
           Scratch 2 Offline Extension for BBC micro:bit
         </div>
         <div class="help-links">
-          <a class="square-btn" href="http://github.com/memakura/s2microbit-ble/wiki" target="_blank">使い方</a>
-          <a class="square-btn" href="http://memakura.github.io/s2microbit-ble" target="_blank">プロジェクトページ</a>
-          <a class="square-btn" href="https://qiita.com/memakura/items/1acab55a37651e9081b4" target="_blank">しくみ</a>
+          <a class="link-btn" href="http://github.com/memakura/s2microbit-ble/wiki" target="_blank">使い方</a>
+          <a class="link-btn" href="http://memakura.github.io/s2microbit-ble" target="_blank">プロジェクトページ</a>
+          <a class="link-btn" href="https://qiita.com/memakura/items/1acab55a37651e9081b4" target="_blank">しくみ</a>
         </div>
         <!-- All of the Node.js APIs are available in this renderer process. -->
         <!-- We are using Node.js <script>document.write(process.versions.node)</script>,
@@ -49,12 +49,14 @@
           <p class="basefont-ja">micro:bitへ転送しておくHEXファイル</p>
           <div class="project-links">
             <a class="btn btn-rect" href="00microbit/microbit-scratch-extension2.hex" download="microbit-scratch-extension2.hex">hex</a>
+            <button id="scan-btn" type="button">再スキャン / Rescan</button>
           </div>
         </div>
       </p>
     </div> <!-- end main_pane -->
-    <div id="log_pane">
-      <div id="console_log"></div>
+    <div id="log-pane">
+      <div id="console-log">
+      </div>
     </div> <!-- end log_pane -->
   </div>  
 

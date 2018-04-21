@@ -9,12 +9,17 @@
       {
         "from": "../00scratch",
         "to": "00scratch",
-        "filter": ["*.sb2", "*.s2e"]
+        "filter": [
+          "*.sb2",
+          "*.s2e"
+        ]
       },
       {
         "from": "../00microbit",
         "to": "00microbit",
-        "filter": ["*.hex"]
+        "filter": [
+          "*.hex"
+        ]
       },
       {
         "from": "../images",
@@ -40,6 +45,6 @@
   },
   "devDependencies": {
     "electron": "^1.8.4",
-    "electron-builder": "^20.8.1"
+    "electron-builder": "^20.10.0"
   }
 }
