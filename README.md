@@ -4,12 +4,12 @@
 
 BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック
 
-**インストーラダウンロード (v2.4.0)**
-## [Windows 10](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.0/s2microbit-ble_installer_v240.exe)
-## [Mac OSX](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.0/s2microbit-ble_installer_v240.dmg)
-
 - **ブロックの使い方**: 下のアイコンをクリックしてください。
 - **準備やインストール方法**：[このページの下の方](#Preparation_JA)をみてください。
+- **インストーラダウンロード (v2.4.0)**
+
+## [Windows 10](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.0/s2microbit-ble_installer_v240.exe)  [Mac OSX](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.0/s2microbit-ble_installer_v240.dmg)
+
 
 [<img align="left" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="256">](https://github.com/memakura/s2microbit-ble/wiki)
 <iframe width="480" height="270" marginheight="4" align="right" src="https://www.youtube.com/embed/dTPiU2RnBIc?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -20,7 +20,8 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 ## 準備
 
-1. Bluetooth 4.0 以上に対応した PC（なければ USBのBluetoothアダプタなどが使えます。）
+Bluetooth 4.0 以上に対応した PC か USB等のBluetooth 4.0アダプタが必要です。Windows の場合は以下も確認してください。
+
 1. Windows 10 build 10.0.15063 以上（OSビルド 15063以上）
     - Windows の画面左下の「ここに入力して検索」に winver といれ、リターンを押すと確認できます。
     - バージョンが古い場合は Windows をアップデートしておきます。
