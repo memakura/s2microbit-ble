@@ -234,7 +234,7 @@ function microbitScanner() {
 // Called each time a new microbit is discovered
 function onDiscover(microbit) {
   logBothConsole('  found microbit : <button class="select-btn" type="button" value="'
-   + scan_round + '-' + microbit_list.length + '">' + microbit.id + '</button>');
+   + scan_round + '-' + microbit_list.length + '">' + microbit.address + '</button>');
   microbit_list.push(microbit); // the above line needs to come before this line (0-index)
   if (microbit_list.length == 1) { // if this is the first microbit
     // set timer to wait for other microbits
@@ -397,14 +397,14 @@ function microbitFound(microbit) {
       });
     }
     // Read device name
-    microbit.readDeviceName(function(error, deviceName) {
-      logBothConsole('microbit deviceName: ' + deviceName);
+    microbit.readDeviceName(function(error, devicename) {
+      logBothConsole('microbit deviceName: ' + devicename);
       deviceName = devicename;
     });
 
     // Initial pattern
     microbit.writeLedMatrixState(ledBuffer, function(error){
-        logBothConsole('microbit: [write ledmatrix] buf= ' + val.toString(2));
+        logBothConsole('microbit: [write ledmatrix] buf= ' + ledBuffer);
     });
     if (exserver === null) {
       startHTTPServer();
