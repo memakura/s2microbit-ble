@@ -292,7 +292,7 @@ ipcMain.on('startscan', function (event, arg) {
 
 // Start connection (called when discovered)
 function microbitFound(microbit) {
-  logBothConsole('microbit: connecting to microbit: ' + microbit.id); // microbit.id, microbit.address
+  logBothConsole('microbit: connecting to microbit: ' + microbit.address); // microbit.id, microbit.address
   if (scanning_all) { // if still scanning
      logBothConsole('  stop scanning all...');
      BBCMicrobit.stopDiscoverAll( onDiscover );
@@ -359,7 +359,7 @@ function microbitFound(microbit) {
     microbitConnected = true;
     device = microbit;
     logBothConsole('microbit: connected ' + microbitConnected);
-    mainWindow.webContents.send('enablescan', microbit.id); // enable rescan
+    mainWindow.webContents.send('enablescan', microbit.address); // enable rescan
 
     if (useButtons) {
       microbit.subscribeButtons(function(error) {
@@ -403,9 +403,8 @@ function microbitFound(microbit) {
     });
 
     // Initial pattern
-    microbit.writeLedMatrixState(ledBuffer, function(error){
-        logBothConsole('microbit: [write ledmatrix] buf= ' + ledBuffer);
-    });
+    writeLedBuffer();
+    
     if (exserver === null) {
       startHTTPServer();
     }
