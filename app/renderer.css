@@ -57,24 +57,22 @@ body {
     color: #158b2b;
     font-size: 28px;
     font-weight: bold;
-    padding: 10px 0;
+    padding: 0px;
     text-align: center;
     margin: 1.5em 0.5em;
 }
 .title-text:before {
     content: "";
     position: absolute;
-    top: -8px;
+    top: -22px;
     left: 50%;
-    width: 140px;
-    height: 68px;
+    width: 80px;
+    height: 60px;
     border-radius: 50%;
-    border: 5px solid #a6ddb0;
+    border: 10px solid #a6ddb0;
+    /* border-top-color: transparent; */
     border-left-color: transparent;
     border-right-color: transparent;
-    -moz-transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
     transform: translateX(-50%);
 }
 .title-icon {
@@ -179,7 +177,7 @@ body {
     color: #ffa000;
     font-size: large;
     border: 3px solid #ffa000;
-    margin: 0px 0px 20px 70px;
+    margin: 0px 0px 0px 70px;
     border-radius: 20px;
 }
 
