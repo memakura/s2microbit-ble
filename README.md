@@ -4,6 +4,9 @@
 
 BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック
 
+- s2microbit-ble (v2.4.0) インストーラ
+    - [Windows 10](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.0/s2microbit-ble_installer_v240.exe)
+    - [Mac OSX](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.0/s2microbit-ble_installer_v240.dmg)
 - **ブロックの使い方**: 下のアイコンをクリックしてください。
 - **準備やインストール方法**：[このページの下の方](#Preparation_JA)をみてください。
 
