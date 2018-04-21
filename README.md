@@ -4,9 +4,10 @@
 
 BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック
 
-- s2microbit-ble (v2.4.0) インストーラ
-    - [Windows 10](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.0/s2microbit-ble_installer_v240.exe)
-    - [Mac OSX](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.0/s2microbit-ble_installer_v240.dmg)
+**インストーラダウンロード (v2.4.0)**
+## [Windows 10](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.0/s2microbit-ble_installer_v240.exe)
+## [Mac OSX](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.0/s2microbit-ble_installer_v240.dmg)
+
 - **ブロックの使い方**: 下のアイコンをクリックしてください。
 - **準備やインストール方法**：[このページの下の方](#Preparation_JA)をみてください。
 
@@ -32,7 +33,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 <a name="Installation_JA">
 
-## インストール方法
+## インストール方法 (Windows)
 
 1. [この Release ページ](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
     - s2microbit-ble_installer-v(バージョン番号).exe という名前です。<br>
@@ -43,16 +44,29 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
     - インストール完了時にはデフォルトではそのまま立ち上がります。
     - 二回目以降は、デスクトップのアイコンから立ち上げるか、Windows のタスクバー右下の「ここに入力して検索」に s2mi.. あたりまで入れると選べます。
     - 「The specified module could not be found」というエラーが出る場合は、準備のところで説明した再頒布可能パッケージが入っていない可能性があります。
-1. [このページ](./00scratch) からScratch2のサンプルプロジェクトをダウンロードして開きます（例えば [fly.sb2](./00scratch/fly.sb2)など）。
-1. [このページ](./00microbit)にある[HEXファイル](./microbit-scratch-extension2.hex)をダウンロードしてmicro:bitへ転送しておきます。
-    - HEXファイルのリンクで右クリックを押し「名前を付けてリンク先を保存」などを選ぶと保存できます。
+
+## インストール方法 (Mac)
+
+1. [この Release ページ](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
+    - s2microbit-ble_installer-v(バージョン番号).dmg という名前です。
+    - dmg を実行し、s2microbit-ble のアイコンを Applications（アプリケーション）フォルダのアイコンにドラッグアンドドロップします。
+1. Finderから「アプリケーション」フォルダを開き、Control キーを押しながら s2microbit-ble のアイコンをクリックして「開く」を選びます。
+    - 初回は「"s2microbit-ble"はインターネットからダウンロードされたアプリケーションです。開いてもよろしいですか？」という警告がでます。
+
+
+## 使い方
+
+1. [こちらのWiki](https://github.com/memakura/s2microbit-ble/wiki)も確認してみてください。
+1. s2microbit-ble の画面からScratch2のサンプルプロジェクトをダウンロードして開きます
+    - [このページ](./00scratch)からもダウンロードできます。（例えば [fly.sb2](./00scratch/fly.sb2)などのように、拡張子が sb2 になっています）。
+1. s2microbit-ble の画面からHEXファイルをダウンロードしてmicro:bitへ転送しておきます。
+    - [このページ](./00microbit)からも[HEXファイル](./00microbit/microbit-scratch-extension2.hex)をダウンロードできます。（「名前を付けてリンク先を保存」などを選ぶと保存できます。）
     - HEXファイルを micro:bit に転送すると、「DRAW A CIRCLE」とLED部分にスクロール表示されることがあります。その場合は micro:bit を傾けながら、LED のドットが端の方を一周するように（ドットが円を描くように）動かします。
 1. 接続の確認
     - micro:bit とPCがすでにペアリング済みの場合、ペアリングは解除しておきます（ペアリングなしで接続するため）。
     - s2microbit-ble が立ち上がっていると自動で接続されます。画面右側にメッセージや進行状況が表示されます。
     - micro:bit の LEDマトリクスが「ハート」を経て「チェックマーク」に変われば接続完了です。
     - Scratch 2 エディタの「その他」ブロックの s2microbit-ble という文字の横にある赤丸が緑丸になっていれば s2microbit-ble と Scratch 2 が接続できています。
-    - [こちらのWiki](https://github.com/memakura/s2microbit-ble/wiki)も確認してみてください。
 
 
 ## サンプルプログラム (fly.sb2)
