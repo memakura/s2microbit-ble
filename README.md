@@ -20,7 +20,7 @@ BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使う�
 
 ## 準備
 
-Bluetooth 4.0 以上に対応した PC か USB等のBluetooth 4.0アダプタが必要です。Windows の場合は以下も確認してください。
+Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必要です。Windows の場合は以下も確認してください。
 
 1. Windows 10 build 10.0.15063 以上（OSビルド 15063以上）
     - Windows の画面左下の「ここに入力して検索」に winver といれ、リターンを押すと確認できます。
