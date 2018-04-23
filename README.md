@@ -123,7 +123,7 @@ Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必�
 
 ## ライセンス情報
 
-- GPL 3.0
+- [AGPL 3.0](LICENSE.txt)
 
 ### Copyright
 
@@ -182,7 +182,7 @@ Some part of the following modules and codes are used or referred in this projec
 
 ## License
 
-- GPL 3.0
+- [AGPL 3.0](LICENSE.txt)
 
 ## Copyright
 
