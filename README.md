@@ -2,15 +2,21 @@
 
 # s2microbit-ble
 
-BBC micro:bit（マイクロビット）を、Scratch（スクラッチ）2 オフライン版から Bluetooth 接続で使うための拡張ブロックです。USBケーブルの接続であれば[s2m](https://github.com/MrYsLab/s2m)が使えるのですが、同じようなブロックを、PC内臓のBluetoothで使いたいので作成しました。予想以上に楽しいものが作れそうなので、ここで共有します。s2mと同じようなブロックに加え、加速度センサなどの値を直接読めるブロックも用意したので、たとえばScratch2の無線ゲームコントローラを簡単に作成することもできます。別途 Python や NodeJS といった環境を準備する必要はなく、インストーラのダウンロード以外では、ネットワーク接続は不要です（ヘルプは読めなくなりますが・・・）。また、特定のUSB Bluetooth アダプタは必要なく、Bluetooth 4.0以上のアダプタがPCに内臓されていれば、もしくは汎用のUSB Bluetooth（4.0以上）のアダプタがあれば（多くの場合？）接続できます。その代わり Windows版は Windows 10 のみの対応（2017年4月ぐらいまでのアップデートが必要）です。現在は Windows 10 と Mac OS X のみですが、おそらく Linux版のビルドも可能です。
+BBC micro:bit（マイクロビット）を、Scratch（スクラッチ）2 オフライン版から Bluetooth 接続で使うための拡張ブロックです。USBケーブルの接続であれば[s2m](https://github.com/MrYsLab/s2m)が使えるのですが、同じようなブロックを、PC内臓のBluetoothで使いたいので作成しました。予想以上に楽しいものが作れそうなのでここで共有します。
 
+## インストーラのダウンロード (v2.4.1)
 
-- **インストーラのダウンロード (v2.4.1)**
-    - [<span style="font-size: 150%; font-weight: bold; display: block;">Windows 10</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.exe)
-    - [<span style="font-size: 150%; font-weight: bold; display: block; margin-bottom: 10px;">Mac OS X</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.dmg)
+- [<span style="font-size: 150%; font-weight: bold; display: block;">Windows 10</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.exe)
+- [<span style="font-size: 150%; font-weight: bold; display: block; margin-bottom: 10px;">Mac OS X</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.dmg)
 - **準備やインストール方法**：[このページの下の方](#Preparation_JA)をみてください。
-- **ブロックの使い方**: 下のアイコンをクリックしてください。
+- **ブロックの使い方**: [こちらのページで](https://github.com/memakura/s2microbit-ble/wiki)ブロックの使い方について説明しています。下のアイコンをクリックしてもOKです。
 
+## 特徴
+
+- s2mと同じようなブロックに加え、加速度センサなどの値を直接読めるブロックも用意したので、たとえばScratch2の無線ゲームコントローラを簡単に作成することもできます。
+- 別途 Python や NodeJS といった環境を準備する必要はなく、インストーラのダウンロード以外では、ネットワーク接続は不要です。（ヘルプは読めなくなりますが・・・）
+- 特定のUSB Bluetooth アダプタは必要なく、Bluetooth 4.0以上のアダプタがPCに内臓されていれば、もしくは汎用のUSB Bluetooth（4.0以上）のアダプタがあれば（多くの場合？）接続できます。その代わり Windows版は Windows 10 のみの対応（2017年4月ぐらいまでのアップデートが必要）です。
+- 現在は Windows 10 と Mac OS X のみですが、おそらく Linux版のビルドも可能です。
 
 [<img align="left" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="200">](https://github.com/memakura/s2microbit-ble/wiki)
 <iframe width="356" height="200" margin-bottom="4" margin-left="5" src="https://www.youtube.com/embed/dTPiU2RnBIc?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
