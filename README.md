@@ -2,7 +2,8 @@
 
 # s2microbit-ble
 
-BBC micro:bit を Scratch 2 オフライン版から Bluetooth 接続で使うための拡張ブロック
+BBC micro:bit（マイクロビット）を、Scratch（スクラッチ）2 オフライン版から Bluetooth 接続で使うための拡張ブロックです。USBケーブルの接続であれば[s2m](https://github.com/MrYsLab/s2m)が使えるのですが、同じようなブロックを、PC内臓のBluetoothで使いたいので作成しました。予想以上に楽しいものが作れそうなので、ここで共有します。s2mと同じようなブロックに加え、加速度センサなどの値を直接読めるブロックも用意したので、たとえばScratch2の無線ゲームコントローラを簡単に作成することもできます。別途 Python や NodeJS といった環境を準備する必要はなく、インストーラのダウンロード以外では、ネットワーク接続は不要です（ヘルプは読めなくなりますが・・・）。また、特定のUSB Bluetooth アダプタは必要なく、Bluetooth 4.0以上のアダプタがPCに内臓されていれば、もしくは汎用のUSB Bluetooth（4.0以上）のアダプタがあれば（多くの場合？）接続できます。その代わり Windows版は Windows 10 のみの対応（2017年4月ぐらいまでのアップデートが必要）です。現在は Windows 10 と Mac OS X のみですが、おそらく Linux版のビルドも可能です。
+
 
 - **インストーラのダウンロード (v2.4.1)**
     - [<span style="font-size: 150%; font-weight: bold; display: block;">Windows 10</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.exe)
