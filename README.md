@@ -6,9 +6,9 @@ BBC micro:bit（マイクロビット）を、Scratch（スクラッチ）2 オ�
 
 ## インストーラのダウンロード (v2.4.1)
 
-[<img align="left" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="200" style="float:right;">](https://github.com/memakura/s2microbit-ble/wiki)
-- [<span style="font-size: 150%; font-weight: bold; display: block;">Windows 10</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.exe)
-- [<span style="font-size: 150%; font-weight: bold; display: block; margin-bottom: 10px;">Mac OS X</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.dmg)
+[<img align="right" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="25%" style="float:right;">](https://github.com/memakura/s2microbit-ble/wiki)
+- [<span style="font-size: 150%; font-weight: bold;">Windows 10</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.exe)
+- [<span style="font-size: 150%; font-weight: bold; margin-bottom: 10px;">Mac OS X</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.dmg)
 - **準備やインストール方法**
     - [このページの下の方](#Preparation_JA)をみてください。
 - **ブロックの使い方**
