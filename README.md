@@ -6,6 +6,7 @@ BBC micro:bit（マイクロビット）を、Scratch（スクラッチ）2 オ�
 
 ## インストーラのダウンロード (v2.4.1)
 
+[<img align="left" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="200" style="float:right;">](https://github.com/memakura/s2microbit-ble/wiki)
 - [<span style="font-size: 150%; font-weight: bold; display: block;">Windows 10</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.exe)
 - [<span style="font-size: 150%; font-weight: bold; display: block; margin-bottom: 10px;">Mac OS X</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.dmg)
 - **準備やインストール方法**：[このページの下の方](#Preparation_JA)をみてください。
@@ -18,9 +19,6 @@ BBC micro:bit（マイクロビット）を、Scratch（スクラッチ）2 オ�
 - インストーラ（Windowsでは加えてVC++再頒布パッケージ）のダウンロード以外では、ネットワーク接続は不要です。使用時にブロックのヘルプは読めなくなりますが・・・
 - 特定のUSB Bluetooth アダプタは必要なく、Bluetooth 4.0以上のアダプタがPCに内臓されていれば、もしくは汎用のUSB Bluetooth（4.0以上対応）のアダプタがあれば（多くの場合）接続できます。その代わり Windows版は Windows 10 のみの対応（2017年4月ぐらいまでのアップデートが必要）です。
 - 現在は Windows 10 と Mac OS X のみですが、おそらく Linux版のビルドも可能です。
-
-[<img align="left" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="200">](https://github.com/memakura/s2microbit-ble/wiki)
-<iframe width="356" height="200" margin-bottom="4" margin-left="5" src="https://www.youtube.com/embed/dTPiU2RnBIc?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 <img alt="blocks" src="./images/blocks_v2.png" width="80%">
 
@@ -85,6 +83,8 @@ Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必�
 - AやBボタンを押している間、何か起こります。（A: Air, B: Bダッシュ）
 - 動作デモは[この記事](https://qiita.com/memakura/items/1acab55a37651e9081b4)や[動画](https://youtu.be/dTPiU2RnBIc)で確認できます。
 - その他のサンプルプログラムは[こちらのページ](./00scratch)にあります。
+
+<iframe width="356" height="200" margin-bottom="4" margin-left="5" src="https://www.youtube.com/embed/dTPiU2RnBIc?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 <a name="StartProject_JA">
