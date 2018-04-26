@@ -12,8 +12,8 @@ BBC micro:bit（マイクロビット）を、Scratch（スクラッチ）2 オ�
 - **準備やインストール方法**
     - [このページの下の方](#Preparation_JA)をみてください。
 - **ブロックの使い方**
-    - [こちらのページで](https://github.com/memakura/s2microbit-ble/wiki)ブロックの使い方について説明しています。
-    - アイコンをクリックしても同じページに移動できます。
+    - アイコン[（もしくはこちら）](https://github.com/memakura/s2microbit-ble/wiki)からたどれます。
+
 
 ## 特徴
 
@@ -23,7 +23,7 @@ BBC micro:bit（マイクロビット）を、Scratch（スクラッチ）2 オ�
 - 特定のUSB Bluetooth アダプタは必要なく、Bluetooth 4.0以上のアダプタがPCに内臓されていれば、もしくは汎用のUSB Bluetooth（4.0以上対応）のアダプタがあれば（多くの場合）接続できます。その代わり Windows版は Windows 10 のみの対応（2017年4月ぐらいまでのアップデートが必要）です。
 - 現在は Windows 10 と Mac OS X のみですが、おそらく Linux版のビルドも可能です。
 
-<img alt="blocks" src="./images/blocks_v2.png" width="80%">
+<img alt="blocks" src="./images/blocks_v2.png" width="600">
 
 <a name="Preparation_JA">
 
@@ -153,7 +153,7 @@ Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必�
 
 Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 
-<img alt="blocks" src="./images/blocks_v2_EN.png" width="80%">
+<img alt="blocks" src="./images/blocks_v2_EN.png" width="600">
 
 ## Requirements
 
