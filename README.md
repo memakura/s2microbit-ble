@@ -2,7 +2,7 @@
 
 # s2microbit-ble
 
-BBC micro:bit（マイクロビット）を、Scratch（スクラッチ）2 オフライン版から Bluetooth 接続で使うための拡張ブロックです。USBケーブルの接続であれば[s2m](https://github.com/MrYsLab/s2m)が使えるのですが、同じようなブロックを、PC内臓の（もしくは一般的なUSBドングルの）Bluetoothアダプタで使いたいので作成しました。予想以上に楽しいものが作れそうなのでここで共有します。
+BBC micro:bit（マイクロビット）を、Scratch（スクラッチ）2 オフライン版から Bluetooth 接続で使うための拡張ブロックです。USBケーブルの接続であれば[s2m](https://github.com/MrYsLab/s2m)が使えるのですが、同じようなブロックを、PC内臓の（もしくは一般的なUSBの）Bluetoothアダプタで使いたいので作成しました。予想以上に楽しいものが作れそうなのでここで共有します。
 
 ## インストーラのダウンロード (v2.4.1)
 
