@@ -1,6 +1,6 @@
 [(English version)](#English)
 
-s2microbit-ble は、BBC micro:bit（マイクロビット）を、Scratch2（スクラッチ2）オフライン版から Bluetooth（ブルートゥース）接続で使うための拡張ブロックです。USBケーブル接続であれば[s2m](https://github.com/MrYsLab/s2m)が使えますが、同様のブロックを、PC内臓の（もしくは一般的なUSBの）Bluetoothアダプタで使いたいので作成しました。[ゲームコントローラー](#DemoProject_JA)や[ロボット](https://memakura.github.io/dialogsystem)などいろいろ楽しいものが作れそうなので、ここで共有します。
+s2microbit-ble は、BBC micro:bit（マイクロビット）を Bluetooth（ブルートゥース）接続で使うための、オフライン版Scratch2（スクラッチ2）の拡張ブロックです。USBケーブル接続であれば[s2m](https://github.com/MrYsLab/s2m)が使えますが、同様のブロックを、PC内臓（もしくは一般的な）Bluetoothアダプタで使いたいので作成しました。[ゲームコントローラー](#DemoProject_JA)や[ロボット](https://memakura.github.io/dialogsystem)など楽しいものがいろいろ作れそうなので、ここで共有します。
 
 ## インストーラのダウンロード (v2.4.1)
 
