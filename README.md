@@ -1,8 +1,6 @@
 [(English version)](#English)
 
-# s2microbit-ble
-
-BBC micro:bit（マイクロビット）を、Scratch（スクラッチ）2 オフライン版から Bluetooth 接続で使うための拡張ブロックです。USBケーブルの接続であれば[s2m](https://github.com/MrYsLab/s2m)が使えるのですが、同じようなブロックを、PC内臓の（もしくは一般的なUSBの）Bluetoothアダプタで使いたいので作成しました。予想以上に楽しいものが作れそうなのでここで共有します。
+s2microbit-ble は、BBC micro:bit（マイクロビット）を、Scratch2（スクラッチ2）オフライン版から Bluetooth（ブルートゥース）接続で使うための拡張ブロックです。USBケーブル接続であれば[s2m](https://github.com/MrYsLab/s2m)が使えますが、同様のブロックを、PC内臓の（もしくは一般的なUSBの）Bluetoothアダプタで使いたいので作成しました。[ゲームコントローラー](#DemoProject_JA)や[ロボット](https://memakura.github.io/dialogsystem)などいろいろ楽しいものが作れそうなので、ここで共有します。
 
 ## インストーラのダウンロード (v2.4.1)
 
@@ -80,6 +78,8 @@ Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必�
     - Scratch 2 エディタの「その他」ブロックの s2microbit-ble という文字の横にある赤丸が緑丸になっていれば s2microbit-ble と Scratch 2 が接続できています。
 
 
+<a name="DemoProject_JA">
+
 ## サンプルプログラム (fly.sb2)
 
 - 飛行機のような感じで動かしてください。
@@ -149,9 +149,9 @@ Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必�
 
 <a name="English">
 
-# s2microbit-ble
+# s2microbit-ble (English version)
 
-Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
+Scratch 2 (offline) extension for BBC micro:bit bluetooth connection with PC built-in or general USB bluetooth adapters.
 
 <img alt="blocks" src="./images/blocks_v2_EN.png" width="600">
 
@@ -161,7 +161,7 @@ Scratch 2 (offline) extension for BBC micro:bit bluetooth connection
 1. Windows 10 build 10.0.15063 or later
 1. Microsoft Visual C++ 2015 Redistributable
 
-## Installation
+## Installation (Windows)
 
 1. Download and install the latest version from [Release](https://github.com/memakura/s2microbit-ble/releases).
     - For Windows: s2microbit-ble_installer.exe
