@@ -1,6 +1,6 @@
-[(English)](#English)
+[(English)](#English) [(ホーム)](../)
 
-# デモプロジェクト (.sb2) とブロック拡張ファイル (.s2e)
+# デモプロジェクト (.sb2) とブロック拡張 (.s2e)
 
 ## Scratch 2 (Offline) プロジェクトファイル (.sb2)
 
@@ -29,7 +29,7 @@
 
 <a name="English">
 
-# Demo projects (.sb2) and block extension files (.s2e)
+# Demo projects (.sb2) and block extension (.s2e)
 
 ## Scratch 2 (Offline) Project files (.sb2)
 
@@ -41,7 +41,7 @@
 - [small-tests_EN.sb2](small-tests_EN.sb2)
     - A set of simple test codes.
 
-## Scratch 2 extension files (.s2e)
+## Scratch 2 block extension file (.s2e)
 
 - [s2microbit_EN.s2e](s2microbit_EN.s2e)
-    - A block extension file can be loaded from File menu. Choose **File** with `Shift` key pressed. Then choose **Import experimental HTTP extension**.
+    - The block extension file can be loaded from Scratch2 File menu. Click **File** with `Shift` key pressed. Then choose **Import experimental HTTP extension**.
