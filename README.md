@@ -48,7 +48,7 @@ Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必�
       <img width="400" alt="release_exe" src="./images/release_exe.png">
     - 「Windows によって PC が保護されました」と出た場合は「詳細情報」をクリックしてから「実行」を選びます。<br>
       <img width="500" alt="win10_warning" src="./images/win10_warning.png">
-1. インストールした s2microbit-ble を立ち上げておきます。
+1. 立ち上げ方
     - インストール完了時にはデフォルトではそのまま立ち上がります。
     - 二回目以降は、デスクトップのアイコンから立ち上げるか、Windows のタスクバー右下の「ここに入力して検索」に s2mi.. あたりまで入れると選べます。
     - 「The specified module could not be found」というエラーが出る場合は、準備のところで説明した再頒布可能パッケージが入っていない可能性があります。
@@ -58,7 +58,8 @@ Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必�
 1. [この Release ページ](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
     - s2microbit-ble_installer-v(バージョン番号).dmg という名前です。
     - dmg を実行し、s2microbit-ble のアイコンを Applications（アプリケーション）フォルダのアイコンにドラッグアンドドロップします。
-1. Finderから「アプリケーション」フォルダを開き、Control キーを押しながら s2microbit-ble のアイコンをクリックして「開く」を選びます。
+1. 立ち上げ方
+    - Finderから「アプリケーション」フォルダを開き、Control キーを押しながら s2microbit-ble のアイコンをクリックして「開く」を選びます。
     - 初回は「"s2microbit-ble"はインターネットからダウンロードされたアプリケーションです。開いてもよろしいですか？」という警告がでます。
 
 
