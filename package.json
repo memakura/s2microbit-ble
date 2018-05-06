@@ -30,7 +30,7 @@
     "artifactName": "${productName}_installer.${ext}",
     "mac": {
       "category": "public.app-category.developer-tools",
-      "target": "dmg"
+      "target": "pkg"
     },
     "win": {
       "target": "nsis"
@@ -40,6 +40,9 @@
       "perMachine": false,
       "allowElevation": true,
       "allowToChangeInstallationDirectory": true,
+      "license": "LICENSE.txt"
+    },
+    "pkg": {
       "license": "LICENSE.txt"
     },
     "npmRebuild": false
