@@ -6,7 +6,7 @@ s2microbit-ble は、BBC micro:bit（マイクロビット）を Bluetooth（ブ
 
 [<img align="right" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="25%" style="float:right;">](https://github.com/memakura/s2microbit-ble/wiki)
 - [<span style="font-size: 150%; font-weight: bold;">Windows 10</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.exe)
-- [<span style="font-size: 150%; font-weight: bold; margin-bottom: 10px;">Mac OS X</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.dmg)
+- [<span style="font-size: 150%; font-weight: bold; margin-bottom: 10px;">Mac OS X</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.pkg)
 - **準備やインストール方法**
     - [このページの下の方](#Preparation_JA)をみてください。
 - **ブロックの使い方**
@@ -56,11 +56,12 @@ Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必�
 ## インストール方法 (Mac)
 
 1. [この Release ページ](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
-    - s2microbit-ble_installer-v(バージョン番号).dmg という名前です。
-    - dmg を実行し、s2microbit-ble のアイコンを Applications（アプリケーション）フォルダのアイコンにドラッグアンドドロップします。
+    - s2microbit-ble_installer-v(バージョン番号).pkg という名前です。
+    - Control キーを押しながら ダウンロードされた pkg ファイルをクリックし、「開く」を選びます。このとき「開発元は未確認です。開いてもよろしいですか？」という警告が表示されます。
+    - もう一度、ダウンロードされた pkg ファイルをクリックすると、インストールが開始します。
+    - 管理者権限がない場合、インストール先で「自分専用にインストール」を選びます。
 1. 立ち上げ方
-    - Finderから「アプリケーション」フォルダを開き、Control キーを押しながら s2microbit-ble のアイコンをクリックして「開く」を選びます。
-    - 初回は「"s2microbit-ble"はインターネットからダウンロードされたアプリケーションです。開いてもよろしいですか？」という警告がでます。
+    - Launchpad から s2microbit-ble を立ち上げます。見つからない場合は、検索の欄に s2mi.. あたりまで入れると選べます。
 
 
 ## 使い方
