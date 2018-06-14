@@ -11,9 +11,15 @@
     - 四角の中を飛びます。micro:bit を、USB端子側を奥にして水平に持ち、飛行機のようにゆっくりと動かしてください。
     - あえて激しく動かすと、波紋っぽくなります。（その場合、四角を丸に変えるのもありかもしれません。）
     - 音楽: [魔王魂](https://maoudamashii.jokersounds.com/)より
+- [綿毛と風 (blowball.sb2)](blowball.sb2)
+    - 風車（かざぐるま）型コントローラと組み合わせます。ふーっと息を吹くと綿毛が舞っていきます。傾けると風のあたる場所が変わります。
+    - [風車とmicro:bitの組み合わせ方](https://paddle.prokids.jp/work/show/239) (この例ではアルミ缶風車ですが、ペットボトル風車などを使うのもありです。）
 - [いろいろ (small-tests.sb2)](small-tests.sb2)
     - いろいろなテストです。
     - [ブロックの使い方の解説](https://github.com/memakura/s2microbit-ble/wiki)で使っているプログラムが含まれています。
+
+<iframe width="480" height="270" margin-bottom="4" margin-left="5" src="https://www.youtube.com/embed/dTPiU2RnBIc?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="270" height="480" margin-bottom="4" margin-left="5" src="https://www.youtube.com/embed/eX-tqYTiw4Q?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Scratch 2 拡張ファイル (.s2e)
 
