@@ -76,12 +76,11 @@ body {
     transform: translateX(-50%);
 }
 .title-icon {
-    margin: 30px 60px 0px 35px;
+    margin: 30px 50px 0px 60px;
 }
 .abstract {
     /* text-align: center; */
-    font-size: 20px;
-    margin: 0px 0px 24px 35px;
+    margin: 0px 0px 24px 55px;
 }
 .help-links {
     /* text-align: center; */

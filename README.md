@@ -1,6 +1,6 @@
 [(English version)](#English)
 
-s2microbit-ble（スマイビー / Smi:be）は、オフライン版Scratch（スクラッチ）2 から BBC micro:bit（マイクロビット）を Bluetooth（ブルートゥース）接続で使うための拡張ブロックです。USBケーブルで利用できる[s2m](https://github.com/MrYsLab/s2m)と同じ様なブロックを、PC内臓もしくは一般的な Bluetoothアダプタで使えます。[ゲームコントローラー](#DemoProject_JA)や[ロボット](https://memakura.github.io/dialogsystem)など楽しいものが色々作れそうなので公開します。
+スマイビー (Smi:be, s2microbit-ble) は、オフライン版Scratch (スクラッチ) から micro:bit (マイクロビット) を Bluetooth (ブルートゥース) 接続で使うための拡張ブロックです。USBケーブルで利用できる[s2m](https://github.com/MrYsLab/s2m)と同じ様なブロックを、PC内臓もしくは一般的なBluetoothアダプタで使えます。[ゲームコントローラー](#DemoProject_JA)や[ロボット](https://memakura.github.io/dialogsystem)など楽しいものが色々作れそうなので公開します。
 
 ## インストーラのダウンロード (v2.4.2)
 
@@ -12,9 +12,14 @@ s2microbit-ble（スマイビー / Smi:be）は、オフライン版Scratch（�
 - **ブロックの使い方**
     - アイコンをクリックするか[（こちら）](https://github.com/memakura/s2microbit-ble/wiki/)からたどれます。
 
-## 名前について
+## 名前の由来
 
-スマイビー (Smi:be): **ス**クラッチ + **マイ**クロ**ビ**ット + **B**luetooth L**E**
+s2mのブロックと互換性があるため、s2microbit-ble という名前にしていますが、読みにくいので以下のような略称を使います。
+
+<dl>
+    <dt>スマイビー</dt><dd>**ス**クラッチ + **マイ**クロ**ビ**ット + ブルートゥースエル**イー**</dd>
+    <dt>Smi:be</dt><dd>**S**cratch + **m**icro:**b**it + **B**luetooth L**E** (bは2個でひとつのbとする)</dd>
+</dl>
 
 ## 特徴
 
