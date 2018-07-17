@@ -1,7 +1,7 @@
 {
-  "name": "s2microbit-ble",
-  "version": "2.4.1",
-  "description": "BBC micro:bit (bluetooth)",
+  "name": "Smi-be",
+  "version": "2.4.2",
+  "description": "Scratch-micro:bit extension over Bluetooth",
   "main": "s2microbit-ble.js",
   "scripts": {
     "start": "../node_modules/.bin/electron .",
@@ -21,7 +21,7 @@
     "bbc-microbit": "^0.2.0",
     "express": "^4.16.3",
     "jquery": "^3.3.1",
-    "noble-uwp": "^0.6.1",
-    "node-pre-gyp": "0.6.39"
+    "noble-uwp": "^0.6.2",
+    "node-pre-gyp": "^0.10.3"
   }
 }

@@ -50,7 +50,7 @@ body {
 .title-box {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 .title-text {
     position: relative;
@@ -64,30 +64,31 @@ body {
 .title-text:before {
     content: "";
     position: absolute;
-    top: -22px;
+    top: -12px;
     left: 50%;
     width: 80px;
     height: 60px;
     border-radius: 50%;
     border: 10px solid #a6ddb0;
-    /* border-top-color: transparent; */
+    border-top-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
     transform: translateX(-50%);
 }
 .title-icon {
-    margin: 0px 0px 0px 0px;
+    margin: 30px 60px 0px 35px;
 }
 .abstract {
-    /* text-align: center; */    
-    margin: 0px 0px 24px 30px;
+    /* text-align: center; */
+    font-size: 20px;
+    margin: 0px 0px 24px 35px;
 }
 .help-links {
     /* text-align: center; */
     margin: 0px 0px 0px 30px;
 }
 .projects p {
-    margin: 30px 0px 10px 5px;
+    margin: 25px 0px 10px 5px;
     background: linear-gradient(transparent 60%, #ffdb98 70%);
     border-radius: 80px 150px / 10px 5px;
     width: 80%;

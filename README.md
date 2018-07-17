@@ -1,24 +1,27 @@
 [(English version)](#English)
 
-s2microbit-ble（Smi:be, スマイビー）は、BBC micro:bit（マイクロビット）を Bluetooth（ブルートゥース）接続で使うための、オフライン版Scratch（スクラッチ）2.0 の拡張ブロックです。USBケーブル接続であれば[s2m](https://github.com/MrYsLab/s2m)が使えますが、同様のブロックを、PC内臓（もしくは一般的な）Bluetoothアダプタで使えます。[ゲームコントローラー](#DemoProject_JA)や[ロボット](https://memakura.github.io/dialogsystem)など楽しいものが色々作れそうなので、ここで共有します。
+s2microbit-ble（スマイビー / Smi:be）は、オフライン版Scratch（スクラッチ）2 から BBC micro:bit（マイクロビット）を Bluetooth（ブルートゥース）接続で使うための拡張ブロックです。USBケーブルで利用できる[s2m](https://github.com/MrYsLab/s2m)と同じ様なブロックを、PC内臓もしくは一般的な Bluetoothアダプタで使えます。[ゲームコントローラー](#DemoProject_JA)や[ロボット](https://memakura.github.io/dialogsystem)など楽しいものが色々作れそうなので公開します。
 
-## インストーラのダウンロード (v2.4.1)
+## インストーラのダウンロード (v2.4.2)
 
 [<img align="right" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="25%" style="float:right;">](https://github.com/memakura/s2microbit-ble/wiki)
-- [<span style="font-size: 150%; font-weight: bold;">Windows 10</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.exe)
-- [<span style="font-size: 150%; font-weight: bold; margin-bottom: 10px;">Mac OS X</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.1/s2microbit-ble_installer_v241.pkg)
+- [<span style="font-size: 150%; font-weight: bold;">Windows 10</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.2/s2microbit-ble_installer_v242.exe)
+- [<span style="font-size: 150%; font-weight: bold; margin-bottom: 10px;">Mac OS X</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.2/s2microbit-ble_installer_v242.pkg)
 - **準備やインストール方法**
-    - [このページの下の方](#Preparation_JA)をみてください。
+    - [ページの下の方（ここをクリックすると移動）](#Preparation_JA)をみてください。
 - **ブロックの使い方**
-    - アイコン[（もしくはこちら）](https://github.com/memakura/s2microbit-ble/wiki/1.-はじめよう)からたどれます。
+    - アイコンをクリックするか[（こちら）](https://github.com/memakura/s2microbit-ble/wiki/)からたどれます。
 
+## 名前について
+
+スマイビー (Smi:be): **ス**クラッチ + **マイ**クロ**ビ**ット + **B**luetooth L**E**
 
 ## 特徴
 
-- s2mと同じようなブロックに加え、加速度センサなどの値を直接読めるブロックも用意したので、たとえばScratch2の無線ゲームコントローラを簡単に作成することもできます。
+- s2mと同じようなブロックに加え、加速度センサなどの値を直接読めるブロックを用意したので、Scratchの無線ゲームコントローラを簡単に作成することができます。
 - 別途 Python や NodeJS といった環境を準備する必要はありません。
-- インストーラ（Windowsでは加えてVC++再頒布パッケージ）のダウンロード以外では、ネットワーク接続は不要です。使用時にブロックのヘルプは読めなくなりますが・・・
-- 特定のUSB Bluetooth アダプタは必要なく、Bluetooth 4.0以上のアダプタがPCに内臓されていれば、もしくは汎用のUSB Bluetooth（4.0以上対応）のアダプタがあれば（多くの場合）接続できます。その代わり Windows版は Windows 10 のみの対応（2017年4月ぐらいまでのアップデートが必要）です。
+- インストーラ（Windowsでは加えてVC++再頒布パッケージ）のダウンロード以外では、ネットワーク接続は不要です。ただし、使用時にブロックのヘルプは読めなくなります。
+- 特定のUSB Bluetooth アダプタは必要なく、Bluetooth 4.0以上のアダプタがPCに内臓されていれば、もしくは汎用のUSB Bluetooth 4.0以上対応のアダプタがあれば、多くの場合接続できます。ただし Windows版は Windows 10 のみ対応で、2017年4月ぐらいまでのアップデートが必要です。
 - 現在は Windows 10 と Mac OS X のみですが、おそらく Linux版のビルドも可能です。
 
 <img alt="blocks" src="./images/blocks_v2.png" width="600">

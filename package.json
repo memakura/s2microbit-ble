@@ -27,7 +27,7 @@
         "filter": "s2microbit-ble.png"
       }
     ],
-    "artifactName": "${productName}_installer.${ext}",
+    "artifactName": "s2microbit-ble_installer.${ext}",
     "mac": {
       "category": "public.app-category.developer-tools",
       "target": "pkg"
@@ -48,7 +48,7 @@
     "npmRebuild": false
   },
   "devDependencies": {
-    "electron": "^1.8.4",
-    "electron-builder": "^20.10.0"
+    "electron": "^2.0.5",
+    "electron-builder": "^20.22.0"
   }
 }
