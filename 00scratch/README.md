@@ -44,8 +44,13 @@
 - [fly_EN.sb2](fly_EN.sb2)
     - Fly in the infinit loop of squares. 
     - Music: Thanks to [Maoudamashii](https://maoudamashii.jokersounds.com/).
+- [blowball_EN.sb2)](blowball_EN.sb2)
+    - A project for a scratch controller made with a soda can wind spinner and a micro:bit.
+    - [Pictures of the controller (in Japanese)](https://paddle.prokids.jp/work/show/239)
 - [small-tests_EN.sb2](small-tests_EN.sb2)
     - A set of simple test codes.
+
+<iframe width="270" height="480" margin-bottom="4" margin-left="5" vertical-align="top" src="https://www.youtube.com/embed/FxhWVQj3drQ?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Scratch 2 block extension file (.s2e)
 
