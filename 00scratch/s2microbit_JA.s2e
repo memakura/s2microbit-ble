@@ -35,7 +35,7 @@
             "display_clear"
         ],
         [
-            " ",
+            "w",
             "端子 %m.pins を %m.admodes %m.iomodes に使う",
             "setup_pin",
             "0",

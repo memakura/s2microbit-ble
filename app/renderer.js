@@ -4,10 +4,10 @@ const { ipcRenderer, shell } = require('electron');
 const $ = require('jquery');
 //const open = require('open');
 
-ipcRenderer.on('mainmsg', function (event, arg) {
+ipcRenderer.on('mainmsg', function (event, msg) {
     //console.log("[main] " + arg);
     var divLogElem = document.getElementById('console-log');
-    divLogElem.innerHTML += arg + "<br>";
+    divLogElem.innerHTML += msg;
     divLogElem.scrollTop = divLogElem.scrollHeight;
 });
 

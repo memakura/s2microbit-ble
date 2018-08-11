@@ -204,9 +204,13 @@ console.log('=== BBC micro:bit Scratch 2.0 offline extension ===');
 
 
 // Output log to both terminal and renderer's console (in the developer tool)
-function logBothConsole (msg) {
+function logBothConsole (msg, newline = true) {
   console.log(msg);
-  mainWindow.webContents.send('mainmsg', msg);
+  if (newline) {
+    mainWindow.webContents.send('mainmsg', msg + "<br>");
+  } else {
+    mainWindow.webContents.send('mainmsg', msg);
+  }
 }
 
 // ------------- discover microbit (begin) ----------------
@@ -234,7 +238,7 @@ function microbitScanner() {
 
 // Called each time a new microbit is discovered
 function onDiscover(microbit) {
-  logBothConsole('  found microbit : <button class="select-btn" type="button" value="'
+  logBothConsole('<br>  found microbit : <button class="select-btn" type="button" value="'
    + scan_round + '-' + microbit_list.length + '">' + microbit.address + '</button>');
   microbit_list.push(microbit); // the above line needs to come before this line (0-index)
   if (microbit_list.length == 1) { // if this is the first microbit
@@ -243,7 +247,7 @@ function onDiscover(microbit) {
     var cnt_sec = 0; // counting seconds
     intervalfunc_id = setInterval( function() {
       cnt_sec += 1;
-      logBothConsole('.'); // visualize the progress while scanning
+      logBothConsole('.', false); // visualize the progress while scanning
       if(cnt_sec == 6) {
         clearInterval(intervalfunc_id);
       }
@@ -428,7 +432,7 @@ function showPinSetting(microbit) {
 // Initialize 0-2 pin setting to Analog-Input
 function initializePinSetting(microbit) {
   for (var pin=0; pin <= 2; pin++) {
-    setupPinMode({pin: pin, ADmode: 'analog', IOmode: 'input'});    
+    setupPinMode({pin: pin, ADmode: 'analog', IOmode: 'input'});
   }
 }
 
@@ -622,42 +626,56 @@ exapp.get('/display_clear', function(req, res){
 });
 
 // PIN I/O
-// Should we use wait block?
+// not a wait block
 exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
-  if (device !== null) {
-    var pin = req.params.pin;
-    if(pin < 0 || pin > 20 ){
-      logBothConsole('microbit: [setup_pin] error: pin number (' + pin + ') is out of range');
-      res.send('ERROR');
-      return;
-    }
-    //    pinMode[pin] = PIN_NOTSET; // once reset mode
-
-    var admode = req.params.admode;
-    if (admode.charAt(0) == 'D') {
-      admode = 'digital';
-    } else if(admode.charAt(0) == 'A') {
-      admode = 'analog';
-    } else {
-      logBothConsole('microbit: [setup_pin] error: no such ADmode: ' + admode);
-      res.send('ERROR');
-      return;
-    }
-    var iomode = req.params.iomode;
-    if (iomode.charAt(0) == 'I') {
-      iomode = 'input';
-    } else if (iomode.charAt(0) == 'O') {
-      iomode = 'output';
-    } else {
-      logBothConsole('[setup_pin] error: no such IOmode: ' + iomode);
-      res.send('ERROR');
-      return;
-    }
-    setupPinMode({pin: pin, ADmode: admode, IOmode: iomode}).then(function() {
-      // unlock
-    });
-  }
+  logBothConsole('no command_id');  // if (debug)
+  setup_pin(res, false, req.params.pin, req.params.admode, req.params.iomode);
 });
+// wait block
+exapp.get('/setup_pin/:command_id/:pin/:admode/:iomode', function(req, res) {
+  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  setup_pin(res, req.params.command_id, req.params.pin, req.params.admode, req.params.iomode);
+});
+function setup_pin(res, command_id, pin, admode, iomode) {
+  if (device !== null) {
+    if (command_id) waiting_commands.add(command_id);  // wait block
+    try {
+      if(pin < 0 || pin > 20 ){
+        logBothConsole('microbit: [setup_pin] error: pin number (' + pin + ') is out of range');
+        throw new Error('illegal pin number');
+      }
+
+      if (admode.charAt(0) == 'D') {
+        admode = 'digital';
+      } else if (admode.charAt(0) == 'A') {
+        admode = 'analog';
+      } else {
+        logBothConsole('microbit: [setup_pin] error: no such ADmode: ' + admode);
+        throw new Error('illegal ADmode');
+      }
+      if (iomode.charAt(0) == 'I') {
+        iomode = 'input';
+      } else if (iomode.charAt(0) == 'O') {
+        iomode = 'output';
+      } else {
+        logBothConsole('[setup_pin] error: no such IOmode: ' + iomode);
+        throw new Error('illegal IOmode');
+      }
+
+      res.send('OK');
+      setupPinMode({pin: pin, ADmode: admode, IOmode: iomode}).then(function() {
+        if(command_id) waiting_commands.delete(command_id);  // should be called after setupPinMode
+        return;
+      }).catch(function(error) {
+        logBothConsole(error);
+      });
+    } catch(e) {
+      res.send('ERROR');
+      waiting_commands.delete(req.params.command_id);
+      return;
+    }
+  }
+}
 
 exapp.get('/digital_write/:pin/:value', function(req, res) {
   if (device !== null) {
@@ -681,8 +699,10 @@ exapp.get('/digital_write/:pin/:value', function(req, res) {
     if ( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) == PINMODE_ANALOG ) {
       logBothConsole('microbit: [digital_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
       setupPinMode({pin: pin, ADmode: 'digital', IOmode: 'output'})
-        .then(function(){
+        .then(function() {
           digital_write();
+        }).catch(function(error) {
+          logBothConsole(error);
         });
     }else{
       digital_write();
@@ -716,7 +736,9 @@ exapp.get('/analog_write/:pin/:value', function(req, res) {
       setupPinMode({pin: pin, ADmode: 'analog', IOmode:' output'})
         .then (function() {
           analog_write();
-        });
+        }).catch(function(error) {
+          logBothConsole(error);
+        });;
     }else{
       analog_write();
     }
