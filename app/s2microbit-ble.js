@@ -538,37 +538,55 @@ exapp.get('/reset_all', function(req, res){
 
 // LED matrix (image pattern)
 function writeLedBuffer(error) {
-  device.writeLedMatrixState(ledBuffer, function(error) {
+  return new Promise(function(resolve) {
+    device.writeLedMatrixState(ledBuffer, function(error) {
       if (debug) { logBothConsole('microbit: writeLedBuffer: buf= ' + ledBuffer.toString('hex')); }
+      resolve();
+    });
   });
 }
+
 // LED display preset image
+// nowait block
 exapp.get('/display_image/:name', function(req, res) {
+  logBothConsole('no command');  // if (debug)
+  display_image(res, false, req.params.name);
+});
+// wait block
+exapp.get('/display_image/:command_id/:name', function(req, res) {
+  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  display_image(res, req.params.command_id, req.params.name);
+});
+function display_image(res, command_id, name) {
   if (device !== null) {
-    var name = req.params.name;
+    if (command_id) waiting_commands.add(command_id);  // wait block
     if (name.charAt(2) == '_') { // non-English
       LED_PATTERNS[name.substr(0,2)-1].value.copy(ledBuffer);
     } else { // English
       LED_PATTERN_MAP[name].copy(ledBuffer);
     }
     logBothConsole('microbit: [display_image] name= ' + name);
-    writeLedBuffer();
+    writeLedBuffer().then(function() {
+      if(command_id) waiting_commands.delete(command_id);
+    });
   }
   res.send('OK');
-});
+}
 
 // LED dot
 // nowait block
 exapp.get('/write_pixel/:x/:y/:value', function(req, res){
+  logBothConsole('no command');  // if (debug)
   write_pixel(res, false, req.params.x, req.params.y, req.params.value);
 });
 // wait block
 exapp.get('/write_pixel/:command_id/:x/:y/:value', function(req, res){
+  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
   write_pixel(res, req.params.command_id, req.params.x, req.params.y, req.params.value);
 });
 function write_pixel(res, command_id, x, y, val) {
   if (device !== null) {
-    // if (command_id) waiting_commands.add(command_id);  // wait block
+    if (command_id) waiting_commands.add(command_id);  // wait block
     if (val >= 1) {
       val = 1;
     }else{
@@ -589,37 +607,59 @@ function write_pixel(res, command_id, x, y, val) {
     ledBuffer[y] &= ~(0x01<<(4-x)); // clear the pixel (set 0)
     ledBuffer[y] |=  val<<(4-x); // set the pixel to 'val'
     logBothConsole('microbit: [write_pixel] val=' + val + ' to ('+ x + ', ' + y + ')');
-    writeLedBuffer();
+    writeLedBuffer().then(function() {
+      if(command_id) waiting_commands.delete(command_id);
+    });
   }
   res.send('OK');  
 }
 
 // LED display custom pattern
+// nowait block
 exapp.get('/display_pattern/:binstr', function(req, res) {
+  logBothConsole('no command');  // if (debug)
+  display_pattern(res, false, req.params.binstr);
+});
+// wait block
+exapp.get('/display_pattern/:command_id/:binstr', function(req, res) {
+  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  display_pattern(res, req.params.command_id, req.params.binstr);
+});
+function display_pattern(res, command_id, binstr) {
   if (device !== null) {
-    logBothConsole('microbit: [display_pattern] str= ' + req.params.binstr);
-    // check
-    if ( ! /^[01]{5} [01]{5} [01]{5} [01]{5} [01]{5}$/.test(req.params.binstr) ) {
-      logBothConsole('error: illegal pattern');
-      res.send('ERROR');
-      return;
+    if (command_id) waiting_commands.add(command_id);
+    try {
+      logBothConsole('microbit: [display_pattern] str= ' + binstr);
+      // check
+      if ( ! /^[01]{5} [01]{5} [01]{5} [01]{5} [01]{5}$/.test(binstr) ) {
+        logBothConsole('error: illegal pattern');
+        throw new Error('illegal pattern');
+      }
+      var linearray = binstr.split(' ');
+      /*
+      if (linearray.length != 5) {
+        logBothConsole('microbit: [display_pattern] error: illegal array length= ' + linearray.length);
+        res.send('ERROR');
+        return;
+      }
+      */
+      for (var y=0; y < 5; y++) {
+        ledBuffer.writeUInt8(parseInt(linearray[y], 2), y);
+        //logBothConsole('microbit: buf[' + y + '] = ' + ledBuffer[y]);
+      }
+      writeLedBuffer().then(function() {
+        if (command_id) waiting_commands.delete(command_id);
+      }).catch(function(error) {
+        logBothConsole(error);
+        throw(error);
+      });
+    } catch (e) {
+      logBothConsole(e);
+      if (command_id) waiting_commands.delete(command_id);
     }
-    var linearray = req.params.binstr.split(' ');
-    /*
-    if (linearray.length != 5) {
-      logBothConsole('microbit: [display_pattern] error: illegal array length= ' + linearray.length);
-      res.send('ERROR');
-      return;
-    }
-    */
-    for (var y=0; y < 5; y++) {
-      ledBuffer.writeUInt8(parseInt(linearray[y], 2), y);
-      //logBothConsole('microbit: buf[' + y + '] = ' + ledBuffer[y]);
-    }
-    writeLedBuffer();
   }
   res.send('OK');
-});
+}
 
 // clear LED
 exapp.get('/display_clear', function(req, res){
@@ -669,12 +709,13 @@ function setup_pin(res, command_id, pin, admode, iomode) {
       }
 
       setupPinMode({pin: pin, ADmode: admode, IOmode: iomode}).then(function() {
-        if(command_id) waiting_commands.delete(command_id);  // should be called after setupPinMode
+        if(command_id) waiting_commands.delete(command_id);  // should be called after setupPinMode        
       }).catch(function(error) {
         logBothConsole(error);
         throw(error);
       });
     } catch(e) {
+      logBothConsole(e);
       if(command_id) waiting_commands.delete(command_id);
     }
   }
@@ -742,7 +783,7 @@ exapp.get('/analog_write/:pin/:value', function(req, res) {
           analog_write();
         }).catch(function(error) {
           logBothConsole(error);
-        });;
+        });
     }else{
       analog_write();
     }

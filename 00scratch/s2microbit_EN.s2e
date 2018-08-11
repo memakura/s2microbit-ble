@@ -4,7 +4,7 @@
     "url": "https://github.com/memakura/s2microbit-ble",
     "blockSpecs": [
         [
-            " ",
+            "w",
             "Display %m.images",
 	        "display_image",
 	        "HAPPY"
@@ -16,7 +16,7 @@
             "Hello!"
         ],
         [
-            " ",
+            "w",
             "Write Pixel X %n Y %n Intensity %m.val",
             "write_pixel",
             "0",
@@ -24,7 +24,7 @@
             "1"
         ],
         [
-            " ",
+            "w",
             "Display pattern %n",
             "display_pattern",
             "11001 01111 01110 11110 10011"

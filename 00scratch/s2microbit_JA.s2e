@@ -4,7 +4,7 @@
     "url": "https://github.com/memakura/s2microbit-ble",
     "blockSpecs": [
         [
-            " ",
+            "w",
             "%m.images を表示",
 	        "display_image",
 	        "01_うれしい顔"
@@ -16,7 +16,7 @@
             "Hello!"
         ],
         [
-            " ",
+            "w",
             "点灯 X %n Y %n 明るさ %m.val",
             "write_pixel",
             "0",
@@ -24,7 +24,7 @@
             "1"
         ],
         [
-            " ",
+            "w",
             "パターン %n を表示",
             "display_pattern",
             "11001 01111 01110 11110 10011"
