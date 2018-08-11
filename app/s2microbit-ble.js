@@ -558,35 +558,41 @@ exapp.get('/display_image/:name', function(req, res) {
 });
 
 // LED dot
+// nowait block
 exapp.get('/write_pixel/:x/:y/:value', function(req, res){
+  write_pixel(res, false, req.params.x, req.params.y, req.params.value);
+});
+// wait block
+exapp.get('/write_pixel/:command_id/:x/:y/:value', function(req, res){
+  write_pixel(res, req.params.command_id, req.params.x, req.params.y, req.params.value);
+});
+function write_pixel(res, command_id, x, y, val) {
   if (device !== null) {
-      var val = req.params.value;
-      if (val >= 1) {
-        val = 1;
-      }else{
-        val = 0;
-      }
-      var x = req.params.x;
-      if (x < 0){
-        x = 0;
-      }
-      if (x > 4){
-        x = 4;
-      }
-      var y = req.params.y;
-      if (y < 0){
-        y = 0;
-      }
-      if (y > 4){
-        y = 4;
-      }
-      ledBuffer[y] &= ~(0x01<<(4-x)); // clear the pixel (set 0)
-      ledBuffer[y] |=  val<<(4-x); // set the pixel to 'val'
-      logBothConsole('microbit: [write_pixel] val=' + val + ' to ('+ x + ', ' + y + ')');
-      writeLedBuffer();
+    // if (command_id) waiting_commands.add(command_id);  // wait block
+    if (val >= 1) {
+      val = 1;
+    }else{
+      val = 0;
+    }
+    if (x < 0){
+      x = 0;
+    }
+    if (x > 4){
+      x = 4;
+    }
+    if (y < 0){
+      y = 0;
+    }
+    if (y > 4){
+      y = 4;
+    }
+    ledBuffer[y] &= ~(0x01<<(4-x)); // clear the pixel (set 0)
+    ledBuffer[y] |=  val<<(4-x); // set the pixel to 'val'
+    logBothConsole('microbit: [write_pixel] val=' + val + ' to ('+ x + ', ' + y + ')');
+    writeLedBuffer();
   }
   res.send('OK');  
-});
+}
 
 // LED display custom pattern
 exapp.get('/display_pattern/:binstr', function(req, res) {
@@ -626,7 +632,7 @@ exapp.get('/display_clear', function(req, res){
 });
 
 // PIN I/O
-// not a wait block
+// nowait block
 exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
   logBothConsole('no command_id');  // if (debug)
   setup_pin(res, false, req.params.pin, req.params.admode, req.params.iomode);
@@ -662,19 +668,17 @@ function setup_pin(res, command_id, pin, admode, iomode) {
         throw new Error('illegal IOmode');
       }
 
-      res.send('OK');
       setupPinMode({pin: pin, ADmode: admode, IOmode: iomode}).then(function() {
         if(command_id) waiting_commands.delete(command_id);  // should be called after setupPinMode
-        return;
       }).catch(function(error) {
         logBothConsole(error);
+        throw(error);
       });
     } catch(e) {
-      res.send('ERROR');
-      waiting_commands.delete(req.params.command_id);
-      return;
+      if(command_id) waiting_commands.delete(command_id);
     }
   }
+  res.send('OK');
 }
 
 exapp.get('/digital_write/:pin/:value', function(req, res) {
