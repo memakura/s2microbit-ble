@@ -193,6 +193,7 @@ function initValues () {
   magnetometer = { 'x': 0, 'y': 0, 'z': 0 };
   accelerometer = { 'x': 0, 'y': 0, 'z': 0 };
   prev_acc_z = 0;
+
 }
 
 initValues();
@@ -391,10 +392,10 @@ function microbitFound(microbit) {
       });
     }
     if (usePins) {
-      microbit.subscribePinData(function(error) {
-        logBothConsole('microbit: subscribePinData');
+//      microbit.subscribePinData(function(error) {
+//        logBothConsole('microbit: subscribePinData');
         initializePinSetting(microbit); // Initialize pin 0-2
-      });
+//      });
     }
     // Read device name
     microbit.readDeviceName(function(error, devicename) {
@@ -433,54 +434,65 @@ function initializePinSetting(microbit) {
 
 // Setting up pin mode (analog/digital and input/output)
 function setupPinMode(data) {
-  if (device !== null) {
-    if (debug) { logBothConsole('setupPinMode: pin ' + data.pin + ' is originally configured as: ' + pinMode[data.pin]); }
-    function log(data) {
-      logBothConsole('microbit: setup pin ' + data.pin + ' as ' + data.ADmode + ' ' + data.IOmode);
-    }
-    // SubscribeData
-    function subscribe(device, data) {
-      log(data);
-      device.readPin(data.pin, function(error, value) { // trigger a pinDataChange
-        if (debug) { showPinSetting(device); }
-      });
-    }
-    // UnsubscribeData
-    function unsubscribe(device) {
-      log(data);
-      if (debug) { showPinSetting(device); }
-    }
-
-    pinMode[data.pin] = PINMODE_OUTPUT_DIGITAL;
-    if (data.IOmode == 'input') {
-      pinMode[data.pin] += PINMODE_INPUT;
-      device.pinInput(data.pin, function(error) {
-        if (data.ADmode == 'analog') {
-          pinMode[data.pin] += PINMODE_ANALOG;
-          device.pinAnalog(data.pin, function(error) {
-            subscribe(device, data);
-          });
-        } else {
-          device.pinDigital(data.pin, function(error) {
-            subscribe(device, data);
-          });
-        };
-      });
+  return new Promise(function(resolve, reject){
+    if (device === null) {
+      reject(new Error('no device'));
     } else {
-      device.pinOutput(data.pin, function(error) {
-        if (data.ADmode == 'analog') {
-          pinMode[data.pin] += PINMODE_ANALOG;
-          device.pinAnalog(data.pin, function(error) {
-            unsubscribe(device);
+      if (debug) { logBothConsole('setupPinMode: pin ' + data.pin + ' is originally configured as: ' + pinMode[data.pin]); }
+      function log(data) {
+        logBothConsole('microbit: setup pin ' + data.pin + ' as ' + data.ADmode + ' ' + data.IOmode);
+      }
+      // SubscribeData
+      function subscribe(device, data) {
+        device.subscribePinData(function(error){
+          logBothConsole('microbit: subscribePinData');
+          device.readPin(data.pin, function(error, value) { // trigger a pinDataChange
+            if (debug) { showPinSetting(device); }
+            log(data);
+            resolve(data);
           });
-        } else {
-          device.pinDigital(data.pin, function(error) {
-            unsubscribe(device);
-          });
-        }
-      });
+        });
+      }
+      // UnsubscribeData
+      function unsubscribe(device) {
+        device.unsubscribePinData(function(error){
+          if (debug) { showPinSetting(device); }
+          log(data);
+          resolve(data);  
+        });
+      }
+
+      pinMode[data.pin] = PINMODE_OUTPUT_DIGITAL;
+      if (data.IOmode == 'input') {
+        pinMode[data.pin] += PINMODE_INPUT;
+        device.pinInput(data.pin, function(error) {
+          if (data.ADmode == 'analog') {
+            pinMode[data.pin] += PINMODE_ANALOG;
+            device.pinAnalog(data.pin, function(error) {
+              subscribe(device, data);
+            });
+          } else {
+            device.pinDigital(data.pin, function(error) {
+              subscribe(device, data);
+            });
+          };
+        });
+      } else {
+        device.pinOutput(data.pin, function(error) {
+          if (data.ADmode == 'analog') {
+            pinMode[data.pin] += PINMODE_ANALOG;
+            device.pinAnalog(data.pin, function(error) {
+              unsubscribe(device);
+            });
+          } else {
+            device.pinDigital(data.pin, function(error) {
+              unsubscribe(device);
+            });
+          }
+        });
+      }
     }
-  }
+  });
 }
 // ------------- pin settings (end) ----------------
 
@@ -490,6 +502,8 @@ function setupPinMode(data) {
 const express = require('express');
 let exapp = express();
 let exserver = null;
+let waiting_commands = new Set();  // for Scratch wait blocks
+
 
 function startHTTPServer(){
   exserver = exapp.listen(50209, function(){
@@ -512,6 +526,7 @@ exapp.get('/scroll/:text', function(req, res) {
 // Reset from scratch
 exapp.get('/reset_all', function(req, res){
   logBothConsole('microbit: reset_all is called');
+  waiting_commands.clear();
   initValues();
   initializePinSetting(device);  // Initialize pin 0-2
   res.send('OK');
@@ -638,9 +653,10 @@ exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
       res.send('ERROR');
       return;
     }
-    setupPinMode({pin: pin, ADmode: admode, IOmode: iomode});
+    setupPinMode({pin: pin, ADmode: admode, IOmode: iomode}).then(function() {
+      // unlock
+    });
   }
-  res.send('OK');
 });
 
 exapp.get('/digital_write/:pin/:value', function(req, res) {
@@ -651,10 +667,7 @@ exapp.get('/digital_write/:pin/:value', function(req, res) {
       res.send('ERROR');
       return;
     }
-    if ( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) == PINMODE_ANALOG ) {
-      logBothConsole('microbit: [digital_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
-      setupPinMode({pin: pin, ADmode: 'digital', IOmode: 'output'});
-    }else{
+    function digital_write() {
       var val = req.params.value;
       if(val >= 1) {
         val = 1;
@@ -664,6 +677,15 @@ exapp.get('/digital_write/:pin/:value', function(req, res) {
       device.writePin(pin, val, function(error) {
         logBothConsole('microbit: [digital_write] pin ' + pin + ', val ' + val);
       });
+    }
+    if ( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) == PINMODE_ANALOG ) {
+      logBothConsole('microbit: [digital_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
+      setupPinMode({pin: pin, ADmode: 'digital', IOmode: 'output'})
+        .then(function(){
+          digital_write();
+        });
+    }else{
+      digital_write();
     }
   }
   res.send('OK');
@@ -677,10 +699,7 @@ exapp.get('/analog_write/:pin/:value', function(req, res) {
       res.send('ERROR');
       return;
     }
-    if ( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) != PINMODE_ANALOG ) {
-      logBothConsole('microbit: [analog_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
-      setupPinMode({pin: pin, ADmode: 'analog', IOmode:' output'});
-    }else{
+    function analog_write() {
       var val = req.params.value;
       if(val > 255) {
         val = 255;
@@ -691,6 +710,15 @@ exapp.get('/analog_write/:pin/:value', function(req, res) {
       device.writePin(pin, val, function(error) {
         logBothConsole('microbit: [analog_write] pin ' + pin + ', val ' + val);
       });
+    }
+    if ( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) != PINMODE_ANALOG ) {
+      logBothConsole('microbit: [analog_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
+      setupPinMode({pin: pin, ADmode: 'analog', IOmode:' output'})
+        .then (function() {
+          analog_write();
+        });
+    }else{
+      analog_write();
     }
   }
   res.send('OK');
@@ -736,7 +764,8 @@ exapp.get('/poll', function(req, res) {
   reply += 'acc_x ' + accelerometer['x'] + '\n';
   reply += 'acc_y ' + accelerometer['y'] + '\n';
   reply += 'acc_z ' + accelerometer['z'] + '\n';
-
+  reply += '_busy ' + Array.from(waiting_commands).join(' ');
+  
   res.send(reply);
   if (debug) { logBothConsole(reply); }
 });
