@@ -515,7 +515,18 @@ function startHTTPServer(){
   });
 }
 
-//--- Responses to HTTP requrests from Scratch 2.0
+// Responses to HTTP requrests from Scratch 2.0
+//--- Reset from scratch
+exapp.get('/reset_all', function(req, res){
+  logBothConsole('microbit: reset_all is called');
+  waiting_commands.clear();
+  initValues();
+  initializePinSetting(device);  // Initialize pin 0-2
+  res.send('OK');
+});
+
+//===== LED matrix =====
+//--- Scrole text
 exapp.get('/scroll/:text', function(req, res) {
   if (device !== null) {
     // text is a string that must be 20 characters or less
@@ -527,16 +538,7 @@ exapp.get('/scroll/:text', function(req, res) {
   res.send('OK');
 });
 
-// Reset from scratch
-exapp.get('/reset_all', function(req, res){
-  logBothConsole('microbit: reset_all is called');
-  waiting_commands.clear();
-  initValues();
-  initializePinSetting(device);  // Initialize pin 0-2
-  res.send('OK');
-});
-
-// LED matrix (image pattern)
+// Write image pattern to the LED matrix
 function writeLedBuffer(error) {
   return new Promise(function(resolve) {
     device.writeLedMatrixState(ledBuffer, function(error) {
@@ -546,18 +548,18 @@ function writeLedBuffer(error) {
   });
 }
 
-// LED display preset image
+//--- LED display preset image
 // nowait block
 exapp.get('/display_image/:name', function(req, res) {
   logBothConsole('no command');  // if (debug)
-  display_image(res, false, req.params.name);
+  res.send(display_image(false, req.params.name));
 });
 // wait block
 exapp.get('/display_image/:command_id/:name', function(req, res) {
   logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
-  display_image(res, req.params.command_id, req.params.name);
+  res.send(display_image(req.params.command_id, req.params.name));
 });
-function display_image(res, command_id, name) {
+function display_image(command_id, name) {
   if (device !== null) {
     if (command_id) waiting_commands.add(command_id);  // wait block
     if (name.charAt(2) == '_') { // non-English
@@ -570,21 +572,21 @@ function display_image(res, command_id, name) {
       if(command_id) waiting_commands.delete(command_id);
     });
   }
-  res.send('OK');
+  return('OK');
 }
 
-// LED dot
+//--- LED dot
 // nowait block
 exapp.get('/write_pixel/:x/:y/:value', function(req, res){
   logBothConsole('no command');  // if (debug)
-  write_pixel(res, false, req.params.x, req.params.y, req.params.value);
+  res.send(write_pixel(false, req.params.x, req.params.y, req.params.value));
 });
 // wait block
 exapp.get('/write_pixel/:command_id/:x/:y/:value', function(req, res){
   logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
-  write_pixel(res, req.params.command_id, req.params.x, req.params.y, req.params.value);
+  res.send(write_pixel(req.params.command_id, req.params.x, req.params.y, req.params.value));
 });
-function write_pixel(res, command_id, x, y, val) {
+function write_pixel(command_id, x, y, val) {
   if (device !== null) {
     if (command_id) waiting_commands.add(command_id);  // wait block
     if (val >= 1) {
@@ -611,21 +613,21 @@ function write_pixel(res, command_id, x, y, val) {
       if(command_id) waiting_commands.delete(command_id);
     });
   }
-  res.send('OK');  
+  return('OK');
 }
 
-// LED display custom pattern
+//--- LED display custom pattern
 // nowait block
 exapp.get('/display_pattern/:binstr', function(req, res) {
   logBothConsole('no command');  // if (debug)
-  display_pattern(res, false, req.params.binstr);
+  res.send(display_pattern(false, req.params.binstr));
 });
 // wait block
 exapp.get('/display_pattern/:command_id/:binstr', function(req, res) {
   logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
-  display_pattern(res, req.params.command_id, req.params.binstr);
+  res.send(display_pattern(req.params.command_id, req.params.binstr));
 });
-function display_pattern(res, command_id, binstr) {
+function display_pattern(command_id, binstr) {
   if (device !== null) {
     if (command_id) waiting_commands.add(command_id);
     try {
@@ -658,20 +660,21 @@ function display_pattern(res, command_id, binstr) {
       if (command_id) waiting_commands.delete(command_id);
     }
   }
-  res.send('OK');
+  return('OK');
 }
 
-// clear LED
+//--- clear LED
+// nowait block
 exapp.get('/display_clear', function(req, res){
   logBothConsole('no command');  // if (debug)
-  display_clear(res, false);
+  res.send(display_clear(false));
 });
 // wait block
 exapp.get('/display_clear/:command_id', function(req, res){
   logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
-  display_clear(res, req.params.command_id);
+  res.send(display_clear(req.params.command_id));
 });
-function display_clear(res, command_id) {
+function display_clear(command_id) {
   if (device !== null) {
     if (command_id) waiting_commands.add(command_id);
     ledBuffer.fill(0);
@@ -684,21 +687,22 @@ function display_clear(res, command_id) {
       if (command_id) waiting_commands.delete(command_id);
     });
   }
-  res.send('OK');
+  return('OK');
 }
 
-// PIN I/O
+//===== PIN I/O =====
+//--- Setup pin mode
 // nowait block
 exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
   logBothConsole('no command_id');  // if (debug)
-  setup_pin(res, false, req.params.pin, req.params.admode, req.params.iomode);
+  res.send(setup_pin(false, req.params.pin, req.params.admode, req.params.iomode));
 });
 // wait block
 exapp.get('/setup_pin/:command_id/:pin/:admode/:iomode', function(req, res) {
   logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
-  setup_pin(res, req.params.command_id, req.params.pin, req.params.admode, req.params.iomode);
+  res.send(setup_pin(req.params.command_id, req.params.pin, req.params.admode, req.params.iomode));
 });
-function setup_pin(res, command_id, pin, admode, iomode) {
+function setup_pin(command_id, pin, admode, iomode) {
   if (device !== null) {
     if (command_id) waiting_commands.add(command_id);  // wait block
     try {
@@ -735,77 +739,106 @@ function setup_pin(res, command_id, pin, admode, iomode) {
       if(command_id) waiting_commands.delete(command_id);
     }
   }
-  res.send('OK');
+  return('OK');
 }
 
+//--- Digital write
+// nowait block
 exapp.get('/digital_write/:pin/:value', function(req, res) {
+  logBothConsole('no command_id');  // if (debug)
+  res.send(digital_write(false, req.params.pin, req.params.value));
+});
+// wait block
+exapp.get('/digital_write/:command_id/:pin/:value', function(req, res) {
+  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  res.send(digital_write(req.params.command_id, req.params.pin, req.params.value));
+});
+function digital_write(command_id, pin, value) {
   if (device !== null) {
-    var pin = req.params.pin;
-    if(pin < 0 || pin > 20 ){
-      logBothConsole('microbit: [digital_write] error: pin number (' + pin + ') is out of range');
-      res.send('ERROR');
-      return;
-    }
-    function digital_write() {
-      var val = req.params.value;
-      if(val >= 1) {
-        val = 1;
-      }else{
-        val = 0;
-      }
-      device.writePin(pin, val, function(error) {
-        logBothConsole('microbit: [digital_write] pin ' + pin + ', val ' + val);
+    if (command_id) waiting_commands.add(command_id);  // wait block
+    function _digital_write() {
+      device.writePin(pin, value, function(error) {
+        logBothConsole('microbit: [digital_write] pin ' + pin + ', value ' + value);
+        if (command_id) waiting_commands.delete(command_id);
       });
     }
-    if ( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) == PINMODE_ANALOG ) {
-      logBothConsole('microbit: [digital_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
-      setupPinMode({pin: pin, ADmode: 'digital', IOmode: 'output'})
-        .then(function() {
-          digital_write();
-        }).catch(function(error) {
-          logBothConsole(error);
-        });
-    }else{
-      digital_write();
+    try {
+      if(pin < 0 || pin > 20 ){
+        logBothConsole('microbit: [digital_write] error: pin number (' + pin + ') is out of range');
+        throw new Error('illegal pin number');
+      }
+      if (value >= 1) {
+        value = 1;
+      } else {
+        value = 0;
+      }
+      if( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) == PINMODE_ANALOG ) {
+        logBothConsole('microbit: [digital_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
+        setupPinMode({pin: pin, ADmode: 'digital', IOmode: 'output'})
+          .then(function() {
+            _digital_write();
+          }).catch(function(error) {
+            logBothConsole(error);
+            throw(error);
+          });
+      } else { // pin mode is already set as Digital Output
+        _digital_write();
+      }
+    } catch (e) {
+      logBothConsole(e);
+      if(command_id) waiting_commands.delete(command_id);
     }
   }
-  res.send('OK');
-});
+  return('OK');
+}
 
+//--- Analog write
 exapp.get('/analog_write/:pin/:value', function(req, res) {
+  logBothConsole('no command_id');  // if (debug)
+  res.send(analog_write(false, req.params.pin, req.params.value));
+});
+exapp.get('/analog_write/:command_id/:pin/:value', function(req, res) {
+  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  res.send(analog_write(req.params.command_id, req.params.pin, req.params.value));
+});
+function analog_write(command_id, pin, value) {
   if (device !== null) {
-    var pin = req.params.pin;
-    if(pin < 0 || pin > 20 ){
-      logBothConsole('microbit: [analog_write] error: pin number (' + pin + ') is out of range');
-      res.send('ERROR');
-      return;
-    }
-    function analog_write() {
-      var val = req.params.value;
-      if(val > 255) {
-        val = 255;
-      }
-      if(val < 0) {
-        val = 0;
-      }
-      device.writePin(pin, val, function(error) {
-        logBothConsole('microbit: [analog_write] pin ' + pin + ', val ' + val);
+    if (command_id) waiting_commands.add(command_id);  // wait block
+    function _analog_write() {
+      device.writePin(pin, value, function(error) {
+        logBothConsole('microbit: [analog_write] pin ' + pin + ', value ' + value);
+        if (command_id) waiting_commands.delete(command_id);
       });
     }
-    if ( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) != PINMODE_ANALOG ) {
-      logBothConsole('microbit: [analog_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
-      setupPinMode({pin: pin, ADmode: 'analog', IOmode:' output'})
-        .then (function() {
-          analog_write();
-        }).catch(function(error) {
-          logBothConsole(error);
-        });
-    }else{
-      analog_write();
+    try {
+      if(pin < 0 || pin > 20 ){
+        logBothConsole('microbit: [analog_write] error: pin number (' + pin + ') is out of range');
+        throw new Error('illegal pin number');        
+      }
+      if(value > 255) {
+        value = 255;
+      }
+      if(value < 0) {
+        value = 0;
+      }
+      if( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) != PINMODE_ANALOG ) {
+        logBothConsole('microbit: [analog_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
+        setupPinMode({pin: pin, ADmode: 'analog', IOmode:' output'})
+          .then (function() {
+            _analog_write();
+          }).catch(function(error) {
+            logBothConsole(error);
+            throw(error);
+          });
+      } else {
+        _analog_write();
+      }
+    } catch(e) {
+      logBothConsole(e);
     }
   }
-  res.send('OK');
-});
+  return('OK');
+}
 
 // Response to polling
 exapp.get('/poll', function(req, res) {
