@@ -663,13 +663,29 @@ function display_pattern(res, command_id, binstr) {
 
 // clear LED
 exapp.get('/display_clear', function(req, res){
+  logBothConsole('no command');  // if (debug)
+  display_clear(res, false);
+});
+// wait block
+exapp.get('/display_clear/:command_id', function(req, res){
+  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  display_clear(res, req.params.command_id);
+});
+function display_clear(res, command_id) {
   if (device !== null) {
+    if (command_id) waiting_commands.add(command_id);
     ledBuffer.fill(0);
     logBothConsole('microbit: [display_clear]');
-    writeLedBuffer();
+    writeLedBuffer().then(function() {
+      if (command_id) waiting_commands.delete(command_id);
+    }).catch(function(error) {
+      logBothConsole(error);
+      throw(error);
+      if (command_id) waiting_commands.delete(command_id);
+    });
   }
   res.send('OK');
-});
+}
 
 // PIN I/O
 // nowait block
