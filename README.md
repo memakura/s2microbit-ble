@@ -6,7 +6,7 @@
 
 [<img align="right" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="25%" style="float:right;">](https://github.com/memakura/s2microbit-ble/wiki)
 - [<span style="font-size: 150%; font-weight: bold;">Windows 10</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.5.0/s2microbit-ble_installer_v250.exe)
-- [<span style="font-size: 150%; font-weight: bold; margin-bottom: 10px;">Mac OS X</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.5.0/s2microbit-ble_installer_v250.pkg)
+- [<span style="font-size: 150%; font-weight: bold; margin-bottom: 10px;">Mac OS X (v2.4.2)</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.2/s2microbit-ble_installer_v242.pkg)
 - **準備やインストール方法**
     - [ページの下の方（ここをクリックすると移動）](#Preparation_JA)をみてください。
 - **ブロックの使い方**
@@ -22,7 +22,7 @@ s2mのブロックと互換性があるため、s2microbit-ble という名前�
 ## 特徴
 
 - s2mと同じようなブロックに加え、加速度センサなどの値を直接読めるブロックを用意したので、Scratchの無線ゲームコントローラを簡単に作成することができます。
-- 入出力ピンとして、0-2ピンだけでなく、8, 13-16ピンを使えます。（アナログ入力は0-2ピンのみ使用可能です。）
+- 入出力ピンとして、0-2ピンだけでなく、8, 13-16ピンを使えるので、ダブルモータードライバなどを Scratch から動かせます。（アナログ入力は0-2ピンのみ使用可能です。）
 - 別途 Python や NodeJS といった環境を準備する必要はありません。
 - インストーラ（Windowsでは加えてVC++再頒布パッケージ）のダウンロード以外では、ネットワーク接続は不要です。ただし、使用時にブロックのヘルプは読めなくなります。
 - 特定のUSB Bluetooth アダプタは必要なく、Bluetooth 4.0以上のアダプタがPCに内臓されていれば、もしくは汎用のUSB Bluetooth 4.0以上対応のアダプタがあれば、多くの場合接続できます。ただし Windows版は Windows 10 のみ対応で、2017年4月ぐらいまでのアップデートが必要です。
