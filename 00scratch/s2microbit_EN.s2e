@@ -10,7 +10,7 @@
 	        "HAPPY"
         ],
         [
-            " ",
+            "w",
             "Scroll %s",
             "scroll",
             "Hello!"
@@ -30,7 +30,7 @@
             "11001 01111 01110 11110 10011"
         ],
         [
-            " ",
+            "w",
             "Clear Display",
             "display_clear"
         ],
@@ -43,14 +43,14 @@
             "Output"
         ],
         [
-            " ",
+            "w",
             "Digital Write Pin %m.pins Value %m.val",
             "digital_write",
             "0",
             "0"
         ],
         [
-            " ",
+            "w",
             "Analog Write Pin %m.pins Value %n",
             "analog_write",
             "0",
@@ -99,7 +99,7 @@
         ],
         [
             "r",
-            "Analog Read Pin %m.pins",
+            "Analog Read Pin %m.ain_pins",
             "analog_read",
             "0"
         ],
@@ -200,9 +200,11 @@
             "GHOST"
 	    ],
         "pins": [
-            "0",
-	        "1",
-	        "2"
+            "0", "1", "2",
+            "8", "13", "14", "15", "16"
+        ],
+        "ain_pins": [
+            "0", "1", "2"
         ],
         "val": [
             "0",

@@ -527,16 +527,25 @@ exapp.get('/reset_all', function(req, res){
 
 //===== LED matrix =====
 //--- Scrole text
+// nowait block
 exapp.get('/scroll/:text', function(req, res) {
+  res.send(scroll_text(false, req.params.text));
+});
+// wait block
+exapp.get('/scroll/:command_id/:text', function(req, res) {
+  res.send(scroll_text(req.params.command_id, req.params.text));
+});
+function scroll_text(command_id, text) {
   if (device !== null) {
+    if (command_id) waiting_commands.add(command_id);  // wait block
     // text is a string that must be 20 characters or less
-    var txt = req.params.text.substring(0, 20);
-    device.writeLedText(txt, function(error) {
-      logBothConsole('microbit: display ' + txt);
+    device.writeLedText(text.substring(0, 20), function(error) {
+      logBothConsole('microbit: display ' + text);
+      if (command_id) waiting_commands.delete(command_id);
     });
   }
-  res.send('OK');
-});
+  return('OK');
+}
 
 // Write image pattern to the LED matrix
 function writeLedBuffer(error) {
