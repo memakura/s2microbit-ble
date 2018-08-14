@@ -1,6 +1,6 @@
 {
   "name": "Smi-be",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "Scratch-micro:bit extension over Bluetooth",
   "main": "s2microbit-ble.js",
   "scripts": {

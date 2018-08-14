@@ -398,7 +398,7 @@ function microbitFound(microbit) {
     if (usePins) {
 //      microbit.subscribePinData(function(error) {
 //        logBothConsole('microbit: subscribePinData');
-        initializePinSetting(microbit); // Initialize pin 0-2
+        initializePinSetting(microbit); // Initialize pin mode
 //      });
     }
     // Read device name
@@ -429,11 +429,14 @@ function showPinSetting(microbit) {
   });  
 }
 
-// Initialize 0-2 pin setting to Analog-Input
+// Initialize pin setting to Analog-Input (0-2) and Digital-Input (8, 13-16)
 function initializePinSetting(microbit) {
-  for (var pin=0; pin <= 2; pin++) {
+  for (var pin of [0, 1, 2]) {
     setupPinMode({pin: pin, ADmode: 'analog', IOmode: 'input'});
   }
+ for (var pin of [8, 13, 14, 15, 16]) {
+   setupPinMode({pin: pin, ADmode: 'digital', IOmode: 'input'});
+ }
 }
 
 // Setting up pin mode (analog/digital and input/output)
@@ -521,7 +524,7 @@ exapp.get('/reset_all', function(req, res){
   logBothConsole('microbit: reset_all is called');
   waiting_commands.clear();
   initValues();
-  initializePinSetting(device);  // Initialize pin 0-2
+  initializePinSetting(device);  // Initialize pin mode
   res.send('OK');
 });
 
