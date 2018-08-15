@@ -563,12 +563,12 @@ function writeLedBuffer(error) {
 //--- LED display preset image
 // nowait block
 exapp.get('/display_image/:name', function(req, res) {
-  logBothConsole('no command');  // if (debug)
+  if (debug) logBothConsole('no command');
   res.send(display_image(false, req.params.name));
 });
 // wait block
 exapp.get('/display_image/:command_id/:name', function(req, res) {
-  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  if (debug) logBothConsole('command_id: ' + req.params.command_id);
   res.send(display_image(req.params.command_id, req.params.name));
 });
 function display_image(command_id, name) {
@@ -590,12 +590,12 @@ function display_image(command_id, name) {
 //--- LED dot
 // nowait block
 exapp.get('/write_pixel/:x/:y/:value', function(req, res){
-  logBothConsole('no command');  // if (debug)
+  if (debug) logBothConsole('no command');
   res.send(write_pixel(false, req.params.x, req.params.y, req.params.value));
 });
 // wait block
 exapp.get('/write_pixel/:command_id/:x/:y/:value', function(req, res){
-  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  if (debug) logBothConsole('command_id: ' + req.params.command_id);
   res.send(write_pixel(req.params.command_id, req.params.x, req.params.y, req.params.value));
 });
 function write_pixel(command_id, x, y, val) {
@@ -631,19 +631,19 @@ function write_pixel(command_id, x, y, val) {
 //--- LED display custom pattern
 // nowait block
 exapp.get('/display_pattern/:binstr', function(req, res) {
-  logBothConsole('no command');  // if (debug)
+  if (debug) logBothConsole('no command');
   res.send(display_pattern(false, req.params.binstr));
 });
 // wait block
 exapp.get('/display_pattern/:command_id/:binstr', function(req, res) {
-  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  if (debug) logBothConsole('command_id: ' + req.params.command_id);
   res.send(display_pattern(req.params.command_id, req.params.binstr));
 });
 function display_pattern(command_id, binstr) {
   if (device !== null) {
     if (command_id) waiting_commands.add(command_id);
     try {
-      logBothConsole('microbit: [display_pattern] str= ' + binstr);
+      logBothConsole('[display_pattern] ' + binstr);
       // check
       if ( ! /^[01]{5} [01]{5} [01]{5} [01]{5} [01]{5}$/.test(binstr) ) {
         logBothConsole('error: illegal pattern');
@@ -678,12 +678,12 @@ function display_pattern(command_id, binstr) {
 //--- clear LED
 // nowait block
 exapp.get('/display_clear', function(req, res){
-  logBothConsole('no command');  // if (debug)
+  if (debug) logBothConsole('no command');
   res.send(display_clear(false));
 });
 // wait block
 exapp.get('/display_clear/:command_id', function(req, res){
-  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  if (debug) logBothConsole('command_id: ' + req.params.command_id);
   res.send(display_clear(req.params.command_id));
 });
 function display_clear(command_id) {
@@ -706,12 +706,12 @@ function display_clear(command_id) {
 //--- Setup pin mode
 // nowait block
 exapp.get('/setup_pin/:pin/:admode/:iomode', function(req, res) {
-  logBothConsole('no command_id');  // if (debug)
+  if (debug) logBothConsole('no command_id');
   res.send(setup_pin(false, req.params.pin, req.params.admode, req.params.iomode));
 });
 // wait block
 exapp.get('/setup_pin/:command_id/:pin/:admode/:iomode', function(req, res) {
-  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  if (debug) logBothConsole('command_id: ' + req.params.command_id);
   res.send(setup_pin(req.params.command_id, req.params.pin, req.params.admode, req.params.iomode));
 });
 function setup_pin(command_id, pin, admode, iomode) {
@@ -757,12 +757,12 @@ function setup_pin(command_id, pin, admode, iomode) {
 //--- Digital write
 // nowait block
 exapp.get('/digital_write/:pin/:value', function(req, res) {
-  logBothConsole('no command_id');  // if (debug)
+  if (debug) logBothConsole('no command_id');
   res.send(digital_write(false, req.params.pin, req.params.value));
 });
 // wait block
 exapp.get('/digital_write/:command_id/:pin/:value', function(req, res) {
-  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  if (debug) logBothConsole('command_id: ' + req.params.command_id);
   res.send(digital_write(req.params.command_id, req.params.pin, req.params.value));
 });
 function digital_write(command_id, pin, value) {
@@ -806,11 +806,11 @@ function digital_write(command_id, pin, value) {
 
 //--- Analog write
 exapp.get('/analog_write/:pin/:value', function(req, res) {
-  logBothConsole('no command_id');  // if (debug)
+  if (debug) logBothConsole('no command_id');
   res.send(analog_write(false, req.params.pin, req.params.value));
 });
 exapp.get('/analog_write/:command_id/:pin/:value', function(req, res) {
-  logBothConsole('command_id: ' + req.params.command_id);  // if (debug)
+  if (debug) logBothConsole('command_id: ' + req.params.command_id);
   res.send(analog_write(req.params.command_id, req.params.pin, req.params.value));
 });
 function analog_write(command_id, pin, value) {
