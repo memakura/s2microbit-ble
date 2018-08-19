@@ -35,7 +35,7 @@
             "display_clear"
         ],
         [
-            " ",
+            "w",
             "Setup Pin %m.pins as %m.admodes %m.iomodes",
             "setup_pin",
             "0",

@@ -6,9 +6,11 @@
 
 [<img align="right" alt="s2microbit-ble" src="./images/s2microbit-ble.png" width="25%" style="float:right;">](https://github.com/memakura/s2microbit-ble/wiki)
 - [<span style="font-size: 150%; font-weight: bold;">Windows 10</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.5.0/s2microbit-ble_installer_v250.exe)
-- [<span style="font-size: 150%; font-weight: bold; margin-bottom: 10px;">Mac OS X (v2.4.2)</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.4.2/s2microbit-ble_installer_v242.pkg)
+- [<span style="font-size: 150%; font-weight: bold; margin-bottom: 10px;">Mac OS X</span>](https://github.com/memakura/s2microbit-ble/releases/download/v2.5.0/s2microbit-ble_installer_v250.pkg)
 - **準備やインストール方法**
-    - [ページの下の方（ここをクリックすると移動）](#Preparation_JA)をみてください。
+    - Windows: インストーラを開くと警告が出ますが「詳細情報」をクリックすると「実行」を選べます。
+    - Mac: コントロールキーを押しながらダウンロードされたpkgファイルを開くとインストールできます。
+    - 詳細は[ページの下の方（ここをクリックすると移動）](#Preparation_JA)をみてください。
 - **ブロックの使い方**
     - アイコンをクリックするか[（こちら）](https://github.com/memakura/s2microbit-ble/wiki/)からたどれます。
 
@@ -53,7 +55,7 @@ Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必�
 1. [この Release ページ](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
     - s2microbit-ble_installer-v(バージョン番号).exe という名前です。<br>
       <img width="400" alt="release_exe" src="./images/release_exe.png">
-    - 「Windows によって PC が保護されました」と出た場合は「詳細情報」をクリックしてから「実行」を選びます。<br>
+    - **「Windows によって PC が保護されました」と出た場合は「詳細情報」をクリック**してから「実行」を選びます。<br>
       <img width="500" alt="win10_warning" src="./images/win10_warning.png">
 1. 立ち上げ方
     - インストール完了時にはデフォルトではそのまま立ち上がります。
@@ -64,7 +66,7 @@ Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必�
 
 1. [この Release ページ](https://github.com/memakura/s2microbit-ble/releases) から最新バージョンをダウンロード、インストールします。
     - s2microbit-ble_installer-v(バージョン番号).pkg という名前です。
-    - Control キーを押しながら ダウンロードされた pkg ファイルをクリックし、「開く」を選びます。このとき「開発元は未確認です。開いてもよろしいですか？」という警告が表示されます。
+    - **Control キーを押しながら ダウンロードされた pkg ファイルをクリック**し、「開く」を選びます。このとき「開発元は未確認です。開いてもよろしいですか？」という警告が表示されます。
     - もう一度、ダウンロードされた pkg ファイルをクリックすると、インストールが開始します。
     - 管理者権限がない場合、インストール先で「自分専用にインストール」を選びます。
 1. 立ち上げ方
@@ -107,6 +109,7 @@ Bluetooth 4.0 以上を内蔵した PC か USB等のBluetoothアダプタが必�
 
 - サンプルプログラムを元にプログラム作っていき「名前をつけて保存」で別の名前にします。
 - 拡張ブロック用のファイル[s2microbit_JA.s2e](./00scratch/s2microbit_JA.s2e)を[00scratch](./00scratch)からダウンロードしておきます。新たにプロジェクトを作成し、シフトを押しながら「ファイル」>「実験的なHTTP拡張を読み込み」でダウンロードしたファイルを選ぶと拡張ブロックが追加されます。
+    - 通常は s2microbit_JA.s2e を使ってください。LED表示等の反応速度を少しでも上げたいときは s2microbit_JA_nowait.s2e を使えますが、反応のタイミングがやや不安定になります。（s2microbit_JA.s2e では、micro:bit に正しく命令が届くまで Scratchの次のブロックが実行されません。）
 
 ## 注意点
 
