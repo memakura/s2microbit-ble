@@ -787,12 +787,12 @@ function digital_write(command_id, pin, value) {
       if( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) == PINMODE_ANALOG ) {
         logBothConsole('microbit: [digital_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
         setupPinMode({pin: pin, ADmode: 'digital', IOmode: 'output'})
-          .then(function() {
-            _digital_write();
-          }).catch(function(error) {
-            logBothConsole(error);
-            throw(error);
-          });
+        .then(function() {
+          _digital_write();
+        }).catch(function(error) {
+          logBothConsole(error);
+          throw(error);
+        });
       } else { // pin mode is already set as Digital Output
         _digital_write();
       }
@@ -836,12 +836,12 @@ function analog_write(command_id, pin, value) {
       if( (pinMode[pin] & PINMODE_INPUT) == PINMODE_INPUT || (pinMode[pin] & PINMODE_ANALOG) != PINMODE_ANALOG ) {
         logBothConsole('microbit: [analog_write] setup pin mode : current pinMode[' + pin + ']= ' + pinMode[pin]);
         setupPinMode({pin: pin, ADmode: 'analog', IOmode:' output'})
-          .then (function() {
-            _analog_write();
-          }).catch(function(error) {
-            logBothConsole(error);
-            throw(error);
-          });
+        .then (function() {
+          _analog_write();
+        }).catch(function(error) {
+          logBothConsole(error);
+          throw(error);
+        });
       } else {
         _analog_write();
       }
